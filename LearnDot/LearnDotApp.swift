@@ -11,7 +11,7 @@ import SwiftUI
 struct LearnDotApp: App {
     var body: some Scene {
         WindowGroup {
-            WordQuizView()
+            ContentView()
         }
     }
 }

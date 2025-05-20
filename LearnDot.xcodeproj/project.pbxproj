@@ -99,11 +99,12 @@
 				};
 			};
 			buildConfigurationList = 8B454ECE2DD602B500DA6E77 /* Build configuration list for PBXProject "LearnDot" */;
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 8B454ECA2DD602B500DA6E77;
 			minimizedProjectReferenceProxies = 1;

@@ -1,0 +1,73 @@
+//
+//  WordQuizCorrectView.swift
+//  LearnDot
+//
+//  Created by 원주연 on 5/26/25.
+//
+
+import SwiftUI
+
+struct WordQuizCorrectView: View {
+    
+    private var wordQuizViewModel = WordQuizViewModel()
+    
+    var body: some View {
+        ZStack {
+            Color.black00
+            
+            VStack {
+                VStack(spacing: 16) {
+                    Text("어떤 글자일까요?")
+                        .font(.mainTextBold24)
+                        .foregroundStyle(.blue00)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundStyle(.gray06)
+                        .frame(width: 240, height: 112)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                        .overlay {
+                            Image("wordQuizDot")
+                        }
+                }
+                
+                Spacer().frame(height: 100)
+                
+                VStack(spacing: 13){
+                    Text("정답입니다!🎉")
+                        .font(.mainTextBold32)
+                        .foregroundStyle(.white00)
+                    
+                    Text("다음 문제에도 도전해볼까요?")
+                        .font(.mainTextSemiBold15)
+                        .foregroundStyle(.gray02)
+                }
+                
+                Spacer().frame(height: 222)
+                
+                HStack(spacing: 17) {
+                    Button(action: {
+                        
+                    }, label: {
+                        QuitButtonCard()
+                    })
+                    
+                    Button(action: {
+                        print("다음 문제")
+                        wordQuizViewModel.goToNextQuiz()
+                    }, label: {
+                        NextButtonCard()
+                    })
+                }
+            }
+        }
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden()
+    }
+}
+
+#Preview {
+    WordQuizCorrectView()
+}

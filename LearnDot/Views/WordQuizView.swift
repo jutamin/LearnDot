@@ -7,86 +7,74 @@
 
 import SwiftUI
 
+// 정답/오답 네비게이션 라우터
+enum AnswerResult: Hashable {
+    case correct
+    case wrong
+    case home
+}
+
 struct WordQuizView: View {
+    
+    @State private var navigationPath: [AnswerResult] = []
+    @State private var viewModel = WordQuizViewModel()
+    
     var body: some View {
-        ZStack {
-            Color.black00
-            VStack(spacing: 52) {
-                
-                VStack(spacing: 16) {
-                    Text("어떤 글자일까요?")
-                        .font(.mainTextBold24)
-                        .foregroundStyle(.blue00)
+        NavigationStack(path: $navigationPath) {
+            ZStack {
+                Color.black00
+                VStack(spacing: 52) {
                     
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.gray06)
-                        .frame(width: 240, height: 112)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .overlay {
-                            Image("wordQuizDot")
+                    VStack(spacing: 16) {
+                        Text("어떤 글자일까요?")
+                            .font(.mainTextBold24)
+                            .foregroundStyle(.blue00)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 240, height: 112)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .overlay {
+                                Image("wordQuizDot")
+                            }
+                    }
+                    
+                    
+                    VStack(spacing: 16) {
+                        ForEach(viewModel.currentQuiz.options.shuffled(), id: \.self) { option in
+                            Button {
+                                if viewModel.isCorrect(answer: option) {
+                                    navigationPath.append(.correct)
+                                } else {
+                                    navigationPath.append(.wrong)
+                                }
+                            } label: {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundStyle(.blue00)
+                                    .frame(width: 280, height: 90)
+                                    .overlay{
+                                        Text(option)
+                                            .font(.mainTextSemiBold32)
+                                            .foregroundStyle(.white00)
+                                    }
+                            }
                         }
-                }
-                
-                
-                VStack(spacing: 16) {
-                    Button(action: {
-                        print("밥")
-                    }, label: {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.blue00)
-                            .frame(width: 280, height: 90)
-                            .overlay{
-                                Text("밥")
-                                    .font(.mainTextSemiBold32)
-                                    .foregroundStyle(.white00)
-                            }
-                    })
+                    }
+                    .navigationDestination(for: AnswerResult.self) { result in
+                        if result == .correct {
+                            WordQuizCorrectView()
+                        } else {
+                            WordQuizWrongView()
+                        }
+                    }
                     
-                    Button(action: {
-                        print("물")
-                    }, label: {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.blue00)
-                            .frame(width: 280, height: 90)
-                            .overlay{
-                                Text("물")
-                                    .font(.mainTextSemiBold32)
-                                    .foregroundStyle(.white00)
-                            }
-                    })
-                    
-                    Button(action: {
-                        print("쌀")
-                    }, label: {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.blue00)
-                            .frame(width: 280, height: 90)
-                            .overlay{
-                                Text("쌀")
-                                    .font(.mainTextSemiBold32)
-                                    .foregroundStyle(.white00)
-                            }
-                    })
-                    
-                    Button(action: {
-                        print("죽")
-                    }, label: {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.blue00)
-                            .frame(width: 280, height: 90)
-                            .overlay{
-                                Text("죽")
-                                    .font(.mainTextSemiBold32)
-                                    .foregroundStyle(.white00)
-                            }
-                    })
                 }
             }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 

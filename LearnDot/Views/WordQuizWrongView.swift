@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct WordQuizWrongView: View {
+    
+    let correctAnswer: String
+        let onNextQuestion: () -> Void
+        let onFinishLearning: () -> Void
+    
     var body: some View {
         ZStack {
             Color.black00
+                .ignoresSafeArea()
             
             VStack {
                 VStack(spacing: 16) {
@@ -52,19 +58,20 @@ struct WordQuizWrongView: View {
                 HStack(spacing: 17) {
                     Button(action: {
                         print("학습 종료")
+                        onFinishLearning()
                     }, label: {
                         QuitButtonCard()
                     })
                     
                     Button(action: {
                         print("다음 문제")
+                        onNextQuestion()
                     }, label: {
                         NextButtonCard()
                     })
                 }
             }
         }
-        .ignoresSafeArea()
         .navigationBarBackButtonHidden()
     }
 }

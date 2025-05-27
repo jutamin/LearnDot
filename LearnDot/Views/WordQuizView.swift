@@ -7,24 +7,42 @@
 
 import SwiftUI
 
-// 정답/오답 네비게이션 라우터
-enum AnswerResult: Hashable {
-    case correct
-    case wrong
+// MARK: - Quiz Result Enum
+enum QuizNavigationDestination: Identifiable {
+    case correct(correctAnswer: String)
+    case incorrect(correctAnswer: String)
     case home
+    
+    var id: String {
+        switch self {
+        case .correct: return "correct"
+        case .incorrect: return "incorrect"
+        case .home: return "home"
+        }
+    }
 }
 
 struct WordQuizView: View {
     
-    @State private var navigationPath: [AnswerResult] = []
-    @State private var viewModel = WordQuizViewModel()
+    let level: DifficultyLevel
+    let category: WordCategory
+    
+    @StateObject private var viewModel: WordQuizViewModel
+    
+    init(level: DifficultyLevel, category: WordCategory) {
+        self.level = level
+        self.category = category
+        self._viewModel = StateObject(wrappedValue: WordQuizViewModel(level: level, category: category))
+    }
     
     var body: some View {
-        NavigationStack(path: $navigationPath) {
+        NavigationStack {
             ZStack {
                 Color.black00
+                    .ignoresSafeArea()
+                
                 VStack(spacing: 52) {
-                    
+        
                     VStack(spacing: 16) {
                         Text("어떤 글자일까요?")
                             .font(.mainTextBold24)
@@ -39,18 +57,15 @@ struct WordQuizView: View {
                             )
                             .overlay {
                                 Image("wordQuizDot")
+                                Text(viewModel.currentQuiz.correctAnswer)
                             }
                     }
                     
                     
                     VStack(spacing: 16) {
-                        ForEach(viewModel.currentQuiz.options.shuffled(), id: \.self) { option in
+                        ForEach(viewModel.currentQuiz.options, id: \.self) { option in
                             Button {
-                                if viewModel.isCorrect(answer: option) {
-                                    navigationPath.append(.correct)
-                                } else {
-                                    navigationPath.append(.wrong)
-                                }
+                                viewModel.checkAnswer(selectedOption: option)
                             } label: {
                                 RoundedRectangle(cornerRadius: 20)
                                     .foregroundStyle(.blue00)
@@ -63,17 +78,32 @@ struct WordQuizView: View {
                             }
                         }
                     }
-                    .navigationDestination(for: AnswerResult.self) { result in
-                        if result == .correct {
-                            WordQuizCorrectView()
-                        } else {
-                            WordQuizWrongView()
-                        }
-                    }
-                    
                 }
             }
-            .ignoresSafeArea()
+//            .ignoresSafeArea()
+            .onAppear {
+                if viewModel.quizData.isEmpty {
+                    viewModel.loadQuizData()
+                }
+            }
+        }
+        .navigationDestination(item: $viewModel.navigationDestination) { destination in
+            switch destination {
+            case .correct(let correctAnswer):
+                WordQuizCorrectView(
+                    correctAnswer: correctAnswer,
+                    onNextQuestion: viewModel.moveToNextQuestion,
+                    onFinishLearning: viewModel.navigateToHome
+                )
+            case .incorrect(let correctAnswer):
+                WordQuizWrongView(
+                    correctAnswer: correctAnswer,
+                    onNextQuestion: viewModel.moveToNextQuestion,
+                    onFinishLearning: viewModel.navigateToHome
+                )
+            case .home:
+                HomeView()
+            }
         }
     }
 }

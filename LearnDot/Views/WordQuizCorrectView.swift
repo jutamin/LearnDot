@@ -9,11 +9,14 @@ import SwiftUI
 
 struct WordQuizCorrectView: View {
     
-    private var wordQuizViewModel = WordQuizViewModel()
+    let correctAnswer: String
+    let onNextQuestion: () -> Void
+    let onFinishLearning: () -> Void
     
     var body: some View {
         ZStack {
             Color.black00
+                .ignoresSafeArea()
             
             VStack {
                 VStack(spacing: 16) {
@@ -49,21 +52,21 @@ struct WordQuizCorrectView: View {
                 
                 HStack(spacing: 17) {
                     Button(action: {
-                        
+                        print("학습 종료")
+                        onFinishLearning()
                     }, label: {
                         QuitButtonCard()
                     })
                     
                     Button(action: {
                         print("다음 문제")
-                        wordQuizViewModel.goToNextQuiz()
+                        onNextQuestion()
                     }, label: {
                         NextButtonCard()
                     })
                 }
             }
         }
-        .ignoresSafeArea()
         .navigationBarBackButtonHidden()
     }
 }

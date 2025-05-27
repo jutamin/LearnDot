@@ -11,7 +11,9 @@ import SwiftUI
 struct LearnDotApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            // HomeView(메인 페이지)로 돌려놓고 푸시할 것
+            HomeView()
+                .preferredColorScheme(.dark)
         }
     }
 }

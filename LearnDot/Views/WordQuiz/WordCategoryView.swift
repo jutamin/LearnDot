@@ -10,6 +10,7 @@ import SwiftUI
 struct WordCategoryView: View {
     
     let level: DifficultyLevel
+    @Environment(NavigationCoordinator.self) private var coordinator
     
     var body: some View {
         ZStack {
@@ -26,7 +27,7 @@ struct WordCategoryView: View {
                             title: category.rawValue,
                             description: category.description(for: level)
                         ) {
-                            
+                            coordinator.push(AppDestination.wordQuiz(level, category))
                         }
                     }
                     Spacer()

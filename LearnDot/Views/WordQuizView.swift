@@ -7,42 +7,31 @@
 
 import SwiftUI
 
-// MARK: - Quiz Result Enum
-enum QuizNavigationDestination: Identifiable {
-    case correct(correctAnswer: String)
-    case incorrect(correctAnswer: String)
-    case home
-    
-    var id: String {
-        switch self {
-        case .correct: return "correct"
-        case .incorrect: return "incorrect"
-        case .home: return "home"
-        }
-    }
-}
-
 struct WordQuizView: View {
     
     let level: DifficultyLevel
     let category: WordCategory
-    
-    @StateObject private var viewModel: WordQuizViewModel
+    @Environment(NavigationCoordinator.self) private var coordinator
+    @State private var viewModel: WordQuizViewModel
     
     init(level: DifficultyLevel, category: WordCategory) {
         self.level = level
         self.category = category
-        self._viewModel = StateObject(wrappedValue: WordQuizViewModel(level: level, category: category))
+        self._viewModel = State(initialValue: WordQuizViewModel(level: level, category: category))
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.black00
-                    .ignoresSafeArea()
-                
+        ZStack {
+            Color.black00
+                .ignoresSafeArea()
+            
+            if viewModel.isLoading {
+                ProgressView("문제를 생성 중 ...")
+                    .foregroundStyle(.white)
+            } else if let quiz = viewModel.currentQuiz {
                 VStack(spacing: 52) {
-        
+                    
+                    // 점자 표시
                     VStack(spacing: 16) {
                         Text("어떤 글자일까요?")
                             .font(.mainTextBold24)
@@ -57,15 +46,18 @@ struct WordQuizView: View {
                             )
                             .overlay {
                                 Image("wordQuizDot")
-                                Text(viewModel.currentQuiz.correctAnswer)
+                                Text(quiz.brailleText)
                             }
                     }
                     
-                    
+                    // 선택지 버튼들
                     VStack(spacing: 16) {
-                        ForEach(viewModel.currentQuiz.options, id: \.self) { option in
+                        ForEach(quiz.options, id: \.self) { option in
                             Button {
-                                viewModel.checkAnswer(selectedOption: option)
+                                let isCorrect = viewModel.checkAnswer(option)
+                                let correctAnswer = quiz.correctAnswer
+                                let braillePattern = quiz.brailleText
+                                coordinator.push(AppDestination.result(isCorrect, level, category, correctAnswer, braillePattern))
                             } label: {
                                 RoundedRectangle(cornerRadius: 20)
                                     .foregroundStyle(.blue00)
@@ -80,34 +72,7 @@ struct WordQuizView: View {
                     }
                 }
             }
-//            .ignoresSafeArea()
-            .onAppear {
-                if viewModel.quizData.isEmpty {
-                    viewModel.loadQuizData()
-                }
-            }
         }
-        .navigationDestination(item: $viewModel.navigationDestination) { destination in
-            switch destination {
-            case .correct(let correctAnswer):
-                WordQuizCorrectView(
-                    correctAnswer: correctAnswer,
-                    onNextQuestion: viewModel.moveToNextQuestion,
-                    onFinishLearning: viewModel.navigateToHome
-                )
-            case .incorrect(let correctAnswer):
-                WordQuizWrongView(
-                    correctAnswer: correctAnswer,
-                    onNextQuestion: viewModel.moveToNextQuestion,
-                    onFinishLearning: viewModel.navigateToHome
-                )
-            case .home:
-                HomeView()
-            }
-        }
+        
     }
-}
-
-#Preview {
-    WordQuizView()
 }

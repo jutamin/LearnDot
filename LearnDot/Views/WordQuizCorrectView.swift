@@ -71,6 +71,6 @@ struct WordQuizCorrectView: View {
     }
 }
 
-#Preview {
-    WordQuizCorrectView()
-}
+//#Preview {
+//    WordQuizCorrectView()
+//}

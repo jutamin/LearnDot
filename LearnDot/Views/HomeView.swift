@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(NavigationCoordinator.self) private var coordinator
     
-    // MARK: - Properties
-    @State private var isWordLevelActive = false
     
     // MARK: - UI Setting
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color.black00
                 
@@ -46,7 +44,7 @@ struct HomeView: View {
                             title: "난이도별 점형 학습",
                             description: "단계별로 점형 맞추기"
                         ) {
-                            isWordLevelActive = true
+                            coordinator.push(AppDestination.wordLevel)
                         }
                         
                         SelectCard(
@@ -62,11 +60,7 @@ struct HomeView: View {
                 }
             }
             .ignoresSafeArea()
-            .navigationDestination(isPresented: $isWordLevelActive) {
-                WordLevelView()
-            }
         }
-    }
 }
 
 #Preview {

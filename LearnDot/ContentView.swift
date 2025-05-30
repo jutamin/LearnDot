@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var coordinator = NavigationCoordinator()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $coordinator.path) {
+            HomeView()
+                .navigationDestination(for: AppDestination.self) { destination in
+                    switch destination {
+                    case .wordLevel:
+                        WordLevelView()
+                    case .wordCategory(let level):
+                        WordCategoryView(level: level)
+                    case .wordQuiz(let level, let category):
+                        WordQuizView(level: level, category: category)
+                    case .result(let isCorrect, let level, let category, let correctAnswer, let braillePattern):
+                        ResultView(isCorrect: isCorrect, level: level, category: category, correctAnswer: correctAnswer, braillePattern: braillePattern)
+                    }
+                }
         }
-        .padding()
+        .environment(coordinator)
     }
 }
 

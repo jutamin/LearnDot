@@ -1,5 +1,5 @@
 //
-//  ResultView.swift
+//  WordQuizResultView.swift
 //  LearnDot
 //
 //  Created by 원주연 on 5/30/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ResultView: View {
+struct WordQuizResultView: View {
     let isCorrect: Bool
     let level: DifficultyLevel
     let category: WordCategory
@@ -73,9 +73,10 @@ struct ResultView: View {
                 Spacer().frame(height: 80)
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 //
 //#Preview {
-//    ResultView()
+//    WordQuizResultView()
 //}

@@ -29,7 +29,7 @@ struct WordQuizView: View {
                 ProgressView("문제를 생성 중 ...")
                     .foregroundStyle(.white)
             } else if let quiz = viewModel.currentQuiz {
-                VStack(spacing: 52) {
+                VStack(spacing: 0) {
                     
                     // 점자 표시
                     VStack(spacing: 16) {
@@ -37,18 +37,47 @@ struct WordQuizView: View {
                             .font(.mainTextBold24)
                             .foregroundStyle(.blue00)
                         
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.gray06)
-                            .frame(width: 240, height: 112)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.gray, lineWidth: 1)
-                            )
-                            .overlay {
-                                Image("wordQuizDot")
-                                Text(quiz.brailleText)
-                            }
+                        switch level {
+                        case .easy:
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 240, height: 112)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+                                .overlay {
+                                    Image("wordQuizDot")
+                                    Text(quiz.brailleText)
+                                }
+                        case .normal:
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 345, height: 112)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+                                .overlay {
+                                    Image("wordQuizDot")
+                                    Text(quiz.brailleText)
+                                }
+                        case .hard:
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 345, height: 150)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+                                .overlay {
+                                    Image("wordQuizDot")
+                                    Text(quiz.brailleText)
+                                }
+                        }
                     }
+                    
+                    Spacer().frame(height: 52)
                     
                     // 선택지 버튼들
                     VStack(spacing: 16) {
@@ -70,6 +99,8 @@ struct WordQuizView: View {
                             }
                         }
                     }
+                    
+                    Spacer().frame(height: 80)
                 }
             }
         }

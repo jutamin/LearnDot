@@ -47,8 +47,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Image("wordQuizDot")
                                     Text(quiz.brailleText)
+                                        .font(.largeTitle)
+                                        .padding(.leading, 30)
                                 }
                         case .normal:
                             RoundedRectangle(cornerRadius: 20)
@@ -59,8 +60,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Image("wordQuizDot")
                                     Text(quiz.brailleText)
+                                        .font(.largeTitle)
+                                        .padding(.leading, 30)
                                 }
                         case .hard:
                             RoundedRectangle(cornerRadius: 20)
@@ -71,8 +73,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Image("wordQuizDot")
                                     Text(quiz.brailleText)
+                                        .font(.largeTitle)
+                                        .padding(.leading, 30)
                                 }
                         }
                     }
@@ -104,6 +107,6 @@ struct WordQuizView: View {
                 }
             }
         }
-        
+        .navigationBarBackButtonHidden()
     }
 }

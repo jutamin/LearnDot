@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8B4553B02DEEC03500DA6E77 /* KorToBraille in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4553AF2DEEC03500DA6E77 /* KorToBraille */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		8B454ED32DD602B500DA6E77 /* LearnDot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnDot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4553B02DEEC03500DA6E77 /* KorToBraille in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = LearnDot;
 			packageProductDependencies = (
+				8B4553AF2DEEC03500DA6E77 /* KorToBraille */,
 			);
 			productName = LearnDot;
 			productReference = 8B454ED32DD602B500DA6E77 /* LearnDot.app */;
@@ -108,6 +114,9 @@
 			);
 			mainGroup = 8B454ECA2DD602B500DA6E77;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8B4553AE2DEEC03500DA6E77 /* XCRemoteSwiftPackageReference "KorToBraille" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8B454ED42DD602B500DA6E77 /* Products */;
 			projectDirPath = "";
@@ -340,6 +349,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B4553AE2DEEC03500DA6E77 /* XCRemoteSwiftPackageReference "KorToBraille" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Bridge-NOONGIL/KorToBraille";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B4553AF2DEEC03500DA6E77 /* KorToBraille */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B4553AE2DEEC03500DA6E77 /* XCRemoteSwiftPackageReference "KorToBraille" */;
+			productName = KorToBraille;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B454ECB2DD602B500DA6E77 /* Project object */;
 }

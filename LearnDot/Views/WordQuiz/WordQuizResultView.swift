@@ -50,8 +50,50 @@ struct WordQuizResultView: View {
                     }
                 }
                 
+                Spacer()
+                
                 // 정답 점자
-                Text(braillePattern)
+                switch level {
+                case .easy:
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundStyle(.gray06)
+                        .frame(width: 240, height: 112)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                        .overlay {
+                            Text(braillePattern)
+                                .font(.largeTitle)
+                                .padding(.leading, 30)
+                        }
+                case .normal:
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundStyle(.gray06)
+                        .frame(width: 345, height: 112)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                        .overlay {
+                            Text(braillePattern)
+                                .font(.largeTitle)
+                                .padding(.leading, 30)
+                        }
+                case .hard:
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundStyle(.gray06)
+                        .frame(width: 345, height: 150)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                        .overlay {
+                            Text(braillePattern)
+                                .font(.largeTitle)
+                                .padding(.leading, 30)
+                        }
+                }
                 
                 Spacer()
                 

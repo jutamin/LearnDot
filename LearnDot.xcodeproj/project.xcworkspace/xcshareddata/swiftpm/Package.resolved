@@ -1,0 +1,15 @@
+{
+  "originHash" : "e4e097eddf66aba87cc92eac27ff10698d648076ba7269c5e6623807676e2065",
+  "pins" : [
+    {
+      "identity" : "kortobraille",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Bridge-NOONGIL/KorToBraille",
+      "state" : {
+        "revision" : "e2da46268f5016efe5e7a0badeee642fe75d5af0",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}

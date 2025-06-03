@@ -1,0 +1,109 @@
+//
+//  WordQuizView.swift
+//  LearnDot
+//
+//  Created by 원주연 on 5/20/25.
+//
+
+import SwiftUI
+
+struct WordQuizView: View {
+    
+    let level: DifficultyLevel
+    let category: WordCategory
+    @Environment(NavigationCoordinator.self) private var coordinator
+    @State private var viewModel: WordQuizViewModel
+    
+    init(level: DifficultyLevel, category: WordCategory) {
+        self.level = level
+        self.category = category
+        self._viewModel = State(initialValue: WordQuizViewModel(level: level, category: category))
+    }
+    
+    var body: some View {
+        ZStack {
+            Color.black00
+                .ignoresSafeArea()
+            
+            if viewModel.isLoading {
+                ProgressView("문제를 생성 중 ...")
+                    .foregroundStyle(.white)
+            } else if let quiz = viewModel.currentQuiz {
+                VStack(spacing: 0) {
+                    
+                    // 점자 표시
+                    VStack(spacing: 16) {
+                        Text("어떤 글자일까요?")
+                            .font(.mainTextBold24)
+                            .foregroundStyle(.blue00)
+                        
+                        switch level {
+                        case .easy:
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 240, height: 112)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+                                .overlay {
+                                    Image("wordQuizDot")
+                                    Text(quiz.brailleText)
+                                }
+                        case .normal:
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 345, height: 112)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+                                .overlay {
+                                    Image("wordQuizDot")
+                                    Text(quiz.brailleText)
+                                }
+                        case .hard:
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 345, height: 150)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+                                .overlay {
+                                    Image("wordQuizDot")
+                                    Text(quiz.brailleText)
+                                }
+                        }
+                    }
+                    
+                    Spacer().frame(height: 52)
+                    
+                    // 선택지 버튼들
+                    VStack(spacing: 16) {
+                        ForEach(quiz.options, id: \.self) { option in
+                            Button {
+                                let isCorrect = viewModel.checkAnswer(option)
+                                let correctAnswer = quiz.correctAnswer
+                                let braillePattern = quiz.brailleText
+                                coordinator.push(AppDestination.result(isCorrect, level, category, correctAnswer, braillePattern))
+                            } label: {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundStyle(.blue00)
+                                    .frame(width: 280, height: 90)
+                                    .overlay{
+                                        Text(option)
+                                            .font(.mainTextSemiBold32)
+                                            .foregroundStyle(.white00)
+                                    }
+                            }
+                        }
+                    }
+                    
+                    Spacer().frame(height: 80)
+                }
+            }
+        }
+        
+    }
+}

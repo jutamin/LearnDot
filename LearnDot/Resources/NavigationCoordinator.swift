@@ -29,5 +29,5 @@ enum AppDestination: Hashable {
     case wordLevel
     case wordCategory(DifficultyLevel)
     case wordQuiz(DifficultyLevel, WordCategory)
-    case result(Bool, DifficultyLevel, WordCategory, String, String) // isCorrect, level, category, correctAnswer, braillePattern
+    case result(Bool, DifficultyLevel, WordCategory, String, String, String) // isCorrect, level, category, correctAnswer, braillePattern, myAnswerBraillePattern
 }

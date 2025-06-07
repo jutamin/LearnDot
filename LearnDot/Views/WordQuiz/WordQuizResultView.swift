@@ -13,6 +13,7 @@ struct WordQuizResultView: View {
     let category: WordCategory
     let correctAnswer: String
     let braillePattern: String
+    let myAnswerBraillePattern: String
     @Environment(NavigationCoordinator.self) private var coordinator
     
     var body: some View {
@@ -67,6 +68,22 @@ struct WordQuizResultView: View {
                                 .font(.mainTextExtraBold36)
                                 .padding(.leading, 30)
                         }
+                    if !isCorrect {
+                        Spacer().frame(height: 8)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 240, height: 112)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .overlay {
+                                Text(myAnswerBraillePattern)
+                                    .font(.mainTextExtraBold36)
+                                    .padding(.leading, 30)
+                            }
+                    }
                 case .normal:
                     RoundedRectangle(cornerRadius: 20)
                         .foregroundStyle(.gray06)
@@ -80,6 +97,22 @@ struct WordQuizResultView: View {
                                 .font(.mainTextExtraBold36)
                                 .padding(.leading, 30)
                         }
+                    if !isCorrect {
+                        Spacer().frame(height: 8)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 345, height: 112)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .overlay {
+                                Text(myAnswerBraillePattern)
+                                    .font(.mainTextExtraBold36)
+                                    .padding(.leading, 30)
+                            }
+                    }
                 case .hard:
                     RoundedRectangle(cornerRadius: 20)
                         .foregroundStyle(.gray06)
@@ -93,6 +126,22 @@ struct WordQuizResultView: View {
                                 .font(.mainTextExtraBold36)
                                 .padding(.leading, 30)
                         }
+                    if !isCorrect {
+                        Spacer().frame(height: 8)
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 345, height: 150)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .overlay {
+                                Text(braillePattern)
+                                    .font(.mainTextExtraBold36)
+                                    .padding(.leading, 30)
+                            }
+                    }
                 }
                 
                 Spacer()

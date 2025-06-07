@@ -22,7 +22,7 @@ struct WordQuizResultView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                Spacer().frame(height: 137)
+                Spacer()
                 
                 if isCorrect {
                     VStack(spacing: 13){
@@ -51,7 +51,7 @@ struct WordQuizResultView: View {
                     }
                 }
                 
-                Spacer()
+                Spacer().frame(height: 52)
                 
                 // 정답 점자
                 switch level {

@@ -64,7 +64,7 @@ struct WordQuizResultView: View {
                         )
                         .overlay {
                             Text(braillePattern)
-                                .font(.largeTitle)
+                                .font(.mainTextExtraBold36)
                                 .padding(.leading, 30)
                         }
                 case .normal:
@@ -77,7 +77,7 @@ struct WordQuizResultView: View {
                         )
                         .overlay {
                             Text(braillePattern)
-                                .font(.largeTitle)
+                                .font(.mainTextExtraBold36)
                                 .padding(.leading, 30)
                         }
                 case .hard:
@@ -90,7 +90,7 @@ struct WordQuizResultView: View {
                         )
                         .overlay {
                             Text(braillePattern)
-                                .font(.largeTitle)
+                                .font(.mainTextExtraBold36)
                                 .padding(.leading, 30)
                         }
                 }

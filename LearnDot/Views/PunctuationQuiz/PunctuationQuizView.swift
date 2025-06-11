@@ -81,6 +81,7 @@ struct PunctuationQuizView: View {
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(Color.blue00, lineWidth: 2)
                                 )
+                                .accessibilityLabel("다음 점자셀로 이동")
                         }
                     }
                     .padding(.horizontal, 16)
@@ -98,6 +99,9 @@ struct PunctuationQuizView: View {
                                         selectedDotsArray[currentCellIndex].append(dotNumber)
                                     }
                                 }
+                            
+                                .accessibilityElement()
+                                .accessibilityLabel("점자 \(dotNumber)")
                         }
                     }
                     .padding(.horizontal, 83)
@@ -113,7 +117,7 @@ struct PunctuationQuizView: View {
                             .foregroundStyle(.gray01)
                             .frame(width: 168, height: 64)
                             .overlay {
-                                Text("다시쓰기")
+                                Text("다시찍기")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(.black00)
                             }
@@ -127,7 +131,7 @@ struct PunctuationQuizView: View {
                             .foregroundStyle(isSubmitDisabled ? .gray04 : .blue01)
                             .frame(width: 168, height: 64)
                             .overlay {
-                                Text("작성완료")
+                                Text("찍기완료")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(isSubmitDisabled ? .gray02 : .white00)
                             }
@@ -138,6 +142,11 @@ struct PunctuationQuizView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if viewModel.shouldGenerateNewQuiz {
+                viewModel.generateNewQuiz()
+            }
+        }
     }
 }
 

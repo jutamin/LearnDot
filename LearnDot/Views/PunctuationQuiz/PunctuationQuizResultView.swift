@@ -37,6 +37,7 @@ struct PunctuationQuizResultView: View {
                         Text("다음 문제에도 도전해볼까요?")
                             .font(.mainTextSemiBold15)
                             .foregroundStyle(.gray02)
+                            .accessibilityHidden(true)
                     }
                 } else {
                     VStack(spacing: 0){
@@ -49,6 +50,9 @@ struct PunctuationQuizResultView: View {
                                 .foregroundStyle(.white00)
                             + Text(dotNumbersText)
                                 .foregroundStyle(.blue00)
+                                .accessibilityLabel(dotArrays
+                                    .map { $0.sorted().map { String($0) }.joined(separator: " ") }
+                                    .joined(separator: ", "))
                             + Text(" 입니다.")
                                 .foregroundStyle(.white00)
                         }
@@ -59,10 +63,23 @@ struct PunctuationQuizResultView: View {
                             .font(.mainTextSemiBold15)
                             .foregroundStyle(.gray02)
                             .padding(.top, 8)
+                            .accessibilityHidden(true)
+                        
+                        Button(action: {
+                            coordinator.pop()
+                        }) {
+                            Text("점자 다시 찍어보기")
+                                .font(.mainTextSemiBold16)
+                                .frame(width: 168, height: 64)
+                                .background(Color.gray06)
+                                .cornerRadius(20)
+                                .foregroundColor(.blue00)
+                        }
+                        .padding(.top, 20)
                     }
                 }
                 
-                Spacer().frame(height: 87)
+                Spacer().frame(height: isCorrect ? 87 : 23)
                 
                 VStack(spacing: 68) {
                     RoundedRectangle(cornerRadius: 20)
@@ -98,7 +115,7 @@ struct PunctuationQuizResultView: View {
                     }
                     
                     Button{
-                        viewModel.generateNewQuiz()
+                        viewModel.shouldGenerateNewQuiz = true
                         coordinator.push(AppDestination.PunctuationQuiz)
                     } label: {
                         NextButtonCard()
@@ -108,6 +125,7 @@ struct PunctuationQuizResultView: View {
                 Spacer().frame(height: 80)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -115,7 +133,6 @@ struct DotCellView: View {
     let dotIndexes: [Int]
 
     var body: some View {
-        let visualIndexToDotNumber = [0: 0, 1: 3, 2: 1, 3: 4, 4: 2, 5: 5]
         VStack(spacing: 6) {
             HStack(spacing: 6) {
                 dotCircle(index: 0)

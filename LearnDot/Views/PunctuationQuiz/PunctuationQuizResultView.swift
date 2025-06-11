@@ -68,7 +68,7 @@ struct PunctuationQuizResultView: View {
                         Button(action: {
                             coordinator.pop()
                         }) {
-                            Text("이전 문제 다시 풀기")
+                            Text("점자 다시 찍어보기")
                                 .font(.mainTextSemiBold16)
                                 .frame(width: 168, height: 64)
                                 .background(Color.gray06)
@@ -79,7 +79,7 @@ struct PunctuationQuizResultView: View {
                     }
                 }
                 
-                Spacer().frame(height: 87)
+                Spacer().frame(height: isCorrect ? 87 : 23)
                 
                 VStack(spacing: 68) {
                     RoundedRectangle(cornerRadius: 20)
@@ -125,6 +125,7 @@ struct PunctuationQuizResultView: View {
                 Spacer().frame(height: 80)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

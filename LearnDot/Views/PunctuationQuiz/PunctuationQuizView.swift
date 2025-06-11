@@ -117,7 +117,7 @@ struct PunctuationQuizView: View {
                             .foregroundStyle(.gray01)
                             .frame(width: 168, height: 64)
                             .overlay {
-                                Text("다시쓰기")
+                                Text("다시찍기")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(.black00)
                             }
@@ -131,7 +131,7 @@ struct PunctuationQuizView: View {
                             .foregroundStyle(isSubmitDisabled ? .gray04 : .blue01)
                             .frame(width: 168, height: 64)
                             .overlay {
-                                Text("작성완료")
+                                Text("찍기완료")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(isSubmitDisabled ? .gray02 : .white00)
                             }

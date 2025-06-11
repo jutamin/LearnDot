@@ -49,6 +49,9 @@ struct PunctuationQuizResultView: View {
                                 .foregroundStyle(.white00)
                             + Text(dotNumbersText)
                                 .foregroundStyle(.blue00)
+                                .accessibilityLabel(dotArrays
+                                    .map { $0.sorted().map { String($0) }.joined(separator: " ") }
+                                    .joined(separator: ", "))
                             + Text(" 입니다.")
                                 .foregroundStyle(.white00)
                         }

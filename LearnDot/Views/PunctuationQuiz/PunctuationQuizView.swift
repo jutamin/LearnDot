@@ -98,6 +98,9 @@ struct PunctuationQuizView: View {
                                         selectedDotsArray[currentCellIndex].append(dotNumber)
                                     }
                                 }
+                            
+                                .accessibilityElement()
+                                .accessibilityLabel("점자 \(dotNumber)")
                         }
                     }
                     .padding(.horizontal, 83)

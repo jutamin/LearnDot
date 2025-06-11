@@ -51,7 +51,7 @@ struct HomeView: View {
                             title: "문장부호 점형 학습",
                             description: "문장부호 퀴즈 맞추기"
                         ) {
-                            
+                            coordinator.push(AppDestination.PunctuationQuiz)
                         }
                     }
                     .padding(.top, 30)
@@ -61,8 +61,4 @@ struct HomeView: View {
             }
             .ignoresSafeArea()
         }
-}
-
-#Preview {
-    HomeView()
 }

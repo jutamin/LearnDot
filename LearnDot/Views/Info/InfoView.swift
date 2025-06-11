@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct InfoView: View {
+    @Environment(NavigationCoordinator.self) private var coordinator
+    
     var body: some View {
-        Text("InfoView")
+        Button {
+            coordinator.push(AppDestination.manual0)
+        } label: {
+            Text("manual")
+        }
     }
 }
 
-#Preview {
-    InfoView()
-}

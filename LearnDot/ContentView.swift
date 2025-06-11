@@ -30,6 +30,16 @@ struct ContentView: View {
                     case .PunctuationResult(let isCorrect):
                         PunctuationQuizResultView(isCorrect: isCorrect)
                             .environmentObject(punctuationViewModel)
+                    case .info:
+                        InfoView()
+                    case .manual0:
+                        ManualView()
+                    case .manual1:
+                        Manual1()
+                    case .manual2:
+                        Manual2()
+                    case .manual3:
+                        Manual3()
                     }
                 }
         }

@@ -28,7 +28,7 @@ struct HomeView: View {
                         Spacer()
                         
                         Button {
-                            // TODO: 설정 뷰로 이동
+                            coordinator.push(AppDestination.info)
                         } label: {
                             Image(systemName: "info.circle")
                                 .resizable()

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KorToBraille
 
 struct WordQuizView: View {
     
@@ -48,7 +49,7 @@ struct WordQuizView: View {
                                 )
                                 .overlay {
                                     Text(quiz.brailleText)
-                                        .font(.largeTitle)
+                                        .font(.mainTextExtraBold36)
                                         .padding(.leading, 30)
                                 }
                         case .normal:
@@ -61,7 +62,7 @@ struct WordQuizView: View {
                                 )
                                 .overlay {
                                     Text(quiz.brailleText)
-                                        .font(.largeTitle)
+                                        .font(.mainTextExtraBold36)
                                         .padding(.leading, 30)
                                 }
                         case .hard:
@@ -74,7 +75,7 @@ struct WordQuizView: View {
                                 )
                                 .overlay {
                                     Text(quiz.brailleText)
-                                        .font(.largeTitle)
+                                        .font(.mainTextExtraBold36)
                                         .padding(.leading, 30)
                                 }
                         }
@@ -89,7 +90,8 @@ struct WordQuizView: View {
                                 let isCorrect = viewModel.checkAnswer(option)
                                 let correctAnswer = quiz.correctAnswer
                                 let braillePattern = quiz.brailleText
-                                coordinator.push(AppDestination.result(isCorrect, level, category, correctAnswer, braillePattern))
+                                let myAnswerBraillePattern = KorToBraille.korTranslate(option)
+                                coordinator.push(AppDestination.result(isCorrect, level, category, correctAnswer, braillePattern, myAnswerBraillePattern))
                             } label: {
                                 RoundedRectangle(cornerRadius: 20)
                                     .foregroundStyle(.blue00)

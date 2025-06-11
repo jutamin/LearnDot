@@ -73,23 +73,23 @@ class WordQuizViewModel {
             case .easy:
                 return [
                     BrailleWord(korean: "사과"),
-                                        BrailleWord(korean: "포도"),
-                                        BrailleWord(korean: "귤"),
-                                        BrailleWord(korean: "딸기"),
-                                        BrailleWord(korean: "바나나"),
-                                        BrailleWord(korean: "수박"),
-                                        BrailleWord(korean: "배"),
-                                        BrailleWord(korean: "복숭아")
+                    BrailleWord(korean: "포도"),
+                    BrailleWord(korean: "귤"),
+                    BrailleWord(korean: "딸기"),
+                    BrailleWord(korean: "바나나"),
+                    BrailleWord(korean: "수박"),
+                    BrailleWord(korean: "배"),
+                    BrailleWord(korean: "복숭아")
                 ]
             case .normal:
                 return [
                     BrailleWord(korean: "중식"),
-                                        BrailleWord(korean: "일식"),
-                                        BrailleWord(korean: "한식"),
-                                        BrailleWord(korean: "양식"),
-                                        BrailleWord(korean: "분식"),
-                                        BrailleWord(korean: "디저트"),
-                                        BrailleWord(korean: "음료수"),
+                    BrailleWord(korean: "일식"),
+                    BrailleWord(korean: "한식"),
+                    BrailleWord(korean: "양식"),
+                    BrailleWord(korean: "분식"),
+                    BrailleWord(korean: "디저트"),
+                    BrailleWord(korean: "음료수"),
                     BrailleWord(korean: "샐러드", braillePattern: "⠱⠑⠇⠇⠑⠙")
                 ]
             case .hard:

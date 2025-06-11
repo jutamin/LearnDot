@@ -13,6 +13,7 @@ struct WordQuizResultView: View {
     let category: WordCategory
     let correctAnswer: String
     let braillePattern: String
+    let myAnswerBraillePattern: String
     @Environment(NavigationCoordinator.self) private var coordinator
     
     var body: some View {
@@ -21,7 +22,7 @@ struct WordQuizResultView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                Spacer().frame(height: 137)
+                Spacer()
                 
                 if isCorrect {
                     VStack(spacing: 13){
@@ -50,49 +51,144 @@ struct WordQuizResultView: View {
                     }
                 }
                 
-                Spacer()
+                Spacer().frame(height: 52)
                 
                 // 정답 점자
                 switch level {
                 case .easy:
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.gray06)
-                        .frame(width: 240, height: 112)
-                        .overlay(
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 240, height: 112)
+                            .overlay {
+                                Text(braillePattern)
+                                    .font(.mainTextExtraBold36)
+                                    .padding(.leading, 30)
+                            }
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.blue00)
+                            .frame(width: 40, height: 27, alignment: .topLeading)
+                            .overlay {
+                                Text("정답")
+                                    .font(.mainTextSemiBold12)
+                            }
+                            .padding(.top, -70)
+                            .padding(.leading, -106)
+                    }
+                    if !isCorrect {
+                        Spacer().frame(height: 22)
+                        
+                        ZStack {
                             RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .overlay {
-                            Text(braillePattern)
-                                .font(.largeTitle)
-                                .padding(.leading, 30)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 240, height: 112)
+                                .overlay {
+                                    Text(myAnswerBraillePattern)
+                                        .font(.mainTextExtraBold36)
+                                        .padding(.leading, 30)
+                                }
+                            
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.blue00)
+                                .frame(width: 76, height: 27)
+                                .overlay {
+                                    Text("내가 고른 답")
+                                        .font(.mainTextSemiBold12)
+                                }
+                                .padding(.top, -70)
+                                .padding(.leading, -106)
                         }
+                    }
                 case .normal:
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.gray06)
-                        .frame(width: 345, height: 112)
-                        .overlay(
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 345, height: 112)
+                            .overlay {
+                                Text(braillePattern)
+                                    .font(.mainTextExtraBold36)
+                                    .padding(.leading, 30)
+                            }
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.blue00)
+                            .frame(width: 40, height: 27)
+                            .overlay {
+                                Text("정답")
+                                    .font(.mainTextSemiBold12)
+                            }
+                            .padding(.top, -70)
+                            .padding(.leading, -159)
+                    }
+                    if !isCorrect {
+                        Spacer().frame(height: 22)
+                        
+                        ZStack {
                             RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .overlay {
-                            Text(braillePattern)
-                                .font(.largeTitle)
-                                .padding(.leading, 30)
+                                .foregroundStyle(.gray06)
+                                .frame(width: 345, height: 112)
+                                .overlay {
+                                    Text(myAnswerBraillePattern)
+                                        .font(.mainTextExtraBold36)
+                                        .padding(.leading, 30)
+                                }
+                            
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.blue00)
+                                .frame(width: 76, height: 27)
+                                .overlay {
+                                    Text("내가 고른 답")
+                                        .font(.mainTextSemiBold12)
+                                }
+                                .padding(.top, -70)
+                                .padding(.leading, -159)
                         }
+                    }
                 case .hard:
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.gray06)
-                        .frame(width: 345, height: 150)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .overlay {
-                            Text(braillePattern)
-                                .font(.largeTitle)
-                                .padding(.leading, 30)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 345, height: 150)
+                            .overlay {
+                                Text(braillePattern)
+                                    .font(.mainTextExtraBold36)
+                                    .padding(.leading, 30)
+                            }
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.blue00)
+                            .frame(width: 40, height: 27)
+                            .overlay {
+                                Text("정답")
+                                    .font(.mainTextSemiBold12)
+                            }
+                            .padding(.top, -89)
+                            .padding(.leading, -159)
+                    }
+                    if !isCorrect {
+                        Spacer().frame(height: 22)
+                        
+                        ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 345, height: 150)
+                            .overlay {
+                                Text(myAnswerBraillePattern)
+                                    .font(.mainTextExtraBold36)
+                                    .padding(.leading, 30)
+                            }
+                        
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.blue00)
+                            .frame(width: 76, height: 27)
+                            .overlay {
+                                Text("내가 고른 답")
+                                    .font(.mainTextSemiBold12)
+                            }
+                            .padding(.top, -89)
+                            .padding(.leading, -159)
                         }
+                    }
                 }
                 
                 Spacer()

@@ -64,6 +64,18 @@ struct PunctuationQuizResultView: View {
                             .foregroundStyle(.gray02)
                             .padding(.top, 8)
                             .accessibilityHidden(true)
+                        
+                        Button(action: {
+                            coordinator.pop()
+                        }) {
+                            Text("이전 문제 다시 풀기")
+                                .font(.mainTextSemiBold16)
+                                .frame(width: 168, height: 64)
+                                .background(Color.gray06)
+                                .cornerRadius(20)
+                                .foregroundColor(.blue00)
+                        }
+                        .padding(.top, 20)
                     }
                 }
                 

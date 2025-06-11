@@ -29,13 +29,22 @@ class PunctuationQuizViewModel: ObservableObject {
     ]
     
     @Published var currentQuiz: BrailleWord? = nil
+    var shouldGenerateNewQuiz: Bool = false
     
     init() {
         generateNewQuiz()
     }
     
     func generateNewQuiz() {
-        currentQuiz = punctuationData.randomElement()
+        guard !punctuationData.isEmpty else { return }
+
+        var newQuiz: BrailleWord
+        repeat {
+            newQuiz = punctuationData.randomElement()!
+        } while newQuiz.korean == currentQuiz?.korean
+
+        currentQuiz = newQuiz
+        shouldGenerateNewQuiz = false
     }
     
     func isAnswerCorrect(selectedDotsArray: [[Int]]) -> Bool {

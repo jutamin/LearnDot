@@ -98,7 +98,7 @@ struct PunctuationQuizResultView: View {
                     }
                     
                     Button{
-                        viewModel.generateNewQuiz()
+                        viewModel.shouldGenerateNewQuiz = true
                         coordinator.push(AppDestination.PunctuationQuiz)
                     } label: {
                         NextButtonCard()
@@ -115,7 +115,6 @@ struct DotCellView: View {
     let dotIndexes: [Int]
 
     var body: some View {
-        let visualIndexToDotNumber = [0: 0, 1: 3, 2: 1, 3: 4, 4: 2, 5: 5]
         VStack(spacing: 6) {
             HStack(spacing: 6) {
                 dotCircle(index: 0)

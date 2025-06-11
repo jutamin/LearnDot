@@ -138,6 +138,11 @@ struct PunctuationQuizView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if viewModel.shouldGenerateNewQuiz {
+                viewModel.generateNewQuiz()
+            }
+        }
     }
 }
 

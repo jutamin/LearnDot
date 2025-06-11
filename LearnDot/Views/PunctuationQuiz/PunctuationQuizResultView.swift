@@ -37,6 +37,7 @@ struct PunctuationQuizResultView: View {
                         Text("다음 문제에도 도전해볼까요?")
                             .font(.mainTextSemiBold15)
                             .foregroundStyle(.gray02)
+                            .accessibilityHidden(true)
                     }
                 } else {
                     VStack(spacing: 0){
@@ -62,6 +63,7 @@ struct PunctuationQuizResultView: View {
                             .font(.mainTextSemiBold15)
                             .foregroundStyle(.gray02)
                             .padding(.top, 8)
+                            .accessibilityHidden(true)
                     }
                 }
                 

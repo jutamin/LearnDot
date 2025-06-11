@@ -81,6 +81,7 @@ struct PunctuationQuizView: View {
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(Color.blue00, lineWidth: 2)
                                 )
+                                .accessibilityLabel("다음 점자셀로 이동")
                         }
                     }
                     .padding(.horizontal, 16)

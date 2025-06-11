@@ -22,7 +22,7 @@ struct ContentView: View {
                         WordCategoryView(level: level)
                     case .wordQuiz(let level, let category):
                         WordQuizView(level: level, category: category)
-                    case .result(let isCorrect, let level, let category, let correctAnswer, let braillePattern):
+                    case .result(let isCorrect, let level, let category, let correctAnswer, let braillePattern, let myAnswerBraillePattern):
                         WordQuizResultView(isCorrect: isCorrect, level: level, category: category, correctAnswer: correctAnswer, braillePattern: braillePattern)
                     case .PunctuationQuiz:
                         PunctuationQuizView()

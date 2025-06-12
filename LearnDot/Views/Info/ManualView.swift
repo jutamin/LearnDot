@@ -75,4 +75,5 @@ struct ManualView: View {
 
 #Preview {
     ManualView()
+        .environment(NavigationCoordinator())
 }

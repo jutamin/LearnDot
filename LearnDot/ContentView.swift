@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var coordinator = NavigationCoordinator()
-    @StateObject private var punctuationViewModel = PunctuationQuizViewModel()
+    @EnvironmentObject private var punctuationViewModel: PunctuationQuizViewModel
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
@@ -40,6 +40,22 @@ struct ContentView: View {
                         Manual2()
                     case .manual3:
                         Manual3()
+                    case .wordTutorial0:
+                        WordQuizTutorialView()
+                    case .wordTutorial1:
+                        WordTutorial1()
+                    case .wordTutorial2:
+                        WordTutorial2()
+                    case .wordTutorial3:
+                        WordTutorial3()
+                    case .wordTutorial4:
+                        WordTutorial4()
+                    case .wordTutorial5:
+                        WordTutorial5()
+                    case .wordTutorial6:
+                        WordTutorial6()
+                    case .wordTutorial7:
+                        WordTutorial7()
                     }
                 }
         }

@@ -40,6 +40,11 @@ extension Font {
     }
     
     // ExtraBold
+    
+    static var mainTextExtraBold70: Font {
+        return .pretend(type: .extraBold, size: 70)
+    }
+    
     static var mainTextExtraBold36: Font {
         return .pretend(type: .extraBold, size: 36)
     }
@@ -70,6 +75,10 @@ extension Font {
         return .pretend(type: .semibold, size: 24)
     }
     
+    static var mainTextSemiBold18: Font {
+        return .pretend(type: .semibold, size: 18)
+    }
+    
     static var mainTextSemiBold16: Font {
         return .pretend(type: .semibold, size: 16)
     }
@@ -78,11 +87,19 @@ extension Font {
         return .pretend(type: .semibold, size: 15)
     }
     
+    static var mainTextSemiBold13: Font {
+        return .pretend(type: .semibold, size: 13)
+    }
+    
     static var mainTextSemiBold12: Font {
         return .pretend(type: .semibold, size: 12)
     }
     
     // Medium
+    static var mainTextMedium10: Font {
+        return .pretend(type: .medium, size: 10)
+    }
+    
     static var mainTextMedium16: Font {
         return .pretend(type: .medium, size: 16)
     }

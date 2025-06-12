@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct LearnDotApp: App {
+    @StateObject private var punctuationViewModel = PunctuationQuizViewModel()
+    
     var body: some Scene {
         WindowGroup {
             // HomeView(메인 페이지)로 돌려놓고 푸시할 것
             ContentView()
+                .environmentObject(punctuationViewModel)
                 .preferredColorScheme(.dark)
         }
     }

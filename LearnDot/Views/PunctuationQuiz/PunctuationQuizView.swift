@@ -143,5 +143,6 @@ struct PunctuationQuizView: View {
 
 #Preview {
     PunctuationQuizView()
+        .environmentObject(PunctuationQuizViewModel())
         .environment(NavigationCoordinator())
 }

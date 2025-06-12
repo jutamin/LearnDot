@@ -41,8 +41,6 @@ struct Manual2: View {
                         .foregroundStyle(.blue00)
                     + Text("을 눌러주세요.")
                         .foregroundStyle(.white00)
-                    
-                    
                 }
                 .font(.mainTextSemiBold16)
                 

@@ -27,11 +27,14 @@ struct OnboardingView: View {
             case .manual0:
                 OnboardingManual0(onNext: { nextStep() })
             case .manual1:
-                OnboardingManual1(onNext: { nextStep() })
+                OnboardingManual1(onNext: { nextStep() },
+                                  onBack: { previousStep() })
             case .manual2:
-                OnboardingManual2(onNext: { nextStep() })
+                OnboardingManual2(onNext: { nextStep() },
+                                  onBack: { previousStep() })
             case .manual3:
-                OnboardingManual3(onNext: { finishOnboarding() })
+                OnboardingManual3(onNext: { finishOnboarding() },
+                                  onBack: { previousStep() })
             }
         }
     }
@@ -41,6 +44,12 @@ struct OnboardingView: View {
             currentStep = nextStep
         }
     }
+    
+    private func previousStep() {
+            if let prevStep = OnboardingStep(rawValue: currentStep.rawValue - 1) {
+                currentStep = prevStep
+            }
+        }
     
     private func finishOnboarding() {
         isFirstLaunching = false

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct OnboardingManual3: View {
     let onNext: () -> Void
+    let onBack: () -> Void
+    @AccessibilityFocusState private var isFocused: Bool
+
     
     var body: some View {
         ZStack {
@@ -22,6 +25,7 @@ struct OnboardingManual3: View {
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .accessibilityFocused($isFocused)
                 
                 Spacer().frame(height: 57)
                 
@@ -62,8 +66,19 @@ struct OnboardingManual3: View {
                 
                 Spacer()
                 
-                HStack {
-                    Spacer()
+                HStack(spacing: 17) {
+                    Button {
+                        onBack()
+                    } label: {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray01)
+                            .frame(width: 168, height: 64)
+                            .overlay{
+                                Text("이전")
+                                    .font(.mainTextBold24)
+                                    .foregroundStyle(.black00)
+                            }
+                    }
                     
                     Button {
                         onNext()
@@ -72,16 +87,24 @@ struct OnboardingManual3: View {
                             .foregroundStyle(.blue01)
                             .frame(width: 168, height: 64)
                             .overlay{
-                                Text("설명 종료")
+                                Text("설명종료")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(.white)
                             }
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
                 
                 Spacer().frame(height: 80)
             }
             .padding(.horizontal, 24)
+        }
+        .onAppear {
+            // 다음 화면으로 이동했을 때 VoiceOver 포커스를 첫 텍스트로 이동
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                isFocused = true
+                UIAccessibility.post(notification: .layoutChanged, argument: nil)
+            }
         }
     }
 }

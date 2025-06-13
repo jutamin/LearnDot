@@ -9,6 +9,8 @@ import SwiftUI
 
 struct OnboardingManual1: View {
     let onNext: () -> Void
+    let onBack: () -> Void
+    @AccessibilityFocusState private var isFocused: Bool
     
     var body: some View {
         ZStack {
@@ -22,6 +24,7 @@ struct OnboardingManual1: View {
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .accessibilityFocused($isFocused)
                 
                 Spacer().frame(height: 57)
                 
@@ -30,7 +33,8 @@ struct OnboardingManual1: View {
                         .foregroundStyle(.white00)
                     + Text("쉬움/보통/어려움 ")
                         .foregroundStyle(.blue00)
-                    + Text("3단계로 나누어져요.\n    학습 난이도를 선택해주세요.")
+                        .accessibilityLabel("쉬움, 보통, 어려움")
+                    + Text("3단계로 나누어져요.\n    학습 난이도를 선택할 수 있어요.")
                         .foregroundStyle(.white00)
                     
                     Text("2. 카테고리 5개가 주어져요.\n")
@@ -60,8 +64,19 @@ struct OnboardingManual1: View {
                 
                 Spacer()
                 
-                HStack {
-                    Spacer()
+                HStack(spacing: 17) {
+                    Button {
+                        onBack()
+                    } label: {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray01)
+                            .frame(width: 168, height: 64)
+                            .overlay{
+                                Text("이전")
+                                    .font(.mainTextBold24)
+                                    .foregroundStyle(.black00)
+                            }
+                    }
                     
                     Button {
                         onNext()
@@ -76,10 +91,18 @@ struct OnboardingManual1: View {
                             }
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
                 
                 Spacer().frame(height: 80)
             }
             .padding(.horizontal, 24)
+        }
+        .onAppear {
+            // 다음 화면으로 이동했을 때 VoiceOver 포커스를 첫 텍스트로 이동
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                isFocused = true
+                UIAccessibility.post(notification: .layoutChanged, argument: nil)
+            }
         }
     }
 }

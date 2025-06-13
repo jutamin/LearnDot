@@ -42,7 +42,7 @@ struct InfoView: View {
                     .listRowBackground(Color.gray06)
                     
                     Button {
-                        coordinator.push(AppDestination.manual0)
+                        coordinator.push(AppDestination.punctuationTutorial0)
                     } label: {
                         Text("문장부호 점형 학습 튜토리얼")
                             .foregroundColor(.white00) // 리스트 기본 텍스트 색상
@@ -57,12 +57,6 @@ struct InfoView: View {
                 .buttonStyle(PlainButtonStyle())
                 .background(Color.clear)          // 리스트 전체 배경도 투명하게
                 .scrollContentBackground(.hidden)
-                
-                Button {
-                    coordinator.push(AppDestination.manual0)
-                } label: {
-                    Text("manual")
-                }
             }
         }
     }

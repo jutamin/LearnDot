@@ -45,4 +45,10 @@ enum AppDestination: Hashable {
     case wordTutorial5
     case wordTutorial6
     case wordTutorial7
+    case punctuationTutorial0
+    case punctuationTutorial1
+    case punctuationTutorial2
+    case punctuationTutorial3
+    case punctuationTutorial4
+    case punctuationTutorial5
 }

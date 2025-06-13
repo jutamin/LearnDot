@@ -56,6 +56,18 @@ struct ContentView: View {
                         WordTutorial6()
                     case .wordTutorial7:
                         WordTutorial7()
+                    case .punctuationTutorial0:
+                        PucntuationQuizTutorialView()
+                    case .punctuationTutorial1:
+                        PunctuationTutorial1()
+                    case .punctuationTutorial2:
+                        PunctuationTutorial2()
+                    case .punctuationTutorial3:
+                        PunctuationTutorial3()
+                    case .punctuationTutorial4:
+                        PunctuationTutorial4()
+                    case .punctuationTutorial5:
+                        PunctuationTutorial5()
                     }
                 }
         }

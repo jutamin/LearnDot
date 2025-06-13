@@ -46,7 +46,7 @@ struct WordQuizTutorialView: View {
                     Spacer()
                     
                     Button {
-                        coordinator.push(AppDestination.wordTutorial1)
+                        coordinator.push(AppDestination.punctuationTutorial0)
                     } label: {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue01)

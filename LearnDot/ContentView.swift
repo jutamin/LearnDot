@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var coordinator = NavigationCoordinator()
     @EnvironmentObject private var punctuationViewModel: PunctuationQuizViewModel
+    @AppStorage("_isFirstLaunching") var isFirstLaunching: Bool = true
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
@@ -72,6 +73,10 @@ struct ContentView: View {
                 }
         }
         .environment(coordinator)
+        .fullScreenCover(isPresented: $isFirstLaunching) {
+            OnboardingView()
+        }
+        
     }
 }
 

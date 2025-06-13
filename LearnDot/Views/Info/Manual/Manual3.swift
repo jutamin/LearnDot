@@ -15,12 +15,13 @@ struct Manual3: View {
             Color.black00
                 .ignoresSafeArea()
             
-            VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
                 Spacer().frame(height: 100)
                 
                 Text("문장부호 점형 학습 안내")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 
                 Spacer().frame(height: 57)
                 
@@ -65,10 +66,8 @@ struct Manual3: View {
                     Spacer()
                     
                     Button {
-                        coordinator.pop()
-                        coordinator.pop()
-                        coordinator.pop()
-                        coordinator.pop() // 다시 InfoView로 이동
+                        coordinator.popToRoot()
+                        coordinator.push(AppDestination.info) // 다시 InfoView로 이동
                     } label: {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue01)
@@ -88,6 +87,3 @@ struct Manual3: View {
     }
 }
 
-#Preview {
-    Manual3()
-}

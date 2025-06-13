@@ -15,12 +15,13 @@ struct Manual1: View {
             Color.black00
                 .ignoresSafeArea()
             
-            VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
                 Spacer().frame(height: 100)
                 
                 Text("난이도별 점형 학습 안내")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 
                 Spacer().frame(height: 57)
                 
@@ -85,4 +86,5 @@ struct Manual1: View {
 
 #Preview {
     Manual1()
+        .environment(NavigationCoordinator())
 }

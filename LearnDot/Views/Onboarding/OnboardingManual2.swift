@@ -1,14 +1,14 @@
 //
-//  Manual2.swift
+//  OnboardingManual2.swift
 //  LearnDot
 //
-//  Created by 원주연 on 6/11/25.
+//  Created by 원주연 on 6/13/25.
 //
 
 import SwiftUI
 
-struct Manual2: View {
-    @Environment(NavigationCoordinator.self) private var coordinator
+struct OnboardingManual2: View {
+    let onNext: () -> Void
     
     var body: some View {
         ZStack {
@@ -51,7 +51,7 @@ struct Manual2: View {
                     Spacer()
                     
                     Button {
-                        coordinator.push(AppDestination.manual3)
+                        onNext()
                     } label: {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue01)

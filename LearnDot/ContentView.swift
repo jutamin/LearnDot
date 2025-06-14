@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var coordinator = NavigationCoordinator()
-    @StateObject private var punctuationViewModel = PunctuationQuizViewModel()
+    @EnvironmentObject private var punctuationViewModel: PunctuationQuizViewModel
+    @AppStorage("_isFirstLaunching") var isFirstLaunching: Bool = true
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
@@ -30,10 +31,52 @@ struct ContentView: View {
                     case .PunctuationResult(let isCorrect):
                         PunctuationQuizResultView(isCorrect: isCorrect)
                             .environmentObject(punctuationViewModel)
+                    case .info:
+                        InfoView()
+                    case .manual0:
+                        ManualView()
+                    case .manual1:
+                        Manual1()
+                    case .manual2:
+                        Manual2()
+                    case .manual3:
+                        Manual3()
+                    case .wordTutorial0:
+                        WordQuizTutorialView()
+                    case .wordTutorial1:
+                        WordTutorial1()
+                    case .wordTutorial2:
+                        WordTutorial2()
+                    case .wordTutorial3:
+                        WordTutorial3()
+                    case .wordTutorial4:
+                        WordTutorial4()
+                    case .wordTutorial5:
+                        WordTutorial5()
+                    case .wordTutorial6:
+                        WordTutorial6()
+                    case .wordTutorial7:
+                        WordTutorial7()
+                    case .punctuationTutorial0:
+                        PucntuationQuizTutorialView()
+                    case .punctuationTutorial1:
+                        PunctuationTutorial1()
+                    case .punctuationTutorial2:
+                        PunctuationTutorial2()
+                    case .punctuationTutorial3:
+                        PunctuationTutorial3()
+                    case .punctuationTutorial4:
+                        PunctuationTutorial4()
+                    case .punctuationTutorial5:
+                        PunctuationTutorial5()
                     }
                 }
         }
         .environment(coordinator)
+        .fullScreenCover(isPresented: $isFirstLaunching) {
+            OnboardingView()
+        }
+        
     }
 }
 

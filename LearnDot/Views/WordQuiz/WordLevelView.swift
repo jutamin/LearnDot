@@ -17,7 +17,7 @@ struct WordLevelView: View {
             
             VStack(spacing: 0) {
                 Spacer()
-                    .frame(height: 82)
+                    .frame(height: 100)
                 
                 HStack {
                     Text("난이도")
@@ -56,7 +56,10 @@ struct WordLevelView: View {
             }
         }
         .ignoresSafeArea()
-        .navigationBarBackButtonHidden(true)
     }
 }
 
+#Preview {
+    WordLevelView()
+        .environment(NavigationCoordinator())
+}

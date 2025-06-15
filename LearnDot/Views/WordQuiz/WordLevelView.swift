@@ -23,6 +23,7 @@ struct WordLevelView: View {
                     Text("난이도")
                         .font(.mainTextExtraBold36)
                         .foregroundStyle(.white00)
+                        .accessibilityLabel("3단계의 난이도 중 하나를 골라주세요")
                     
                     Spacer()
                 }
@@ -31,14 +32,14 @@ struct WordLevelView: View {
                 VStack(spacing: 16) {
                     SelectCard(
                         title: "쉬움",
-                        description: "1-2개의 점자 셀로 구성된 단어"
+                        description: "5개 이하의 점자 셀로 구성된 단어"
                     ) {
                         coordinator.push(AppDestination.wordCategory(.easy))
                     }
                     
                     SelectCard(
                         title: "보통",
-                        description: "3-4셀 이상 또는 합성어"
+                        description: "6개 이상의 점자 셀 또는 합성어"
                     ) {
                         coordinator.push(AppDestination.wordCategory(.normal))
                     }
@@ -59,6 +60,3 @@ struct WordLevelView: View {
     }
 }
 
-#Preview {
-    WordLevelView()
-}

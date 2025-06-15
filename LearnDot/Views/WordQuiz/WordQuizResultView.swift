@@ -69,7 +69,7 @@ struct WordQuizResultView: View {
                             .frame(width: 240, height: 112)
                             .overlay {
                                 Text(braillePattern)
-                                    .font(.mainTextExtraBold36)
+                                    .font(.mainTextExtraBold60)
                                     .padding(.leading, 30)
                                     .accessibilitySortPriority(0)
                             }
@@ -95,7 +95,7 @@ struct WordQuizResultView: View {
                                 .frame(width: 240, height: 112)
                                 .overlay {
                                     Text(myAnswerBraillePattern)
-                                        .font(.mainTextExtraBold36)
+                                        .font(.mainTextExtraBold60)
                                         .padding(.leading, 30)
                                         .accessibilitySortPriority(0)
                                 }
@@ -121,7 +121,7 @@ struct WordQuizResultView: View {
                             .frame(width: 345, height: 112)
                             .overlay {
                                 Text(braillePattern)
-                                    .font(.mainTextExtraBold36)
+                                    .font(.mainTextExtraBold60)
                                     .padding(.leading, 30)
                                     .accessibilitySortPriority(0)
                             }
@@ -148,7 +148,7 @@ struct WordQuizResultView: View {
                                 .frame(width: 345, height: 112)
                                 .overlay {
                                     Text(myAnswerBraillePattern)
-                                        .font(.mainTextExtraBold36)
+                                        .font(.mainTextExtraBold60)
                                         .padding(.leading, 30)
                                         .accessibilitySortPriority(0)
                                 }
@@ -174,7 +174,7 @@ struct WordQuizResultView: View {
                             .frame(width: 345, height: 150)
                             .overlay {
                                 Text(braillePattern)
-                                    .font(.mainTextExtraBold36)
+                                    .font(.mainTextExtraBold60)
                                     .padding(.leading, 30)
                                     .accessibilitySortPriority(0)
                             }
@@ -201,7 +201,7 @@ struct WordQuizResultView: View {
                             .frame(width: 345, height: 150)
                             .overlay {
                                 Text(myAnswerBraillePattern)
-                                    .font(.mainTextExtraBold36)
+                                    .font(.mainTextExtraBold60)
                                     .padding(.leading, 30)
                                     .accessibilitySortPriority(0)
                             }

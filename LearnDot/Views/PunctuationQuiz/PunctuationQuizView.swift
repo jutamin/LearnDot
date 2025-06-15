@@ -15,6 +15,7 @@ struct PunctuationQuizView: View {
     @State private var currentCellIndex: Int = 0
     
     let indexToDotNumber = [1, 4, 2, 5, 3, 6]
+    let totalDots = 6
     
     var body: some View {
         let isSubmitDisabled = selectedDotsArray.allSatisfy { $0.isEmpty }
@@ -24,25 +25,30 @@ struct PunctuationQuizView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
+                VStack(spacing: 0){
                 Text("다음 문장부호의 점자를 찍어보세요.")
                     .font(.mainTextBold24)
                     .foregroundStyle(.blue00)
+                    .accessibilityLabel("주어지는 문장부호를 듣고 점자를 찍어보세요.")
                 
-                if let quiz = viewModel.currentQuiz {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.gray06)
-                        .frame(width: 240, height: 72)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .overlay {
-                            Text(quiz.korean)
-                                .font(.mainTextSemiBold24)
-                                .foregroundStyle(.white00)
-                        }
-                        .padding(.top, 12)
+                    if let quiz = viewModel.currentQuiz {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray06)
+                            .frame(width: 240, height: 72)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .overlay {
+                                Text(quiz.korean)
+                                    .font(.mainTextSemiBold24)
+                                    .foregroundStyle(.white00)
+                            }
+                            .padding(.top, 12)
+                    }
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilitySortPriority(2)
                 
                 ZStack {
                     HStack(spacing: 26) {
@@ -57,6 +63,7 @@ struct PunctuationQuizView: View {
                                         RoundedRectangle(cornerRadius: 20)
                                             .stroke(Color.blue00, lineWidth: 2)
                                     )
+                                    .accessibilityLabel("이전 점자셀로 이동")
                             }
                         } else {
                             Color.clear
@@ -85,6 +92,7 @@ struct PunctuationQuizView: View {
                         }
                     }
                     .padding(.horizontal, 16)
+                    .accessibilitySortPriority(0)
                     
                     LazyVGrid(columns: [GridItem(), GridItem()], spacing: 26) {
                         ForEach(0..<6) { index in
@@ -102,9 +110,11 @@ struct PunctuationQuizView: View {
                             
                                 .accessibilityElement()
                                 .accessibilityLabel("점자 \(dotNumber)")
+                                .accessibilitySortPriority(Double(totalDots + 1 - dotNumber))
                         }
                     }
                     .padding(.horizontal, 83)
+                    .accessibilitySortPriority(1)
                 }
                 .padding(.top, 42)
                 

@@ -33,6 +33,7 @@ struct PunctuationQuizResultView: View {
                         Text("정답입니다!🎉")
                             .font(.mainTextBold32)
                             .foregroundStyle(.white00)
+                            .accessibilityLabel("정답입니다")
                         
                         Text("다음 문제에도 도전해볼까요?")
                             .font(.mainTextSemiBold15)
@@ -44,6 +45,7 @@ struct PunctuationQuizResultView: View {
                         Text("오답입니다 😭")
                             .font(.mainTextBold32)
                             .foregroundStyle(.white00)
+                            .accessibilityLabel("오답입니다")
                         
                         Group {
                             Text("정답의 점형 번호는 ")
@@ -74,6 +76,7 @@ struct PunctuationQuizResultView: View {
                                 .background(Color.gray06)
                                 .cornerRadius(20)
                                 .foregroundColor(.blue00)
+                                .accessibilityLabel("점자 다시 찍어보기 버튼. 다음으로 넘기면 다음 문제를 풀 수 있고, 두번 탭하면 방금 문제의 점자를 다시 찍어볼 수 있어요.")
                         }
                         .padding(.top, 20)
                     }

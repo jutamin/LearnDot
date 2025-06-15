@@ -26,6 +26,7 @@ struct SelectCard: View {
                         Text(title)
                             .font(.mainTextBold24)
                             .foregroundStyle(.blue00)
+                            .accessibilityLabel(title.replacingOccurrences(of: "/", with: ", "))
                         
                         Text(description)
                             .font(.mainTextSemiBold16)

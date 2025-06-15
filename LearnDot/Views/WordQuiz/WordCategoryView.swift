@@ -18,10 +18,20 @@ struct WordCategoryView: View {
                 .ignoresSafeArea()
             
             ScrollView(.vertical) {
-                VStack(spacing: 16) {
-                    Spacer()
-                        .frame(height: 140)
+                Spacer()
+                    .frame(height: 100)
+                
+                HStack {
+                    Text("카테고리")
+                        .font(.mainTextExtraBold36)
+                        .foregroundStyle(.white00)
+                        .accessibilityLabel("5개의 카테고리 중 하나를 골라주세요")
                     
+                    Spacer()
+                }
+                .padding(.horizontal, 27)
+                
+                VStack(spacing: 16) {
                     ForEach(WordCategory.allCases) { category in
                         SelectCard(
                             title: category.rawValue,
@@ -35,11 +45,11 @@ struct WordCategoryView: View {
             }
             .ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationTitle("카테고리 선택")
         }
     }
 }
 
 #Preview {
     WordCategoryView(level: .easy)
+        .environment(NavigationCoordinator())
 }

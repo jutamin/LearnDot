@@ -37,6 +37,7 @@ struct WordQuizView: View {
                         Text("어떤 글자일까요?")
                             .font(.mainTextBold24)
                             .foregroundStyle(.blue00)
+                            .accessibilityLabel("주어지는 점형을 듣고, 4개의 보기 중 점자에 해당하는 단어를 골라주세요.")
                         
                         switch level {
                         case .easy:
@@ -48,9 +49,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Text(quiz.brailleText)
-                                        .font(.mainTextExtraBold36)
-                                        .padding(.leading, 30)
+                                    Text(quiz.brailleText.trimmingCharacters(in: .whitespacesAndNewlines))
+                                        .font(.mainTextExtraBold60)
+//                                        .padding(.leading, 50)
                                 }
                         case .normal:
                             RoundedRectangle(cornerRadius: 20)
@@ -61,9 +62,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Text(quiz.brailleText)
-                                        .font(.mainTextExtraBold36)
-                                        .padding(.leading, 30)
+                                    Text(quiz.brailleText.trimmingCharacters(in: .whitespacesAndNewlines))
+                                        .font(.mainTextExtraBold60)
+//                                        .padding(.leading, 35)
                                 }
                         case .hard:
                             RoundedRectangle(cornerRadius: 20)
@@ -74,12 +75,14 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Text(quiz.brailleText)
-                                        .font(.mainTextExtraBold36)
-                                        .padding(.leading, 30)
+                                    Text(quiz.brailleText.trimmingCharacters(in: .whitespacesAndNewlines))
+                                        .font(.mainTextExtraBold60)
+//                                        .padding(.leading, 30)
+                                        .lineLimit(nil)
                                 }
                         }
                     }
+                    .accessibilityElement(children: .combine)
                     
                     Spacer().frame(height: 52)
                     

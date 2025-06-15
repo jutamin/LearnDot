@@ -90,7 +90,7 @@ class WordQuizViewModel {
                     BrailleWord(korean: "분식"),
                     BrailleWord(korean: "디저트"),
                     BrailleWord(korean: "음료수"),
-                    BrailleWord(korean: "샐러드", braillePattern: "⠱⠑⠇⠇⠑⠙")
+                    BrailleWord(korean: "샐러드")
                 ]
             case .hard:
                 return [

@@ -36,6 +36,7 @@ struct HomeView: View {
                                 .frame(width: 38, height: 42)
                                 .foregroundStyle(.white00)
                         }
+                        .accessibilityLabel("도움말")
                     }
                     .padding(.horizontal, 27)
                     

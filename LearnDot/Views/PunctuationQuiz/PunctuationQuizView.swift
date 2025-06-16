@@ -10,9 +10,10 @@ import SwiftUI
 struct PunctuationQuizView: View {
     @Environment(NavigationCoordinator.self) private var coordinator
     @EnvironmentObject var viewModel: PunctuationQuizViewModel
-
+    
     @State private var selectedDotsArray: [[Int]] = [[]]
     @State private var currentCellIndex: Int = 0
+    @AccessibilityFocusState private var focusedDot: Int?
     
     let indexToDotNumber = [1, 4, 2, 5, 3, 6]
     let totalDots = 6
@@ -26,11 +27,11 @@ struct PunctuationQuizView: View {
             
             VStack(spacing: 0) {
                 VStack(spacing: 0){
-                Text("다음 문장부호의 점자를 찍어보세요.")
-                    .font(.mainTextBold24)
-                    .foregroundStyle(.blue00)
-                    .accessibilityLabel("주어지는 문장부호를 듣고 점자를 찍어보세요.")
-                
+                    Text("다음 문장부호의 점자를 찍어보세요.")
+                        .font(.mainTextBold24)
+                        .foregroundStyle(.blue00)
+                        .accessibilityLabel("주어지는 문장부호를 듣고 점자를 찍어보세요.")
+                    
                     if let quiz = viewModel.currentQuiz {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray06)
@@ -48,53 +49,31 @@ struct PunctuationQuizView: View {
                     }
                 }
                 .accessibilityElement(children: .combine)
-                .accessibilitySortPriority(2)
+                .accessibilitySortPriority(3)
                 
-                ZStack {
-                    HStack(spacing: 26) {
-                        if currentCellIndex > 0 {
-                            Button {
-                                currentCellIndex -= 1
-                            } label: {
-                                Image(systemName: "chevron.left")
-                                    .frame(width: 41, height: 70)
-                                    .foregroundColor(.gray00)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.blue00, lineWidth: 2)
-                                    )
-                                    .accessibilityLabel("이전 점자셀로 이동")
-                            }
-                        } else {
-                            Color.clear
-                                .frame(width: 41, height: 70)
-                        }
-                        
-                        Spacer()
-                        
-                        Button {
-                            if !selectedDotsArray[currentCellIndex].isEmpty {
-                                currentCellIndex += 1
-                                
-                                if currentCellIndex >= selectedDotsArray.count {
-                                    selectedDotsArray.append([])
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "chevron.right")
-                                .frame(width: 41, height: 70)
-                                .foregroundColor(.gray00)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.blue00, lineWidth: 2)
-                                )
-                                .accessibilityLabel("다음 점자셀로 이동")
-                        }
+                HStack(spacing: 26) {
+                    /// 이전 점자 셀
+                    Button {
+                        currentCellIndex -= 1
+                        focusedDot = 1
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .frame(width: 41, height: 70)
+                            .foregroundColor(currentCellIndex == 0 ? .clear : .gray00)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(currentCellIndex == 0 ? .clear : Color.blue00, lineWidth: 2)
+                            )
+                            .accessibilityLabel("이전 점자셀로 이동")
                     }
-                    .padding(.horizontal, 16)
-                    .accessibilitySortPriority(0)
+                    .disabled(currentCellIndex == 0)
+                    .accessibilityHidden(currentCellIndex == 0) // ⬅️ 비활성화 시 VoiceOver에서 숨김
+                    .accessibilityLabel("이전 점자셀로 이동")
+                    .accessibilitySortPriority(1)
                     
-                    LazyVGrid(columns: [GridItem(), GridItem()], spacing: 26) {
+                    /// 6점 셀
+                    LazyVGrid(columns: [GridItem(.fixed(100), spacing: 26),
+                                        GridItem(.fixed(100), spacing: 26)], spacing: 26) {
                         ForEach(0..<6) { index in
                             let dotNumber = indexToDotNumber[index]
                             Circle()
@@ -107,21 +86,45 @@ struct PunctuationQuizView: View {
                                         selectedDotsArray[currentCellIndex].append(dotNumber)
                                     }
                                 }
-                            
                                 .accessibilityElement()
-                                .accessibilityLabel("점자 \(dotNumber)")
+                                .accessibilityLabel("\(dotNumber)번 점자")
                                 .accessibilitySortPriority(Double(totalDots + 1 - dotNumber))
+                                .accessibilityFocused($focusedDot, equals: dotNumber)
                         }
                     }
-                    .padding(.horizontal, 83)
-                    .accessibilitySortPriority(1)
+                                        .accessibilitySortPriority(2)
+                    
+                    /// 다음 점자셀로 이동
+                    Button {
+                        if !selectedDotsArray[currentCellIndex].isEmpty {
+                            currentCellIndex += 1
+                            
+                            if currentCellIndex >= selectedDotsArray.count {
+                                selectedDotsArray.append([])
+                            }
+                            
+                            focusedDot = 1
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right")
+                            .frame(width: 41, height: 70)
+                            .foregroundColor(.gray00)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.blue00, lineWidth: 2)
+                            )
+                            .accessibilityLabel("다음 점자셀로 이동")
+                    }
+                    .accessibilitySortPriority(0)
                 }
                 .padding(.top, 42)
                 
+                /// 다시찍기, 찍기완료
                 HStack(spacing: 17) {
                     Button {
                         selectedDotsArray = [[]]
                         currentCellIndex = 0
+                        focusedDot = 1
                     } label: {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray01)
@@ -156,6 +159,8 @@ struct PunctuationQuizView: View {
             if viewModel.shouldGenerateNewQuiz {
                 viewModel.generateNewQuiz()
             }
+            selectedDotsArray = [[]]
+            currentCellIndex = 0
         }
     }
 }

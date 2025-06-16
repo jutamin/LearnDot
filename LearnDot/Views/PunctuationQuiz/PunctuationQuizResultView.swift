@@ -38,34 +38,38 @@ struct PunctuationQuizResultView: View {
                         Text("다음 문제에도 도전해볼까요?")
                             .font(.mainTextSemiBold15)
                             .foregroundStyle(.gray02)
-                            .accessibilityHidden(true)
+                            
                     }
+                    .accessibilityElement(children: .combine)
                 } else {
                     VStack(spacing: 0){
-                        Text("오답입니다 😭")
-                            .font(.mainTextBold32)
-                            .foregroundStyle(.white00)
-                            .accessibilityLabel("오답입니다")
-                        
-                        Group {
-                            Text("정답의 점형 번호는 ")
+                        VStack(spacing: 0) {
+                            Text("오답입니다 😭")
+                                .font(.mainTextBold32)
                                 .foregroundStyle(.white00)
-                            + Text(dotNumbersText)
-                                .foregroundStyle(.blue00)
-                                .accessibilityLabel(dotArrays
-                                    .map { $0.sorted().map { String($0) }.joined(separator: " ") }
-                                    .joined(separator: ", "))
-                            + Text(" 입니다.")
-                                .foregroundStyle(.white00)
-                        }
-                        .font(.mainTextSemiBold20)
-                        .padding(.top, 8)
-                        
-                        Text("다음 문제는 맞춰봐요!")
-                            .font(.mainTextSemiBold15)
-                            .foregroundStyle(.gray02)
+                                .accessibilityLabel("오답입니다")
+                            
+                            Group {
+                                Text("정답의 점형 번호는 ")
+                                    .foregroundStyle(.white00)
+                                + Text(dotNumbersText)
+                                    .foregroundStyle(.blue00)
+                                    .accessibilityLabel(dotArrays
+                                        .map { $0.sorted().map { String($0) }.joined(separator: " ") }
+                                        .joined(separator: ", "))
+                                + Text(" 입니다.")
+                                    .foregroundStyle(.white00)
+                            }
+                            .font(.mainTextSemiBold20)
                             .padding(.top, 8)
-                            .accessibilityHidden(true)
+                            
+                            Text("다음 문제는 맞춰봐요!")
+                                .font(.mainTextSemiBold15)
+                                .foregroundStyle(.gray02)
+                                .padding(.top, 8)
+                                .accessibilityHidden(true)
+                        }
+                        .accessibilityElement(children: .combine)
                         
                         Button(action: {
                             coordinator.pop()
@@ -97,6 +101,7 @@ struct PunctuationQuizResultView: View {
                                 .font(.mainTextSemiBold24)
                                 .foregroundStyle(.white00)
                         }
+                        .accessibilityHidden(true)
                     
                     let dotArrays = viewModel.convertBraillePatternToDotArrays(correctQuiz.braillePattern)
                     HStack(spacing: 12) {

@@ -68,9 +68,8 @@ struct WordQuizResultView: View {
                             .foregroundStyle(.gray06)
                             .frame(width: 240, height: 112)
                             .overlay {
-                                Text(braillePattern)
-                                    .font(.mainTextExtraBold60)
-                                    .padding(.leading, 30)
+                                Text(braillePattern.trimmingCharacters(in: ["⠀"]))
+                                    .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
                             }
                         RoundedRectangle(cornerRadius: 20)
@@ -94,9 +93,8 @@ struct WordQuizResultView: View {
                                 .foregroundStyle(.gray06)
                                 .frame(width: 240, height: 112)
                                 .overlay {
-                                    Text(myAnswerBraillePattern)
-                                        .font(.mainTextExtraBold60)
-                                        .padding(.leading, 30)
+                                    Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
+                                        .font(.mainTextExtraBold50)
                                         .accessibilitySortPriority(0)
                                 }
                             
@@ -120,9 +118,8 @@ struct WordQuizResultView: View {
                             .foregroundStyle(.gray06)
                             .frame(width: 345, height: 112)
                             .overlay {
-                                Text(braillePattern)
-                                    .font(.mainTextExtraBold60)
-                                    .padding(.leading, 30)
+                                Text(braillePattern.trimmingCharacters(in: ["⠀"]))
+                                    .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
                             }
                         
@@ -147,9 +144,8 @@ struct WordQuizResultView: View {
                                 .foregroundStyle(.gray06)
                                 .frame(width: 345, height: 112)
                                 .overlay {
-                                    Text(myAnswerBraillePattern)
-                                        .font(.mainTextExtraBold60)
-                                        .padding(.leading, 30)
+                                    Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
+                                        .font(.mainTextExtraBold50)
                                         .accessibilitySortPriority(0)
                                 }
                             
@@ -173,9 +169,8 @@ struct WordQuizResultView: View {
                             .foregroundStyle(.gray06)
                             .frame(width: 345, height: 150)
                             .overlay {
-                                Text(braillePattern)
-                                    .font(.mainTextExtraBold60)
-                                    .padding(.leading, 30)
+                                Text(braillePattern.trimmingCharacters(in: ["⠀"]))
+                                    .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
                             }
                         
@@ -200,9 +195,8 @@ struct WordQuizResultView: View {
                             .foregroundStyle(.gray06)
                             .frame(width: 345, height: 150)
                             .overlay {
-                                Text(myAnswerBraillePattern)
-                                    .font(.mainTextExtraBold60)
-                                    .padding(.leading, 30)
+                                Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
+                                    .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
                             }
                         

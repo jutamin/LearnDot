@@ -49,6 +49,10 @@ extension Font {
         return .pretend(type: .extraBold, size: 60)
     }
     
+    static var mainTextExtraBold50: Font {
+        return .pretend(type: .extraBold, size: 50)
+    }
+    
     static var mainTextExtraBold45: Font {
         return .pretend(type: .extraBold, size: 45)
     }

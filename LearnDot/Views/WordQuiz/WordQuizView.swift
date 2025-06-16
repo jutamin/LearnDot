@@ -49,9 +49,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Text(quiz.brailleText.trimmingCharacters(in: .whitespacesAndNewlines))
-                                        .font(.mainTextExtraBold60)
-//                                        .padding(.leading, 50)
+                                    Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
+                                        .font(.mainTextExtraBold50)
+//                                        .padding(.leading, 0)
                                 }
                         case .normal:
                             RoundedRectangle(cornerRadius: 20)
@@ -62,9 +62,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Text(quiz.brailleText.trimmingCharacters(in: .whitespacesAndNewlines))
-                                        .font(.mainTextExtraBold60)
-//                                        .padding(.leading, 35)
+                                    Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
+                                        .font(.mainTextExtraBold50)
+//                                        .padding(.leading, 20)
                                 }
                         case .hard:
                             RoundedRectangle(cornerRadius: 20)
@@ -75,9 +75,9 @@ struct WordQuizView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .overlay {
-                                    Text(quiz.brailleText.trimmingCharacters(in: .whitespacesAndNewlines))
-                                        .font(.mainTextExtraBold60)
-//                                        .padding(.leading, 30)
+                                    Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
+                                        .font(.mainTextExtraBold50)
+//                                        .padding(.leading, 20)
                                         .lineLimit(nil)
                                 }
                         }
@@ -95,6 +95,11 @@ struct WordQuizView: View {
                                 let braillePattern = quiz.brailleText
                                 let myAnswerBraillePattern = KorToBraille.korTranslate(option)
                                 coordinator.push(AppDestination.result(isCorrect, level, category, correctAnswer, braillePattern, myAnswerBraillePattern))
+                                /// test
+                                print("문제 점형")
+                                print(quiz.brailleText)
+                                print("문제 점형 공백제거")
+                                print(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                             } label: {
                                 RoundedRectangle(cornerRadius: 20)
                                     .foregroundStyle(.blue00)

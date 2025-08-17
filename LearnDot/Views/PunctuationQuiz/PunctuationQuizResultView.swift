@@ -117,6 +117,7 @@ struct PunctuationQuizResultView: View {
                 
                 HStack(spacing: 17) {
                     Button {
+                        viewModel.shouldGenerateNewQuiz = true
                         coordinator.popToRoot()
                     } label: {
                         QuitButtonCard()

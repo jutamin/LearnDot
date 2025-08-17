@@ -47,6 +47,13 @@ class PunctuationQuizViewModel: ObservableObject {
         shouldGenerateNewQuiz = false
     }
     
+    func prepareNewQuizIfNeeded() {
+        if shouldGenerateNewQuiz || currentQuiz == nil {
+            generateNewQuiz()
+            shouldGenerateNewQuiz = false
+        }
+    }
+    
     func isAnswerCorrect(selectedDotsArray: [[Int]]) -> Bool {
         guard let correctPattern = currentQuiz?.braillePattern else { return false }
         

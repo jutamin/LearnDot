@@ -156,9 +156,7 @@ struct PunctuationQuizView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            if viewModel.shouldGenerateNewQuiz {
-                viewModel.generateNewQuiz()
-            }
+            viewModel.prepareNewQuizIfNeeded()
             selectedDotsArray = [[]]
             currentCellIndex = 0
         }

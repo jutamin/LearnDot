@@ -112,11 +112,11 @@ struct PunctuationQuizResultView: View {
                 }
                 .padding(.top, 20)
                 
-                
                 Spacer().frame(height: 96)
                 
                 HStack(spacing: 17) {
                     Button {
+                        viewModel.shouldGenerateNewQuiz = true
                         coordinator.popToRoot()
                     } label: {
                         QuitButtonCard()

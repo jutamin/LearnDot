@@ -31,6 +31,12 @@ struct ContentView: View {
                     case .PunctuationResult(let isCorrect):
                         PunctuationQuizResultView(isCorrect: isCorrect)
                             .environmentObject(punctuationViewModel)
+                    case .basicUnit:
+                        BasicUnitView()
+                    case .basicQuiz(let unit):
+                        BasicQuizView(unit: unit)
+                    case .basicReult(let isCorrect, let unit, let correctAnswer, let braillePattern, let myAnswerBraillePattern):
+                        BasicQuizResultView(isCorrect: isCorrect, unit: unit, correctAnswer: correctAnswer, braillePattern: braillePattern, myAnswerBraillePattern: myAnswerBraillePattern)
                     case .info:
                         InfoView()
                     case .manual0:

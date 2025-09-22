@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WordCategoryView: View {
-    
     let level: DifficultyLevel
     @Environment(NavigationCoordinator.self) private var coordinator
     

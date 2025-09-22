@@ -32,6 +32,9 @@ enum AppDestination: Hashable {
     case PunctuationQuiz
     case PunctuationResult(Bool) // isCorrect
     case result(Bool, DifficultyLevel, WordCategory, String, String, String) // isCorrect, level, category, correctAnswer, braillePattern, myAnswerBraillePattern
+    case basicUnit
+    case basicQuiz(BasicUnit)
+    case basicReult(Bool, BasicUnit, String, String, String)
     case info
     case manual0
     case manual1

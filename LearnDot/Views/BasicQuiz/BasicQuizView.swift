@@ -49,7 +49,7 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-//                                        .padding(.leading, 0)
+                                    //                                        .padding(.leading, 0)
                                 }
                         case .jungseong:
                             RoundedRectangle(cornerRadius: 20)
@@ -62,7 +62,7 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-//                                        .padding(.leading, 20)
+                                    //                                        .padding(.leading, 20)
                                 }
                         case .jongseong:
                             RoundedRectangle(cornerRadius: 20)
@@ -75,7 +75,7 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-//                                        .padding(.leading, 20)
+                                    //                                        .padding(.leading, 20)
                                         .lineLimit(nil)
                                 }
                         }
@@ -91,7 +91,17 @@ struct BasicQuizView: View {
                                 let isCorrect = viewModel.checkAnswer(option)
                                 let correctAnswer = quiz.correctAnswer
                                 let braillePattern = quiz.brailleText
-                                let myAnswerBraillePattern = KorToBraille.korTranslate(option)
+                                
+                                let myAnswerBraillePattern: String
+                                switch unit {
+                                case .choseong:
+                                    myAnswerBraillePattern = kor_cho[option] ?? ""
+                                case .jungseong:
+                                    myAnswerBraillePattern = kor_jung[option] ?? ""
+                                case .jongseong:
+                                    myAnswerBraillePattern = kor_jong[option] ?? ""
+                                }
+                                
                                 coordinator.push(AppDestination.basicReult(isCorrect, unit, correctAnswer, braillePattern, myAnswerBraillePattern))
                                 /// test
                                 print("문제 점형")

@@ -36,6 +36,7 @@ struct PunctuationQuizView: View {
                         .accessibilityLabel("주어지는 문장부호를 듣고 점자를 찍어보세요.")
                     
                     if let quiz = viewModel.currentQuiz {
+                        let label = quiz.korean + (quiz.description != nil ? ", \(quiz.description!)" : "")
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray06)
                             .frame(width: 240, height: 72)
@@ -48,6 +49,7 @@ struct PunctuationQuizView: View {
                                     .font(.mainTextSemiBold24)
                                     .foregroundStyle(.white00)
                             }
+                            .accessibilityLabel(label)
                             .padding(.top, 12)
                     }
                 }

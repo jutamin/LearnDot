@@ -106,7 +106,7 @@ struct PunctuationQuizView: View {
                                 .accessibilityLabel({
                                     if let lastDot = lastTappedDot, lastDot == dotNumber,
                                        let selected = lastTappedSelected {
-                                        return "\(dotNumber)번 점자, \(selected ? "선택됨" : "선택 취소됨")"
+                                        return "\(dotNumber)번, \(selected ? "선택" : "취소")"
                                     } else {
                                         return "\(dotNumber)번 점자"
                                     }

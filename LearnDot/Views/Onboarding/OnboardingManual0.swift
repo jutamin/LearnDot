@@ -20,7 +20,6 @@ struct OnboardingManual0: View {
                 Spacer().frame(height: 50)
                 Spacer()
                 
-                
                 Text("안녕하세요,\n점자학습앱\n")
                     .foregroundStyle(.white00)
                     .font(.mainTextBold32)

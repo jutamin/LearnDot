@@ -11,7 +11,7 @@ struct OnboardingManual2: View {
     let onNext: () -> Void
     let onBack: () -> Void
     @AccessibilityFocusState private var isFocused: Bool
-
+    
     var body: some View {
         ZStack {
             Color.black00
@@ -28,20 +28,20 @@ struct OnboardingManual2: View {
                 Spacer().frame(height: 57)
                 
                 VStack(alignment: .leading, spacing: 30) {
-                    Text("5. 정답을 맞혔을 경우, 축하 메시지와\n    정답 점형을 다시 들어볼 수 있어요. ")
+                    Text("5. 정답을 맞히면, 축하 메시지와 함께\n    정답 점형을 다시 들어볼 수 있어요. ")
                         .foregroundStyle(.white00)
                         .accessibilityFocused($isFocused)
                     
-                    Text("6. 오답을 골랐을 경우, 안내 메시지와 정답,\n    내가 고른 답의 점형을 다시 들어볼 수 있어요.")
+                    Text("6. 오답을 고르면 안내 메시지와 정답,\n    내가 고른 답의 점형을 다시 들어볼 수 있어요.")
                         .foregroundStyle(.white00)
                     
-                    Text("7. 학습을 그만하거나, 난이도 또는 카테고리를\n    바꾸고 싶다면, ")
+                    Text("7. 학습을 그만하거나, 난이도 또는 카테고리를\n    바꾸려면, ")
                         .foregroundStyle(.white00)
                     + Text("'학습종료' 버튼 ")
                         .foregroundStyle(.blue00)
-                    + Text("을 눌러주세요.\n    계속해서 다음 문제를 풀어보고 싶다면,\n")
+                    + Text("을,\n    계속하려면,")
                         .foregroundStyle(.white00)
-                    + Text("    '다음문제' 버튼 ")
+                    + Text(" '다음문제' 버튼 ")
                         .foregroundStyle(.blue00)
                     + Text("을 눌러주세요.")
                         .foregroundStyle(.white00)
@@ -93,3 +93,11 @@ struct OnboardingManual2: View {
     }
 }
 
+#Preview {
+    OnboardingManual2 {
+        print("👉 다음 버튼 눌림")
+    } onBack: {
+        print("👈 이전 버튼 눌림")
+    }
+    
+}

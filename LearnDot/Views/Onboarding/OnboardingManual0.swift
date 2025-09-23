@@ -35,15 +35,11 @@ struct OnboardingManual0: View {
                     .foregroundStyle(.white00)
                     .font(.mainTextBold24)
                 
-                + Text("\n다음 안내로 넘어가려면,\n한 손가락으로 화면을 왼쪽에서 오른쪽으로 빠르게 쓸어보세요.")
+                + Text("\n다음 안내로 넘어가려면,\n한 손가락으로 왼쪽에서 오른쪽으로 빠르게 쓸어주세요.")
                     .font(.mainTextSemiBold15)
                     .foregroundStyle(.gray02)
                 
                 Text("버튼은 빠르게 두 번 탭하면 선택돼요.\n")
-                    .font(.mainTextSemiBold15)
-                    .foregroundStyle(.gray02)
-                
-                + Text("한 번 더 왼쪽에서 오른쪽으로 빠르게 쓴 뒤,\n버튼을 빠르게 두 번 탭하여 다음 안내로 넘어가주세요.")
                     .font(.mainTextSemiBold15)
                     .foregroundStyle(.gray02)
                 

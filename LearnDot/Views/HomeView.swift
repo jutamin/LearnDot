@@ -42,6 +42,13 @@ struct HomeView: View {
                     
                     VStack(spacing: 16) {
                         SelectCard(
+                            title: "기초단계 점형 학습",
+                            description: "한글 자모 점형 맞추기"
+                        ) {
+                            coordinator.push(AppDestination.basicUnit)
+                        }
+                        
+                        SelectCard(
                             title: "난이도별 점형 학습",
                             description: "단계별로 점형 맞추기"
                         ) {

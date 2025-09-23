@@ -34,18 +34,18 @@ struct OnboardingManual1: View {
                     + Text("쉬움/보통/어려움 ")
                         .foregroundStyle(.blue00)
                         .accessibilityLabel("쉬움, 보통, 어려움")
-                    + Text("3단계로 나누어져요.\n    학습 난이도를 선택할 수 있어요.")
+                    + Text("3단계로 나눠져 있어요.\n    원하는 난이도를 선택하세요.")
                         .foregroundStyle(.white00)
                     
-                    Text("2. 카테고리 5개가 주어져요.\n")
+                    Text("2. 학습 주제는 5개,\n")
                         .foregroundStyle(.white00)
-                    + Text("    (식품/화장실/철도/의약품/가전제품)\n")
+                    + Text("    식품/화장실/철도/의약품/가전제품\n")
                         .foregroundStyle(.blue00)
                         .accessibilityLabel("식품, 화장실, 철도, 의약품, 가전제품")
-                    + Text("    관심있는 주제를 선택해주세요.")
+                    + Text("    중에서 고를 수 있어요.")
                         .foregroundStyle(.white00)
                     
-                    Text("3. 한 단어에 대한 점형이 주어져요.\n    어떤 글자일까요? 라는 문구 다음에,\n    주어진 ")
+                    Text("3. 한 단어의 점형이 제시되고,\n    ")
                         .foregroundStyle(.white00)
                     + Text("점형 번호를 음성으로 ")
                         .foregroundStyle(.blue00)
@@ -54,11 +54,10 @@ struct OnboardingManual1: View {
                     
                     Text("4. ")
                         .foregroundStyle(.white00)
-                    + Text("4개의 선택지 버튼 ")
+                    + Text("4개의 보기 버튼 ")
                         .foregroundStyle(.blue00)
-                    + Text("중, 문제 점형과 일치하는\n    선택지를 하나 골라주세요.")
+                    + Text("중,\n    점형과 일치하는 정답을 선택하세요.")
                         .foregroundStyle(.white00)
-                    
                 }
                 .font(.mainTextSemiBold16)
                 
@@ -105,4 +104,13 @@ struct OnboardingManual1: View {
             }
         }
     }
+}
+
+#Preview {
+    OnboardingManual1 {
+        print("👉 다음 버튼 눌림")
+    } onBack: {
+        print("👈 이전 버튼 눌림")
+    }
+    
 }

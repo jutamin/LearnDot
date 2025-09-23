@@ -17,17 +17,20 @@ struct QuizData {
 struct BrailleWord {
     let korean: String
     let braillePattern: String
+    let description: String?
     
     // KorToBraille을 사용하여 한글 단어들로부터 점자 패턴을 생성하는 편의 이니셜라이저
-    init(korean: String) {
+    init(korean: String, description: String? = nil) {
         self.korean = korean
         self.braillePattern = KorToBraille.korTranslate(korean)
+        self.description = description
     }
     
     // 미리 계산된 점자 패턴을 직접 지정하는 이니셜라이저 (커스터마이징 필요시)
-    init(korean: String, braillePattern: String) {
-        self.korean = korean
-        self.braillePattern = braillePattern
-    }
+    init(korean: String, braillePattern: String, description: String? = nil) {
+         self.korean = korean
+         self.braillePattern = braillePattern
+         self.description = description
+     }
 }
 

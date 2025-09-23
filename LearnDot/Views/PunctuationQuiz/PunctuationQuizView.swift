@@ -13,6 +13,9 @@ struct PunctuationQuizView: View {
     
     @State private var selectedDotsArray: [[Int]] = [[]]
     @State private var currentCellIndex: Int = 0
+    @State private var lastTappedDot: Int? = nil
+    @State private var lastTappedSelected: Bool? = nil
+
     @AccessibilityFocusState private var focusedDot: Int?
     
     let indexToDotNumber = [1, 4, 2, 5, 3, 6]
@@ -33,6 +36,7 @@ struct PunctuationQuizView: View {
                         .accessibilityLabel("주어지는 문장부호를 듣고 점자를 찍어보세요.")
                     
                     if let quiz = viewModel.currentQuiz {
+                        let label = quiz.korean + (quiz.description != nil ? ", \(quiz.description!)" : "")
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray06)
                             .frame(width: 240, height: 72)
@@ -45,6 +49,7 @@ struct PunctuationQuizView: View {
                                     .font(.mainTextSemiBold24)
                                     .foregroundStyle(.white00)
                             }
+                            .accessibilityLabel(label)
                             .padding(.top, 12)
                     }
                 }
@@ -76,18 +81,36 @@ struct PunctuationQuizView: View {
                                         GridItem(.fixed(100), spacing: 26)], spacing: 26) {
                         ForEach(0..<6) { index in
                             let dotNumber = indexToDotNumber[index]
+                            let isSelected = selectedDotsArray[currentCellIndex].contains(dotNumber)
+                            
                             Circle()
-                                .fill(selectedDotsArray[currentCellIndex].contains(dotNumber) ? Color.white00 : Color.gray05)
+                                .fill(isSelected ? Color.white00 : Color.gray05)
                                 .frame(width: 100, height: 100)
                                 .onTapGesture {
-                                    if selectedDotsArray[currentCellIndex].contains(dotNumber) {
+                                    if isSelected {
                                         selectedDotsArray[currentCellIndex].removeAll { $0 == dotNumber }
+                                        lastTappedDot = dotNumber
+                                        lastTappedSelected = false
                                     } else {
                                         selectedDotsArray[currentCellIndex].append(dotNumber)
+                                        lastTappedDot = dotNumber
+                                        lastTappedSelected = true
+                                    }
+
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        lastTappedDot = nil
+                                        lastTappedSelected = nil
                                     }
                                 }
                                 .accessibilityElement()
-                                .accessibilityLabel("\(dotNumber)번 점자")
+                                .accessibilityLabel({
+                                    if let lastDot = lastTappedDot, lastDot == dotNumber,
+                                       let selected = lastTappedSelected {
+                                        return "\(dotNumber)번, \(selected ? "선택" : "취소")"
+                                    } else {
+                                        return "\(dotNumber)번 점자"
+                                    }
+                                }())
                                 .accessibilitySortPriority(Double(totalDots + 1 - dotNumber))
                                 .accessibilityFocused($focusedDot, equals: dotNumber)
                         }

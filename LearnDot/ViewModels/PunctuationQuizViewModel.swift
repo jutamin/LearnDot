@@ -10,22 +10,22 @@ import Foundation
 class PunctuationQuizViewModel: ObservableObject {
     
     let punctuationData: [BrailleWord] = [
-        BrailleWord(korean: "온점 (.)", braillePattern: "⠲"),
-        BrailleWord(korean: "물음표 (?)", braillePattern: "⠦"),
-        BrailleWord(korean: "느낌표 (!)", braillePattern: "⠖"),
-        BrailleWord(korean: "반점 (,)", braillePattern: "⠐"),
-        BrailleWord(korean: "붙임표 (-)", braillePattern: "⠤"),
-        BrailleWord(korean: "빼기 (-)", braillePattern: "⠔"),
-        BrailleWord(korean: "줄표 (—)", braillePattern: "⠤⠤"),
-        BrailleWord(korean: "물결표 (~)", braillePattern: "⠈⠔"),
-        BrailleWord(korean: "별표 (*)", braillePattern: "⠐⠔"),
-        BrailleWord(korean: "여는 큰따옴표 (“)", braillePattern: "⠠⠦"),
-        BrailleWord(korean: "닫는 큰따옴표 (”)", braillePattern: "⠴"),
-        BrailleWord(korean: "여는 작은따옴표 (‘)", braillePattern: "⠠⠦"),
-        BrailleWord(korean: "닫는 작은따옴표 (’)", braillePattern: "⠴⠄"),
-        BrailleWord(korean: "쌍점 (:)", braillePattern: "⠐⠂"),
-        BrailleWord(korean: "세미콜론 (;)", braillePattern: "⠰⠆"),
-        BrailleWord(korean: "줄임표 (…)", braillePattern: "⠠⠠⠠")
+        BrailleWord(korean: "온점 (.)", braillePattern: "⠲", description: "문장 끝을 마무리할 때 사용"),
+        BrailleWord(korean: "물음표 (?)", braillePattern: "⠦", description: "의문을 나타낼 때 사용"),
+        BrailleWord(korean: "느낌표 (!)", braillePattern: "⠖", description: "강조하거나 감탄을 나타낼 때 사용"),
+        BrailleWord(korean: "반점 (,)", braillePattern: "⠐", description: "문장 안에서 잠깐 쉬거나 나열할 때 사용"),
+        BrailleWord(korean: "붙임표 (-)", braillePattern: "⠤", description: "두 단어를 이어주거나 연결할 때 사용"),
+        BrailleWord(korean: "빼기 (-)", braillePattern: "⠔", description: "뺄셈이나 음수를 나타낼 때 사용"),
+        BrailleWord(korean: "줄표 (—)", braillePattern: "⠤⠤", description: "문장 내 구분이나 강조를 위해 사용"),
+        BrailleWord(korean: "물결표 (~)", braillePattern: "⠈⠔", description: "길이나 범위를 나타낼 때 사용"),
+        BrailleWord(korean: "별표 (*)", braillePattern: "⠐⠔", description: "주석이나 강조 표시할 때 사용"),
+        BrailleWord(korean: "여는 큰따옴표 (“)", braillePattern: "⠠⠦", description: "말이나 글을 인용할 때 시작"),
+        BrailleWord(korean: "닫는 큰따옴표 (”)", braillePattern: "⠴", description: "말이나 글을 인용할 때 끝"),
+        BrailleWord(korean: "여는 작은따옴표 (‘)", braillePattern: "⠠⠦", description: "작은 인용이나 강조를 시작할 때"),
+        BrailleWord(korean: "닫는 작은따옴표 (’)", braillePattern: "⠴⠄", description: "작은 인용이나 강조를 끝낼 때"),
+        BrailleWord(korean: "쌍점 (:)", braillePattern: "⠐⠂", description: "목록이나 설명을 시작할 때 사용"),
+        BrailleWord(korean: "세미콜론 (;)", braillePattern: "⠰⠆", description: "두 문장을 연결하거나 나열할 때 사용"),
+        BrailleWord(korean: "줄임표 (…)", braillePattern: "⠠⠠⠠", description: "문장의 일부를 생략하거나 말을 끊어 생략할 때 사용")
     ]
     
     @Published var currentQuiz: BrailleWord? = nil

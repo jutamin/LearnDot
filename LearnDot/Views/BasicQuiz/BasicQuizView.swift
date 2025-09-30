@@ -54,7 +54,7 @@ struct BasicQuizView: View {
                         case .jungseong:
                             RoundedRectangle(cornerRadius: 20)
                                 .foregroundStyle(.gray06)
-                                .frame(width: 345, height: 112)
+                                .frame(width: 240, height: 112)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(Color.gray, lineWidth: 1)
@@ -67,7 +67,7 @@ struct BasicQuizView: View {
                         case .jongseong:
                             RoundedRectangle(cornerRadius: 20)
                                 .foregroundStyle(.gray06)
-                                .frame(width: 345, height: 150)
+                                .frame(width: 240, height: 112)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(Color.gray, lineWidth: 1)

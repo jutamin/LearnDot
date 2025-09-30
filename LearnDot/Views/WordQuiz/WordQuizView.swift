@@ -51,21 +51,14 @@ struct WordQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                        .accessibilityElement()
                                         .accessibilityLabel(
                                             quiz.brailleText
                                                 .trimmingCharacters(in: ["⠀"])
-                                                .chunked(into: 1)
-                                                .map { cell in
-                                                    let positions = brailleDotPositions(for: cell.first!)
-                                                    guard !positions.isEmpty else { return "" }
-                                                    return positions.map { "\($0)" }.joined(separator: " ")
-                                                }
-                                                .filter { !$0.isEmpty }
-                                                .joined(separator: "\n다음 cell\n") // 각 셀 구분
+                                                .map { String($0) }
+                                                .joined(separator: "\n\n\n")
                                         )
                                 }
-
+                            
                         case .normal:
                             RoundedRectangle(cornerRadius: 20)
                                 .foregroundStyle(.gray06)
@@ -77,18 +70,11 @@ struct WordQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                        .accessibilityElement()
                                         .accessibilityLabel(
                                             quiz.brailleText
                                                 .trimmingCharacters(in: ["⠀"])
-                                                .chunked(into: 1)
-                                                .map { cell in
-                                                    let positions = brailleDotPositions(for: cell.first!)
-                                                    guard !positions.isEmpty else { return "" }
-                                                    return positions.map { "\($0)" }.joined(separator: " ")
-                                                }
-                                                .filter { !$0.isEmpty }
-                                                .joined(separator: "\n다음 cell\n")
+                                                .map { String($0) }
+                                                .joined(separator: "\n\n\n")
                                         )
                                 }
                         case .hard:
@@ -102,18 +88,11 @@ struct WordQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                        .accessibilityElement()
                                         .accessibilityLabel(
                                             quiz.brailleText
                                                 .trimmingCharacters(in: ["⠀"])
-                                                .chunked(into: 1)
-                                                .map { cell in
-                                                    let positions = brailleDotPositions(for: cell.first!)
-                                                    guard !positions.isEmpty else { return "" }
-                                                    return positions.map { "\($0)" }.joined(separator: " ")
-                                                }
-                                                .filter { !$0.isEmpty }
-                                                .joined(separator: "\n다음 cell\n")
+                                                .map { String($0) }
+                                                .joined(separator: "\n\n\n")
                                         )
                                         .lineLimit(nil)
                                 }
@@ -155,33 +134,5 @@ struct WordQuizView: View {
             }
         }
         .navigationBarBackButtonHidden()
-    }
-    
-    func brailleDotPositions(for brailleChar: Character) -> [Int] {
-        guard let scalar = brailleChar.unicodeScalars.first else { return [] }
-        let value = scalar.value - 0x2800
-        var positions: [Int] = []
-        for i in 0..<6 {
-            if (value & (1 << i)) != 0 {
-                positions.append(i + 1)
-            }
-        }
-        return positions
-    }
-}
-
-extension String {
-    func chunked(into size: Int) -> [String] {
-        var chunks: [String] = []
-        var current = ""
-        for (i, char) in self.enumerated() {
-            current.append(char)
-            if (i + 1) % size == 0 {
-                chunks.append(current)
-                current = ""
-            }
-        }
-        if !current.isEmpty { chunks.append(current) }
-        return chunks
     }
 }

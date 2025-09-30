@@ -49,7 +49,12 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                    //                                        .padding(.leading, 0)
+                                        .accessibilityLabel(
+                                            quiz.brailleText
+                                                .trimmingCharacters(in: ["⠀"])
+                                                .map { String($0) }
+                                                .joined(separator: "\n\n\n")
+                                        )
                                 }
                         case .jungseong:
                             RoundedRectangle(cornerRadius: 20)
@@ -62,7 +67,12 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                    //                                        .padding(.leading, 20)
+                                        .accessibilityLabel(
+                                            quiz.brailleText
+                                                .trimmingCharacters(in: ["⠀"])
+                                                .map { String($0) }
+                                                .joined(separator: "\n\n\n")
+                                        )
                                 }
                         case .jongseong:
                             RoundedRectangle(cornerRadius: 20)
@@ -75,7 +85,12 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                    //                                        .padding(.leading, 20)
+                                        .accessibilityLabel(
+                                            quiz.brailleText
+                                                .trimmingCharacters(in: ["⠀"])
+                                                .map { String($0) }
+                                                .joined(separator: "\n\n\n")
+                                        )
                                         .lineLimit(nil)
                                 }
                         }

@@ -61,7 +61,7 @@ struct BasicQuizResultView: View {
                 
                 // 정답 점자
                 switch unit {
-                case .choseong:
+                case .choseong, .jungseong, .jongseong:
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray06)
@@ -70,6 +70,12 @@ struct BasicQuizResultView: View {
                                 Text(braillePattern.trimmingCharacters(in: ["⠀"]))
                                     .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
+                                    .accessibilityLabel(
+                                        braillePattern
+                                            .trimmingCharacters(in: ["⠀"])
+                                            .map { String($0) }
+                                            .joined(separator: "\n\n\n")
+                                    )
                             }
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue00)
@@ -95,106 +101,12 @@ struct BasicQuizResultView: View {
                                     Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
                                         .accessibilitySortPriority(0)
-                                }
-                            
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(.blue00)
-                                .frame(width: 76, height: 27)
-                                .overlay {
-                                    Text("내가 고른 답")
-                                        .font(.mainTextSemiBold12)
-                                        .accessibilityLabel("내가 고른 답의 점형")
-                                        .accessibilitySortPriority(1)
-                                }
-                                .padding(.top, -70)
-                                .padding(.leading, -106)
-                        }
-                        .accessibilityElement(children: .combine)
-                    }
-                case .jungseong:
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.gray06)
-                            .frame(width: 240, height: 112)
-                            .overlay {
-                                Text(braillePattern.trimmingCharacters(in: ["⠀"]))
-                                    .font(.mainTextExtraBold50)
-                                    .accessibilitySortPriority(0)
-                            }
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.blue00)
-                            .frame(width: 40, height: 27, alignment: .topLeading)
-                            .overlay {
-                                Text("정답")
-                                    .font(.mainTextSemiBold12)
-                                    .accessibilityLabel("정답 점형")
-                                    .accessibilitySortPriority(1)
-                            }
-                            .padding(.top, -70)
-                            .padding(.leading, -106)
-                    }
-                    .accessibilityElement(children: .combine)
-                    if !isCorrect {
-                        Spacer().frame(height: 22)
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(.gray06)
-                                .frame(width: 240, height: 112)
-                                .overlay {
-                                    Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
-                                        .font(.mainTextExtraBold50)
-                                        .accessibilitySortPriority(0)
-                                }
-                            
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(.blue00)
-                                .frame(width: 76, height: 27)
-                                .overlay {
-                                    Text("내가 고른 답")
-                                        .font(.mainTextSemiBold12)
-                                        .accessibilityLabel("내가 고른 답의 점형")
-                                        .accessibilitySortPriority(1)
-                                }
-                                .padding(.top, -70)
-                                .padding(.leading, -106)
-                        }
-                        .accessibilityElement(children: .combine)
-                    }
-                case .jongseong:
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.gray06)
-                            .frame(width: 240, height: 112)
-                            .overlay {
-                                Text(braillePattern.trimmingCharacters(in: ["⠀"]))
-                                    .font(.mainTextExtraBold50)
-                                    .accessibilitySortPriority(0)
-                            }
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.blue00)
-                            .frame(width: 40, height: 27, alignment: .topLeading)
-                            .overlay {
-                                Text("정답")
-                                    .font(.mainTextSemiBold12)
-                                    .accessibilityLabel("정답 점형")
-                                    .accessibilitySortPriority(1)
-                            }
-                            .padding(.top, -70)
-                            .padding(.leading, -106)
-                    }
-                    .accessibilityElement(children: .combine)
-                    if !isCorrect {
-                        Spacer().frame(height: 22)
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(.gray06)
-                                .frame(width: 240, height: 112)
-                                .overlay {
-                                    Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
-                                        .font(.mainTextExtraBold50)
-                                        .accessibilitySortPriority(0)
+                                        .accessibilityLabel(
+                                            myAnswerBraillePattern
+                                                .trimmingCharacters(in: ["⠀"])
+                                                .map { String($0) }
+                                                .joined(separator: "\n\n\n")
+                                        )
                                 }
                             
                             RoundedRectangle(cornerRadius: 20)

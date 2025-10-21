@@ -64,7 +64,7 @@ struct TranslateView: View {
                                         .foregroundStyle(.white00)
                                 }
                                     .padding(.leading, 16)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .frame(maxWidth: .infinity)
                             )
                             .overlay(alignment: .top) {
                                 Button(action: {

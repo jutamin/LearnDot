@@ -50,9 +50,6 @@ struct SavedLearningWordDetailView: View {
                     Spacer().frame(height: 30)
                     
                     mainCard(item: item)
-                        .onTapGesture {
-                            playSound(for: item)
-                        }
                     
                     Spacer().frame(height: 30)
                     listenAgainButton(item: item)
@@ -125,7 +122,8 @@ struct SavedLearningWordDetailView: View {
     @ViewBuilder
     private func listenAgainButton(item: SavedLearningItem) -> some View {
         Button {
-            playSound(for: item)
+            let brailleText = item.braillePattern.trimmingCharacters(in: ["⠀"])
+            UIAccessibility.post(notification: .announcement, argument: brailleText)
         } label: {
             Text("다시 듣기")
                 .font(.mainTextSemiBold20)
@@ -143,11 +141,5 @@ struct SavedLearningWordDetailView: View {
             modelContext.delete(item)
             coordinator.pop()
         }
-    }
-    
-    /// 소리 재생 함수 (TODO)
-    private func playSound(for item: SavedLearningItem) {
-        // TODO: VoiceOver/AVSpeechSynthesizer로 item.word 또는 item.braillePattern 읽어주기
-        print("Play sound for: \(item.word)")
     }
 }

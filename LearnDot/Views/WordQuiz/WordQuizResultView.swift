@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WordQuizResultView: View {
     let isCorrect: Bool
@@ -15,6 +16,53 @@ struct WordQuizResultView: View {
     let braillePattern: String
     let myAnswerBraillePattern: String
     @Environment(NavigationCoordinator.self) private var coordinator
+    @Environment(\.modelContext) private var modelContext
+    @State private var isBookmarked: Bool = false
+    
+    var currentLearningItemData: (word: String, unitType: String, title: String, braille: String) {
+        (
+            word: correctAnswer,
+            unitType: "난이도별",
+            title: correctAnswer,
+            braille: braillePattern
+        )
+    }
+    
+    private func fetchSavedItem() -> SavedLearningItem? {
+        let word = currentLearningItemData.word
+        let unitType = currentLearningItemData.unitType
+        
+        let predicate = #Predicate<SavedLearningItem> { item in
+            item.word == word && item.unitType == unitType
+        }
+        
+        var fetchDescriptor = FetchDescriptor(predicate: predicate)
+        fetchDescriptor.fetchLimit = 1
+        
+        do {
+            let items = try modelContext.fetch(fetchDescriptor)
+            return items.first
+        } catch {
+            print("Failed to fetch item: \(error)")
+            return nil
+        }
+    }
+    
+    func toggleBookmark() {
+        if let itemToRemove = fetchSavedItem() {
+            modelContext.delete(itemToRemove)
+            isBookmarked = false
+        } else {
+            let newItem = SavedLearningItem(
+                title: currentLearningItemData.title,
+                unitType: currentLearningItemData.unitType,
+                word: currentLearningItemData.word,
+                braillePattern: currentLearningItemData.braille
+            )
+            modelContext.insert(newItem)
+            isBookmarked = true
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -77,6 +125,10 @@ struct WordQuizResultView: View {
                                             .joined(separator: "\n\n\n")
                                     )
                                     .accessibilitySortPriority(0)
+                            }
+                            .overlay(alignment: .topTrailing) {
+                                bookmarkButton
+                                    .padding(8)
                             }
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue00)
@@ -150,6 +202,10 @@ struct WordQuizResultView: View {
                                     .accessibilityLabel("정답 점형")
                                     .accessibilitySortPriority(1)
                             }
+                            .overlay(alignment: .topTrailing) {
+                                bookmarkButton
+                                    .padding(8)
+                            }
                             .padding(.top, -70)
                             .padding(.leading, -159)
                     }
@@ -213,6 +269,10 @@ struct WordQuizResultView: View {
                                     .accessibilityLabel("정답 점형")
                                     .accessibilitySortPriority(1)
                             }
+                            .overlay(alignment: .topTrailing) {
+                                bookmarkButton
+                                    .padding(8)
+                            }
                             .padding(.top, -89)
                             .padding(.leading, -159)
                     }
@@ -273,8 +333,25 @@ struct WordQuizResultView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            isBookmarked = (fetchSavedItem() != nil)
+        }
+    }
+    
+    private var bookmarkButton: some View {
+        Button {
+            toggleBookmark()
+        } label: {
+            Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                .font(.system(size: 24))
+                .foregroundStyle(isBookmarked ? .blue01 : .gray03)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel(isBookmarked ? "북마크 해제" : "북마크 저장")
     }
 }
+
 //
 //#Preview {
 //    WordQuizResultView()

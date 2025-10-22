@@ -127,10 +127,6 @@ struct BasicQuizResultView: View {
                                             .joined(separator: "\n\n\n")
                                     )
                             }
-                            .overlay(alignment: .topTrailing) {
-                                bookmarkButton
-                                    .padding(8)
-                            }
                         
                         RoundedRectangle(cornerRadius: 14)
                             .foregroundStyle(.blue00)
@@ -183,6 +179,13 @@ struct BasicQuizResultView: View {
                 
                 Spacer()
                 
+                HStack {
+                    Spacer()
+                    bookmarkButton
+                        .padding(.bottom, 20)
+                        .padding(.trailing, 20)
+                }
+                
                 HStack(spacing: 17) {
                     Button {
                         coordinator.popToRoot()
@@ -216,6 +219,6 @@ struct BasicQuizResultView: View {
                 .frame(width: 44, height: 44)
                 .contentShape(Rectangle())
         }
-        .accessibilityLabel(isBookmarked ? "북마크 해제" : "북마크 저장")
+        .accessibilityLabel(isBookmarked ? "학습 저장 취소" : "학습 저장하기")
     }
 }

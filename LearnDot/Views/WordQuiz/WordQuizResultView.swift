@@ -126,10 +126,7 @@ struct WordQuizResultView: View {
                                     )
                                     .accessibilitySortPriority(0)
                             }
-                            .overlay(alignment: .topTrailing) {
-                                bookmarkButton
-                                    .padding(8)
-                            }
+                        
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue00)
                             .frame(width: 40, height: 27, alignment: .topLeading)
@@ -202,10 +199,6 @@ struct WordQuizResultView: View {
                                     .accessibilityLabel("정답 점형")
                                     .accessibilitySortPriority(1)
                             }
-                            .overlay(alignment: .topTrailing) {
-                                bookmarkButton
-                                    .padding(8)
-                            }
                             .padding(.top, -70)
                             .padding(.leading, -159)
                     }
@@ -269,10 +262,6 @@ struct WordQuizResultView: View {
                                     .accessibilityLabel("정답 점형")
                                     .accessibilitySortPriority(1)
                             }
-                            .overlay(alignment: .topTrailing) {
-                                bookmarkButton
-                                    .padding(8)
-                            }
                             .padding(.top, -89)
                             .padding(.leading, -159)
                     }
@@ -314,6 +303,13 @@ struct WordQuizResultView: View {
                 
                 Spacer()
                 
+                HStack {
+                    Spacer()
+                    bookmarkButton
+                        .padding(.bottom, 20)
+                        .padding(.trailing, 20)
+                }
+                
                 // 학습종료 or 다음문제
                 HStack(spacing: 17) {
                     Button {
@@ -348,7 +344,7 @@ struct WordQuizResultView: View {
                 .frame(width: 44, height: 44)
                 .contentShape(Rectangle())
         }
-        .accessibilityLabel(isBookmarked ? "북마크 해제" : "북마크 저장")
+        .accessibilityLabel(isBookmarked ? "학습 저장 취소" : "학습 저장하기")
     }
 }
 

@@ -151,10 +151,6 @@ struct PunctuationQuizResultView: View {
                                 .font(.mainTextSemiBold24)
                                 .foregroundStyle(.white00)
                         }
-                        .overlay(alignment: .topTrailing) {
-                            bookmarkButton
-                                .padding(8)
-                        }
                         .accessibilityHidden(true)
                     
                     let dotArrays = viewModel.convertBraillePatternToDotArrays(correctQuiz.braillePattern)
@@ -166,7 +162,14 @@ struct PunctuationQuizResultView: View {
                 }
                 .padding(.top, 20)
                 
-                Spacer().frame(height: 96)
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    bookmarkButton
+                        .padding(.bottom, 20)
+                        .padding(.trailing, 20)
+                }
                 
                 HStack(spacing: 17) {
                     Button {
@@ -206,7 +209,7 @@ struct PunctuationQuizResultView: View {
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
             }
-            .accessibilityLabel(isBookmarked ? "북마크 해제" : "북마크 저장")
+            .accessibilityLabel(isBookmarked ? "학습 저장 취소" : "학습 저장하기")
         }
 }
 

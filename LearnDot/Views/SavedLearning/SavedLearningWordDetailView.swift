@@ -96,6 +96,7 @@ struct SavedLearningWordDetailView: View {
         VStack(spacing: 0) {
             Text(item.word)
                 .font(.mainTextExtraBold50)
+                .multilineTextAlignment(.center)
                 .padding(.top, 30)
             
             Spacer()
@@ -108,6 +109,7 @@ struct SavedLearningWordDetailView: View {
             Text("(카드를 탭하면 소리가 나옵니다)")
                 .font(.mainTextSemiBold15)
                 .foregroundStyle(.gray02)
+                .accessibilityHidden(true)
                 .padding(.bottom, 20)
         }
         .foregroundStyle(.white00)

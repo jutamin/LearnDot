@@ -11,23 +11,22 @@ import KorToBraille
 struct TranslateView: View {
     @State var text: String = ""
     @State var translatedText: String = ""
+    @State private var isTranslated = false
     
     var body: some View {
         ZStack {
             Color.black00.ignoresSafeArea()
             
             VStack(alignment: .leading, spacing: 0) {
-                // 🔹 제목
                 Text("점자 번역")
                     .font(.mainTextExtraBold36)
                     .foregroundStyle(.white00)
                     .padding(.leading, 27)
                     .padding(.bottom, 30)
                 
-                // 🔹 상단 + 하단 박스를 겹치는 ZStack
                 ZStack(alignment: .top) {
                     VStack(spacing: 0) {
-                        // 상단 Rectangle
+                        // 상단 입력 박스
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray05)
                             .frame(height: 172)
@@ -36,7 +35,7 @@ struct TranslateView: View {
                                     .stroke(Color.gray02, lineWidth: 1)
                             )
                             .overlay(
-                                VStack(alignment: .leading, spacing: 6) {
+                                VStack(alignment: .leading) {
                                     TextField(
                                         "글자를 입력해주세요..",
                                         text: $text,
@@ -46,30 +45,42 @@ struct TranslateView: View {
                                     .foregroundStyle(.white00)
                                 }
                                     .padding(.leading, 16)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
                             )
                         
-                        // 하단 Rectangle
+                        // 하단 번역 결과 박스
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray06)
                             .frame(height: 353)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.gray02, lineWidth: 1)
+                                    .stroke(isTranslated ? Color.blue00 : Color.gray02, lineWidth: isTranslated ? 3 : 1)
                             )
                             .overlay(
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text(translatedText)
-                                        .font(.mainTextSemiBold24)
-                                        .foregroundStyle(.white00)
+                                VStack {
+                                    let brailleChars = Array(trimmedBraille(translatedText))
+                                    let rows = stride(from: 0, to: brailleChars.count, by: 5).map {
+                                        Array(brailleChars[$0..<min($0 + 5, brailleChars.count)])
+                                    }
+                                    
+                                    VStack(alignment: .center, spacing: 20) {
+                                        ForEach(0..<rows.count, id: \.self) { rowIndex in
+                                            HStack(spacing: 16) {
+                                                ForEach(rows[rowIndex], id: \.self) { char in
+                                                    let dots = brailleToDots(char)
+                                                    BrailleCellView(dots: dots)
+                                                }
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                        }
+                                    }
+                                    .padding(.vertical, 20)
                                 }
-                                    .padding(.leading, 16)
-                                    .frame(maxWidth: .infinity)
                             )
                             .overlay(alignment: .top) {
                                 Button(action: {
                                     translatedText = KorToBraille.korTranslate(text)
-                                }) {
+                                    isTranslated = true
+                                }, label: {
                                     Circle()
                                         .fill(text.isEmpty ? Color.gray01 : Color.blue01)
                                         .frame(width: 70, height: 70)
@@ -81,8 +92,9 @@ struct TranslateView: View {
                                                 .padding(.top, 5)
                                         )
                                         .offset(y: -35)
-                                }
+                                })
                                 .disabled(text.isEmpty)
+                                .accessibilityLabel("\(text) 번역")
                             }
                     }
                 }
@@ -92,6 +104,49 @@ struct TranslateView: View {
             }
             .padding(.top, 20)
         }
+    }
+}
+
+// MARK: - Helper: 마지막 점자 제거용
+func trimmedBraille(_ text: String) -> String {
+    if let last = text.last, last.unicodeScalars.first?.value == 0x2800 {
+        return String(text.dropLast())
+    } else {
+        return text
+    }
+}
+
+// MARK: - Helper: Braille to dots
+func brailleToDots(_ brailleChar: Character) -> [Bool] {
+    guard let scalarValue = brailleChar.unicodeScalars.first?.value else { return Array(repeating: false, count: 6) }
+    let dotsMask = Int(scalarValue) - 0x2800
+    return (0..<6).map { i in
+        (dotsMask & (1 << i)) != 0
+    }
+}
+
+// MARK: - Braille Cell View
+struct BrailleCellView: View {
+    let dots: [Bool]
+    
+    var body: some View {
+        HStack(spacing: 8) {
+            VStack(spacing: 8) {
+                ForEach(0..<3, id: \.self) { i in
+                    Circle()
+                        .fill(dots[i] ? Color.white00 : Color.gray05)
+                        .frame(width: 14, height: 14)
+                }
+            }
+            VStack(spacing: 8) {
+                ForEach(3..<6, id: \.self) { i in
+                    Circle()
+                        .fill(dots[i] ? Color.white00 : Color.gray05)
+                        .frame(width: 14, height: 14)
+                }
+            }
+        }
+        .padding(6)
     }
 }
 

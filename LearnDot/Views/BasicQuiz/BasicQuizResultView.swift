@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BasicQuizResultView: View {
     let isCorrect: Bool
@@ -14,6 +15,54 @@ struct BasicQuizResultView: View {
     let braillePattern: String
     let myAnswerBraillePattern: String
     @Environment(NavigationCoordinator.self) private var coordinator
+    
+    @Environment(\.modelContext) private var modelContext
+    @State private var isBookmarked: Bool = false
+    
+    var currentLearningItemData: (word: String, unitType: String, title: String, braille: String) {
+        (
+            word: correctAnswer,
+            unitType: "기초단계",
+            title: correctAnswer,
+            braille: braillePattern
+        )
+    }
+    
+    private func fetchSavedItem() -> SavedLearningItem? {
+        let word = currentLearningItemData.word
+        let unitType = currentLearningItemData.unitType
+        
+        let predicate = #Predicate<SavedLearningItem> { item in
+            item.word == word && item.unitType == unitType
+        }
+        
+        var fetchDescriptor = FetchDescriptor(predicate: predicate)
+        fetchDescriptor.fetchLimit = 1
+        
+        do {
+            let items = try modelContext.fetch(fetchDescriptor)
+            return items.first
+        } catch {
+            print("Failed to fetch item: \(error)")
+            return nil
+        }
+    }
+    
+    func toggleBookmark() {
+        if let itemToRemove = fetchSavedItem() {
+            modelContext.delete(itemToRemove)
+            isBookmarked = false
+        } else {
+            let newItem = SavedLearningItem(
+                title: currentLearningItemData.title,
+                unitType: currentLearningItemData.unitType,
+                word: currentLearningItemData.word,
+                braillePattern: currentLearningItemData.braille
+            )
+            modelContext.insert(newItem)
+            isBookmarked = true
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -25,10 +74,12 @@ struct BasicQuizResultView: View {
                 
                 if isCorrect {
                     VStack(spacing: 13){
-                        Text("정답입니다!🎉")
-                            .font(.mainTextBold32)
-                            .foregroundStyle(.white00)
-                            .accessibilityLabel("정답입니다")
+                        HStack {
+                            Text("정답입니다!🎉")
+                                .font(.mainTextBold32)
+                                .foregroundStyle(.white00)
+                                .accessibilityLabel("정답입니다")
+                        }
                         
                         Text("다음 문제에도 도전해볼까요?")
                             .font(.mainTextSemiBold15)
@@ -59,7 +110,6 @@ struct BasicQuizResultView: View {
                 
                 Spacer().frame(height: 52)
                 
-                // 정답 점자
                 switch unit {
                 case .choseong, .jungseong, .jongseong:
                     ZStack {
@@ -77,9 +127,14 @@ struct BasicQuizResultView: View {
                                             .joined(separator: "\n\n\n")
                                     )
                             }
-                        RoundedRectangle(cornerRadius: 20)
+                            .overlay(alignment: .topTrailing) {
+                                bookmarkButton
+                                    .padding(8)
+                            }
+                        
+                        RoundedRectangle(cornerRadius: 14)
                             .foregroundStyle(.blue00)
-                            .frame(width: 40, height: 27, alignment: .topLeading)
+                            .frame(width: 40, height: 27)
                             .overlay {
                                 Text("정답")
                                     .font(.mainTextSemiBold12)
@@ -90,6 +145,7 @@ struct BasicQuizResultView: View {
                             .padding(.leading, -106)
                     }
                     .accessibilityElement(children: .combine)
+                    
                     if !isCorrect {
                         Spacer().frame(height: 22)
                         
@@ -127,7 +183,6 @@ struct BasicQuizResultView: View {
                 
                 Spacer()
                 
-                // 학습종료 or 다음문제
                 HStack(spacing: 17) {
                     Button {
                         coordinator.popToRoot()
@@ -146,5 +201,21 @@ struct BasicQuizResultView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            isBookmarked = (fetchSavedItem() != nil)
+        }
+    }
+    
+    private var bookmarkButton: some View {
+        Button {
+            toggleBookmark()
+        } label: {
+            Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                .font(.system(size: 24))
+                .foregroundStyle(isBookmarked ? .blue01 : .gray03)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel(isBookmarked ? "북마크 해제" : "북마크 저장")
     }
 }

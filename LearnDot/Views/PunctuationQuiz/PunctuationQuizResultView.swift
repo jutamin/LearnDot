@@ -13,9 +13,12 @@ struct PunctuationQuizResultView: View {
     @Environment(NavigationCoordinator.self) private var coordinator
     @Environment(\.modelContext) private var modelContext
     @State private var isBookmarked: Bool = false
+    @State private var quizToShow: BrailleWord?
     
     let isCorrect: Bool
-    private var correctQuiz: BrailleWord { viewModel.currentQuiz! }
+    private var correctQuiz: BrailleWord {
+            quizToShow ?? viewModel.currentQuiz!
+        }
     
     var currentLearningItemData: (word: String, unitType: String, title: String, braille: String) {
         (
@@ -186,6 +189,9 @@ struct PunctuationQuizResultView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
+            if quizToShow == nil {
+                quizToShow = viewModel.currentQuiz
+            }
             isBookmarked = (fetchSavedItem() != nil)
         }
     }

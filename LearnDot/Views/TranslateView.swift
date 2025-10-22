@@ -80,7 +80,6 @@ struct TranslateView: View {
                                                 .frame(width: 30, height: 16)
                                                 .padding(.top, 5)
                                         )
-                                    // 상단박스의 아래쪽 경계선 중앙에 겹치게
                                         .offset(y: -35)
                                 }
                                 .disabled(text.isEmpty)

@@ -58,4 +58,5 @@ enum AppDestination: Hashable {
     case savedLearningView
     case savedLearningWordView
     case savedLearningWordDetailView(PersistentIdentifier)
+    case savedLearningLevelView
 }

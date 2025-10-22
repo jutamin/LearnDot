@@ -81,6 +81,8 @@ struct ContentView: View {
                         SavedLearningWordView()
                     case .savedLearningWordDetailView(let itemID):
                         SavedLearningWordDetailView(itemID: itemID)
+                    case .savedLearningLevelView:
+                        SavedLearningLevelView()
                     }
                 }
         }

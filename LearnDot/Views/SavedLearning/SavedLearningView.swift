@@ -37,7 +37,7 @@ struct SavedLearningView: View {
                     SelectLearning(
                         title: "난이도별 점형 학습"
                     ) {
-
+                        coordinator.push(AppDestination.savedLearningLevelView)
                     }
                     
                     SelectLearning(

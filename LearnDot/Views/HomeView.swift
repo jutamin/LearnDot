@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
     @Environment(NavigationCoordinator.self) private var coordinator
     
-    
-    // MARK: - UI Setting
     var body: some View {
             ZStack {
                 Color.black00
@@ -65,8 +64,37 @@ struct HomeView: View {
                     .padding(.top, 30)
                     
                     Spacer()
+                    
+                    HStack(spacing: 13) {
+                        Button {
+                            // TODO: - 점자번역 화면 전환
+                        } label: {
+                            Text("< 점자 번역")
+                                .font(.mainTextBold24)
+                                .foregroundStyle(.black00)
+                                .frame(width: 167, height: 64)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .foregroundStyle(.gray01)
+                                )
+                        }
+                        
+                        Button {
+                            coordinator.push(AppDestination.savedLearningView)
+                        } label: {
+                            Text("저장한 학습 >")
+                                .font(.mainTextBold24)
+                                .foregroundStyle(.white00)
+                                .frame(width: 167, height: 64)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .foregroundStyle(.blue01)
+                                )
+                        }
+                    }
+                    .padding(.bottom, 60)
                 }
             }
             .ignoresSafeArea()
-        }
+    }
 }

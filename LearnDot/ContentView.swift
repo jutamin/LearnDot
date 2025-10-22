@@ -75,6 +75,16 @@ struct ContentView: View {
                         PunctuationTutorial4()
                     case .punctuationTutorial5:
                         PunctuationTutorial5()
+                    case .savedLearningView:
+                        SavedLearningView()
+                    case .savedLearningWordView:
+                        SavedLearningWordView()
+                    case .savedLearningLevelView:
+                        SavedLearningLevelView()
+                    case .savedLearningPunctuationView:
+                        SavedLearningPunctuationView()
+                    case .savedLearningWordDetailView(let itemID):
+                        SavedLearningWordDetailView(itemID: itemID)
                     }
                 }
         }

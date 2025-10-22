@@ -6,16 +6,66 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PunctuationQuizResultView: View {
     @EnvironmentObject var viewModel: PunctuationQuizViewModel
     @Environment(NavigationCoordinator.self) private var coordinator
+    @Environment(\.modelContext) private var modelContext
+    @State private var isBookmarked: Bool = false
+    @State private var quizToShow: BrailleWord?
     
     let isCorrect: Bool
+    private var correctQuiz: BrailleWord {
+            quizToShow ?? viewModel.currentQuiz!
+        }
+    
+    var currentLearningItemData: (word: String, unitType: String, title: String, braille: String) {
+        (
+            word: correctQuiz.korean,
+            unitType: "문장부호",
+            title: correctQuiz.korean,
+            braille: correctQuiz.braillePattern
+        )
+    }
+    
+    private func fetchSavedItem() -> SavedLearningItem? {
+        let word = currentLearningItemData.word
+        let unitType = currentLearningItemData.unitType
+        
+        let predicate = #Predicate<SavedLearningItem> { item in
+            item.word == word && item.unitType == unitType
+        }
+        
+        var fetchDescriptor = FetchDescriptor(predicate: predicate)
+        fetchDescriptor.fetchLimit = 1
+        
+        do {
+            let items = try modelContext.fetch(fetchDescriptor)
+            return items.first
+        } catch {
+            print("Failed to fetch item: \(error)")
+            return nil
+        }
+    }
+    
+    func toggleBookmark() {
+        if let itemToRemove = fetchSavedItem() {
+            modelContext.delete(itemToRemove)
+            isBookmarked = false
+        } else {
+            let newItem = SavedLearningItem(
+                title: currentLearningItemData.title,
+                unitType: currentLearningItemData.unitType,
+                word: currentLearningItemData.word,
+                braillePattern: currentLearningItemData.braille
+            )
+            modelContext.insert(newItem)
+            isBookmarked = true
+        }
+    }
     
     var body: some View {
-        let correctQuiz = viewModel.currentQuiz!
-        
         let dotArrays = viewModel.convertBraillePatternToDotArrays(correctQuiz.braillePattern)
         let dotNumbersText = dotArrays
             .map { $0.sorted().map { String($0) }.joined(separator: "-") }
@@ -38,7 +88,7 @@ struct PunctuationQuizResultView: View {
                         Text("다음 문제에도 도전해볼까요?")
                             .font(.mainTextSemiBold15)
                             .foregroundStyle(.gray02)
-                            
+                        
                     }
                     .accessibilityElement(children: .combine)
                 } else {
@@ -112,7 +162,14 @@ struct PunctuationQuizResultView: View {
                 }
                 .padding(.top, 20)
                 
-                Spacer().frame(height: 96)
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    bookmarkButton
+                        .padding(.bottom, 20)
+                        .padding(.trailing, 20)
+                }
                 
                 HStack(spacing: 17) {
                     Button {
@@ -134,7 +191,26 @@ struct PunctuationQuizResultView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if quizToShow == nil {
+                quizToShow = viewModel.currentQuiz
+            }
+            isBookmarked = (fetchSavedItem() != nil)
+        }
     }
+    
+    private var bookmarkButton: some View {
+            Button {
+                toggleBookmark()
+            } label: {
+                Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                    .font(.system(size: 24))
+                    .foregroundStyle(isBookmarked ? .blue01 : .gray03)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel(isBookmarked ? "학습 저장 취소" : "학습 저장하기")
+        }
 }
 
 struct DotCellView: View {

@@ -12,6 +12,8 @@ struct TranslateView: View {
     @State var text: String = ""
     @State var translatedText: String = ""
     @State private var isTranslated = false
+    @Environment(NavigationCoordinator.self) private var coordinator
+
     
     var body: some View {
         ZStack {
@@ -100,9 +102,41 @@ struct TranslateView: View {
                 }
                 .padding(.horizontal, 8)
                 
-                Spacer()
+                Spacer().frame(height: 16)
+                
+                HStack(spacing: 17) {
+                    Button {
+                        text = ""
+                        translatedText = ""
+                        isTranslated = false
+                    } label: {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.blue01)
+                            .frame(width: 168, height: 64)
+                            .overlay{
+                                Text("검색 초기화")
+                                    .font(.mainTextBold24)
+                                    .foregroundStyle(.white)
+                            }
+                    }
+                    
+                    Button{
+                        coordinator.popToRoot()
+                    } label: {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(.gray01)
+                            .frame(width: 168, height: 64)
+                            .overlay{
+                                Text("번역 종료")
+                                    .font(.mainTextBold24)
+                                    .foregroundStyle(.black00)
+                            }
+                    }
+                }.padding(.horizontal, 20)
+                
+                Spacer().frame(height: 80)
             }
-            .padding(.top, 20)
+            .padding(.top, 28)
         }
     }
 }
@@ -152,4 +186,5 @@ struct BrailleCellView: View {
 
 #Preview {
     TranslateView()
+        .environment(NavigationCoordinator())
 }

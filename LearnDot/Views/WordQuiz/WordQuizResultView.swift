@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WordQuizResultView: View {
     let isCorrect: Bool
@@ -15,6 +16,53 @@ struct WordQuizResultView: View {
     let braillePattern: String
     let myAnswerBraillePattern: String
     @Environment(NavigationCoordinator.self) private var coordinator
+    @Environment(\.modelContext) private var modelContext
+    @State private var isBookmarked: Bool = false
+    
+    var currentLearningItemData: (word: String, unitType: String, title: String, braille: String) {
+        (
+            word: correctAnswer,
+            unitType: "난이도별",
+            title: correctAnswer,
+            braille: braillePattern
+        )
+    }
+    
+    private func fetchSavedItem() -> SavedLearningItem? {
+        let word = currentLearningItemData.word
+        let unitType = currentLearningItemData.unitType
+        
+        let predicate = #Predicate<SavedLearningItem> { item in
+            item.word == word && item.unitType == unitType
+        }
+        
+        var fetchDescriptor = FetchDescriptor(predicate: predicate)
+        fetchDescriptor.fetchLimit = 1
+        
+        do {
+            let items = try modelContext.fetch(fetchDescriptor)
+            return items.first
+        } catch {
+            print("Failed to fetch item: \(error)")
+            return nil
+        }
+    }
+    
+    func toggleBookmark() {
+        if let itemToRemove = fetchSavedItem() {
+            modelContext.delete(itemToRemove)
+            isBookmarked = false
+        } else {
+            let newItem = SavedLearningItem(
+                title: currentLearningItemData.title,
+                unitType: currentLearningItemData.unitType,
+                word: currentLearningItemData.word,
+                braillePattern: currentLearningItemData.braille
+            )
+            modelContext.insert(newItem)
+            isBookmarked = true
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -78,6 +126,7 @@ struct WordQuizResultView: View {
                                     )
                                     .accessibilitySortPriority(0)
                             }
+                        
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue00)
                             .frame(width: 40, height: 27, alignment: .topLeading)
@@ -254,6 +303,13 @@ struct WordQuizResultView: View {
                 
                 Spacer()
                 
+                HStack {
+                    Spacer()
+                    bookmarkButton
+                        .padding(.bottom, 20)
+                        .padding(.trailing, 20)
+                }
+                
                 // 학습종료 or 다음문제
                 HStack(spacing: 17) {
                     Button {
@@ -273,8 +329,25 @@ struct WordQuizResultView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            isBookmarked = (fetchSavedItem() != nil)
+        }
+    }
+    
+    private var bookmarkButton: some View {
+        Button {
+            toggleBookmark()
+        } label: {
+            Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                .font(.system(size: 24))
+                .foregroundStyle(isBookmarked ? .blue01 : .gray03)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel(isBookmarked ? "학습 저장 취소" : "학습 저장하기")
     }
 }
+
 //
 //#Preview {
 //    WordQuizResultView()

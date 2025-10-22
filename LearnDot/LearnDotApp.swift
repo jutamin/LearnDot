@@ -6,17 +6,31 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct LearnDotApp: App {
     @StateObject private var punctuationViewModel = PunctuationQuizViewModel()
+
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            SavedLearningItem.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
     
     var body: some Scene {
         WindowGroup {
-            // HomeView(메인 페이지)로 돌려놓고 푸시할 것
             ContentView()
                 .environmentObject(punctuationViewModel)
                 .preferredColorScheme(.dark)
         }
+        .modelContainer(sharedModelContainer)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @Observable
 class NavigationCoordinator {
@@ -54,4 +55,9 @@ enum AppDestination: Hashable {
     case punctuationTutorial3
     case punctuationTutorial4
     case punctuationTutorial5
+    case savedLearningView
+    case savedLearningWordView
+    case savedLearningLevelView
+    case savedLearningPunctuationView
+    case savedLearningWordDetailView(PersistentIdentifier)
 }

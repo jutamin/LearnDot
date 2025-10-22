@@ -43,7 +43,7 @@ struct SavedLearningView: View {
                     SelectLearning(
                         title: "문장부호 점형 학습"
                     ) {
-
+                        coordinator.push(AppDestination.savedLearningPunctuationView)
                     }
                 }
                 .padding(.top, 30)

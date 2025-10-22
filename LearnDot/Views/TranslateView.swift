@@ -13,7 +13,22 @@ struct TranslateView: View {
     @State var translatedText: String = ""
     @State private var isTranslated = false
     @Environment(NavigationCoordinator.self) private var coordinator
-
+    
+    // 초성·중성 사전
+    let kor_cho: [String: String] = [
+        "ㄱ": "⠈", "ㄴ": "⠉", "ㄷ": "⠊", "ㄹ": "⠐", "ㅁ": "⠑",
+        "ㅂ": "⠘", "ㅅ": "⠠", "ㅇ": " ", "ㅈ": "⠨","ㅊ": "⠰",
+        "ㅋ": "⠋", "ㅌ": "⠓", "ㅍ": "⠙", "ㅎ": "⠚",
+        "ㄲ": "⠠⠈", "ㄸ": "⠠⠊", "ㅃ": "⠠⠘", "ㅆ": "⠠⠠","ㅉ": "⠠⠨"
+    ]
+    
+    let kor_jung: [String: String] = [
+        "ㅏ": "⠣", "ㅑ": "⠜", "ㅓ": "⠎", "ㅕ": "⠱", "ㅗ": "⠥",
+        "ㅛ": "⠬", "ㅜ": "⠍", "ㅠ": "⠩", "ㅡ": "⠪", "ㅣ": "⠕",
+        "ㅐ": "⠗", "ㅔ": "⠝", "ㅒ": "⠜⠗", "ㅖ": "⠌", "ㅘ": "⠧",
+        "ㅙ": "⠧⠗", "ㅚ": "⠽", "ㅝ": "⠏", "ㅞ": "⠏⠗",
+        "ㅟ": "⠍⠗", "ㅢ": "⠺"
+    ]
     
     var body: some View {
         ZStack {
@@ -80,8 +95,10 @@ struct TranslateView: View {
                             )
                             .overlay(alignment: .top) {
                                 Button(action: {
-                                    translatedText = KorToBraille.korTranslate(text)
+                                    //                                    translatedText = KorToBraille.korTranslate(text)
+                                    translateText()
                                     isTranslated = true
+                                    print("text: \(text), translatedText: \(translatedText)")
                                 }, label: {
                                     Circle()
                                         .fill(text.isEmpty ? Color.gray01 : Color.blue01)
@@ -138,6 +155,28 @@ struct TranslateView: View {
             }
             .padding(.top, 28)
         }
+    }
+    
+    // MARK: - Translate Logic
+    func translateText() {
+        var result = ""
+        
+        for char in text {
+            let strChar = String(char)
+            
+            if let braille = kor_cho[strChar] {
+                result += braille
+            } else if let braille = kor_jung[strChar] {
+                result += braille
+            } else {
+                // KorToBraille 변환 후 마지막 글자 제거
+                let converted = KorToBraille.korTranslate(strChar)
+                result += trimmedBraille(converted)
+            }
+        }
+        
+        translatedText = result
+        isTranslated = true
     }
 }
 

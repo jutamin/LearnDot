@@ -118,7 +118,7 @@ struct TranslateView: View {
                                 .offset(y: -35)
                         }
                         .disabled(text.isEmpty)
-                        .accessibilityLabel("\(text) 번역하기")
+                        .accessibilityLabel("번역")
                     }
                     .padding(.horizontal, 8)
                 
@@ -148,7 +148,6 @@ struct TranslateView: View {
             }
             .padding(.top, 20)
         }
-        //        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     // MARK: - Translation Logic

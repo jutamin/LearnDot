@@ -67,7 +67,7 @@ struct HomeView: View {
                     
                     HStack(spacing: 13) {
                         Button {
-                            // TODO: - 점자번역 화면 전환
+                            coordinator.push(AppDestination.translateView)
                         } label: {
                             Text("< 점자 번역")
                                 .font(.mainTextBold24)
@@ -77,6 +77,7 @@ struct HomeView: View {
                                     RoundedRectangle(cornerRadius: 20)
                                         .foregroundStyle(.gray01)
                                 )
+                                .accessibilityLabel("점자 번역")
                         }
                         
                         Button {
@@ -90,6 +91,7 @@ struct HomeView: View {
                                     RoundedRectangle(cornerRadius: 20)
                                         .foregroundStyle(.blue01)
                                 )
+                                .accessibilityLabel("저장한 학습")
                         }
                     }
                     .padding(.bottom, 60)

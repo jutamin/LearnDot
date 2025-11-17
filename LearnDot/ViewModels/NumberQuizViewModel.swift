@@ -62,12 +62,25 @@ class NumberQuizViewModel {
         return selectedAnswer == currentQuiz?.correctAnswer
     }
     
-
+    
     private func getSampleNumbers() -> [BrailleWord] {
-        let numbers = [
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "15", "20", "28", "37", "50", "99", "100", "123", "500", "1000"
-        ]
+        var numbersSet: Set<String> = []
+        
+        for i in 0...9 {
+            numbersSet.insert(String(i))
+        }
+
+        while numbersSet.count < 25 {
+            let randomNum = String(Int.random(in: 10...99))
+            numbersSet.insert(randomNum)
+        }
+        
+        while numbersSet.count < 35 {
+            let randomNum = String(Int.random(in: 100...999))
+            numbersSet.insert(randomNum)
+        }
+        
+        let numbers = Array(numbersSet)
         
         return numbers.map { BrailleWord(korean: $0) }
     }

@@ -85,8 +85,16 @@ struct ContentView: View {
                         SavedLearningPunctuationView()
                     case .savedLearningWordDetailView(let itemID):
                         SavedLearningWordDetailView(itemID: itemID)
+                    case .savedLearningAbbreviationView:
+                        SavedLearningAbbreviationView()
                     case .translateView:
                         TranslateView()
+                    case .abbreviationUnit:
+                        AbbreviationUnitView()
+                    case .abbreviationQuiz(let unit):
+                        AbbreviationQuizView(unit: unit)
+                    case .abbreviationResult(let isCorrect, let unit, let correctAnswer, let braillePattern, let myAnswerBraillePattern):
+                        AbbreviationResultView(isCorrect: isCorrect, unit: unit, correctAnswer: correctAnswer, braillePattern: braillePattern, myAnswerBraillePattern: myAnswerBraillePattern)
                     }
                 }
         }

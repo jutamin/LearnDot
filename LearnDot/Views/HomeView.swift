@@ -39,37 +39,38 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 27)
                     
-                    VStack(spacing: 16) {
-                        SelectCard(
-                            title: "기초단계 점형 학습",
-                            description: "한글 자모 점형 맞추기"
-                        ) {
-                            coordinator.push(AppDestination.basicUnit)
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 16) {
+                            SelectCard(
+                                title: "기초단계 점형 학습",
+                                description: "한글 자모 점형 맞추기"
+                            ) {
+                                coordinator.push(AppDestination.basicUnit)
+                            }
+                            
+                            SelectCard(
+                                title: "난이도별 점형 학습",
+                                description: "단계별로 점형 맞추기"
+                            ) {
+                                coordinator.push(AppDestination.wordLevel)
+                            }
+                            
+                            SelectCard(
+                                title: "문장부호 점형 학습",
+                                description: "문장부호 퀴즈 맞추기"
+                            ) {
+                                coordinator.push(AppDestination.PunctuationQuiz)
+                            }
+                            
+                            SelectCard(
+                                title: "약자, 약어 점형 학습",
+                                description: "약자, 약어 퀴즈 맞추기"
+                            ) {
+                                coordinator.push(AppDestination.abbreviationUnit)
+                            }
                         }
-                        
-                        SelectCard(
-                            title: "난이도별 점형 학습",
-                            description: "단계별로 점형 맞추기"
-                        ) {
-                            coordinator.push(AppDestination.wordLevel)
-                        }
-                        
-                        SelectCard(
-                            title: "문장부호 점형 학습",
-                            description: "문장부호 퀴즈 맞추기"
-                        ) {
-                            coordinator.push(AppDestination.PunctuationQuiz)
-                        }
-                        
-                        SelectCard(
-                            title: "약자, 약어 점형 학습",
-                            description: "약자, 약어 퀴즈 맞추기"
-                        ) {
-                            coordinator.push(AppDestination.abbreviationUnit)
-                        }
+                        .padding(.top, 30)
                     }
-                    .padding(.top, 30)
-                    
                     Spacer()
                     
                     HStack(spacing: 13) {

@@ -60,6 +60,13 @@ struct HomeView: View {
                         ) {
                             coordinator.push(AppDestination.PunctuationQuiz)
                         }
+                        
+                        SelectCard(
+                            title: "약자, 약어 점형 학습",
+                            description: "약자, 약어 퀴즈 맞추기"
+                        ) {
+                            coordinator.push(AppDestination.abbreviationUnit)
+                        }
                     }
                     .padding(.top, 30)
                     

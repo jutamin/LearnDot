@@ -34,14 +34,14 @@ struct AbbreviationUnitView: View {
                         title: "약자",
                         description: "음절, 받침을 점형 한 칸으로 나타내는 점자 표기"
                     ) {
-                        //coordinator.push(AppDestination.abbreviationQuiz(.contraction))
+                        coordinator.push(AppDestination.abbreviationQuiz(.contraction))
                     }
                     
                     SelectCard(
                         title: "약어",
                         description: "특정한 단어를 줄여 나타내는 점자 표기"
                     ) {
-                        //coordinator.push(AppDestination.abbreviationQuiz(.abbreviations))
+                        coordinator.push(AppDestination.abbreviationQuiz(.abbreviations))
                     }
                 }
                 .padding(.top, 30)

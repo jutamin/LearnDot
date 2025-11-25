@@ -108,7 +108,8 @@ struct HomeView: View {
                             .accessibilityLabel("저장한 학습")
                     }
                 }
-                .padding(.bottom, 30)
+                .padding(.bottom, ((UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+                    .windows.first?.safeAreaInsets.bottom ?? 0) + 30)
             }
         }
         .ignoresSafeArea()

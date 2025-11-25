@@ -81,12 +81,23 @@ struct ContentView: View {
                         SavedLearningWordView()
                     case .savedLearningLevelView:
                         SavedLearningLevelView()
+                    case .savedLearningNumberView:
+                        SavedLearningNumberView()
                     case .savedLearningPunctuationView:
                         SavedLearningPunctuationView()
                     case .savedLearningWordDetailView(let itemID):
                         SavedLearningWordDetailView(itemID: itemID)
                     case .translateView:
                         TranslateView()
+                    case .numberQuiz:
+                        NumberQuizView()
+                    case .numberResult(let isCorrect, let correctAnswer, let braillePattern, let myAnswerBraillePattern):
+                        NumberQuizResultView(
+                            isCorrect: isCorrect,
+                            correctAnswer: correctAnswer,
+                            braillePattern: braillePattern,
+                            myAnswerBraillePattern: myAnswerBraillePattern
+                        )
                     }
                 }
         }

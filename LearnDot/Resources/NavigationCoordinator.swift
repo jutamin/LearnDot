@@ -41,6 +41,7 @@ enum AppDestination: Hashable {
     case manual1
     case manual2
     case manual3
+    case manual4
     case wordTutorial0
     case wordTutorial1
     case wordTutorial2

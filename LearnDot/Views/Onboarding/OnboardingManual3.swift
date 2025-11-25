@@ -21,7 +21,7 @@ struct OnboardingManual3: View {
             VStack(alignment: .leading, spacing: 0) {
                 Spacer()
                 
-                Text("풀었던 문제 중,\n다시 보고 싶은 문제는\n저장할 수 있어요.")
+                Text("퀴즈를 풀고,\n다시 보고 싶은 문제는\n저장할 수 있어요.")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
                     .accessibilityFocused($isFocused)
@@ -40,7 +40,7 @@ struct OnboardingManual3: View {
                         .foregroundStyle(.white00)
                     + Text("왼쪽")
                         .foregroundStyle(.blue00)
-                    + Text("으로 쓸어 넘기면\n")
+                    + Text("으로 쓸어넘기면\n")
                         .foregroundStyle(.white00)
                     + Text("저장한 학습")
                         .foregroundStyle(.blue00)

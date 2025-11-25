@@ -1,13 +1,13 @@
 //
-//  Manual1.swift
+//  Manual4.swift
 //  LearnDot
 //
-//  Created by 원주연 on 6/11/25.
+//  Created by juyeun on 11/26/25.
 //
 
 import SwiftUI
 
-struct Manual1: View {
+struct Manual4: View {
     @Environment(NavigationCoordinator.self) private var coordinator
     
     var body: some View {
@@ -18,22 +18,29 @@ struct Manual1: View {
             VStack(alignment: .leading, spacing: 0) {
                 Spacer()
                 
-                Text("배우닷에서는\n점형을 자연스럽게\n익힐 수 있어요.")
+                Text("마지막으로,\n점자 번역 기능이 있어요.")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
                 
                 Spacer().frame(height: 57)
                 
                 VStack(alignment: .leading, spacing: 30) {
-                    Text("기초 점형(초성·중성·종성),\n난이도별 생활 단어(5개 카테고리),\n숫자 점형,\n약자·약어까지")
+                    Text("입력한 한글을 \n")
                         .foregroundStyle(.white00)
-                        .accessibilityLabel("초성, 중성, 종성 점형, 난이도별 생활 단어, 숫자, 그리고 약자와 약어까지")
-                    
-                    Text("모두 ")
-                        .foregroundStyle(.white00)
-                    + Text("4지선다 퀴즈 형식")
+                    + Text("점자로 변환")
                         .foregroundStyle(.blue00)
-                    + Text("으로 학습할 수 있어요.")
+                    + Text("해주어,\n실생활에서 점자를 확인하는 데\n사용할 수 있어요.")
+                        .foregroundStyle(.white00)
+                    
+                    Text("홈 화면에서 세 손가락으로\n")
+                        .foregroundStyle(.white00)
+                    + Text("오른쪽")
+                        .foregroundStyle(.blue00)
+                    + Text("으로 쓸어넘기면\n")
+                        .foregroundStyle(.white00)
+                    + Text("점자 번역")
+                        .foregroundStyle(.blue00)
+                    + Text("으로 바로 이동해요.")
                         .foregroundStyle(.white00)
                 }
                 .font(.mainTextSemiBold18)
@@ -44,13 +51,14 @@ struct Manual1: View {
                     Spacer()
                     
                     Button {
-                        coordinator.push(AppDestination.manual2)
+                        coordinator.popToRoot()
+                        coordinator.push(AppDestination.info) // 다시 InfoView로 이동
                     } label: {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.blue01)
                             .frame(width: 168, height: 64)
                             .overlay{
-                                Text("다음")
+                                Text("설명 종료")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(.white)
                             }
@@ -64,7 +72,3 @@ struct Manual1: View {
     }
 }
 
-#Preview {
-    Manual1()
-        .environment(NavigationCoordinator())
-}

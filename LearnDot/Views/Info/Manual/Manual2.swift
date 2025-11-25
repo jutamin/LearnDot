@@ -16,34 +16,31 @@ struct Manual2: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .leading, spacing: 0) {
-                Spacer().frame(height: 100)
+                Spacer()
                 
-                Text("난이도별 점형 학습 안내")
+                Text("문장부호는 직접 점을 찍어보도록 구성되어 있어요.")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
-                    .frame(maxWidth: .infinity, alignment: .center)
                 
                 Spacer().frame(height: 57)
                 
                 VStack(alignment: .leading, spacing: 30) {
-                    Text("5. 정답을 맞히면, 축하 메시지와 함께\n    정답 점형을 다시 들어볼 수 있어요. ")
+                    
+                    Text("1~6번 점을 선택해 입력하고,\n필요하면 ")
+                        .foregroundStyle(.white00)
+                    + Text("‘다음 점자’")
+                        .foregroundStyle(.blue00)
+                    + Text(" 또는 ")
+                        .foregroundStyle(.white00)
+                    + Text("‘이전 점자’")
+                        .foregroundStyle(.blue00)
+                    + Text("로\n이동하며 수정할 수 있어요.")
                         .foregroundStyle(.white00)
                     
-                    Text("6. 오답을 고르면 안내 메시지와 정답,\n    내가 고른 답의 점형을 다시 들어볼 수 있어요.")
-                        .foregroundStyle(.white00)
-                    
-                    Text("7. 학습을 그만하거나, 난이도 또는 카테고리를\n    바꾸려면, ")
-                        .foregroundStyle(.white00)
-                    + Text("'학습종료' 버튼 ")
-                        .foregroundStyle(.blue00)
-                    + Text("을,\n    계속하려면,")
-                        .foregroundStyle(.white00)
-                    + Text(" '다음문제' 버튼 ")
-                        .foregroundStyle(.blue00)
-                    + Text("을 눌러주세요.")
+                    Text("문장부호를 실제처럼 조작하며\n익히는 학습이에요.")
                         .foregroundStyle(.white00)
                 }
-                .font(.mainTextSemiBold16)
+                .font(.mainTextSemiBold18)
                 
                 Spacer()
                 

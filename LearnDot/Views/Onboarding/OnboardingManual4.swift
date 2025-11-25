@@ -12,7 +12,6 @@ struct OnboardingManual4: View {
     let onBack: () -> Void
     @AccessibilityFocusState private var isFocused: Bool
     
-    
     var body: some View {
         ZStack {
             Color.black00
@@ -21,7 +20,7 @@ struct OnboardingManual4: View {
             VStack(alignment: .leading, spacing: 0) {
                 Spacer()
                 
-                Text("점자 번역 기능도\n사용해보세요.")
+                Text("마지막으로,\n점자 번역 기능이 있어요.")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
                     .accessibilityFocused($isFocused)
@@ -40,7 +39,7 @@ struct OnboardingManual4: View {
                         .foregroundStyle(.white00)
                     + Text("오른쪽")
                         .foregroundStyle(.blue00)
-                    + Text("으로 쓸어 넘기면\n")
+                    + Text("으로 쓸어넘기면\n")
                         .foregroundStyle(.white00)
                     + Text("점자 번역")
                         .foregroundStyle(.blue00)

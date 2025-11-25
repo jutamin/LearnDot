@@ -32,7 +32,7 @@ struct OnboardingManual2: View {
                         .foregroundStyle(.white00)
                     + Text("‘다음 점자’")
                         .foregroundStyle(.blue00)
-                    + Text(" 또는")
+                    + Text(" 또는 ")
                         .foregroundStyle(.white00)
                     + Text("‘이전 점자’")
                         .foregroundStyle(.blue00)

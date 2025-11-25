@@ -1,13 +1,13 @@
 //
-//  OnboardingManual1.swift
+//  OnboardingManual4.swift
 //  LearnDot
 //
-//  Created by 원주연 on 6/13/25.
+//  Created by juyeun on 11/26/25.
 //
 
 import SwiftUI
 
-struct OnboardingManual1: View {
+struct OnboardingManual4: View {
     let onNext: () -> Void
     let onBack: () -> Void
     @AccessibilityFocusState private var isFocused: Bool
@@ -20,7 +20,7 @@ struct OnboardingManual1: View {
             VStack(alignment: .leading, spacing: 0) {
                 Spacer()
                 
-                Text("배우닷에서는\n점형을 자연스럽게\n익힐 수 있어요.")
+                Text("마지막으로,\n점자 번역 기능이 있어요.")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
                     .accessibilityFocused($isFocused)
@@ -28,15 +28,22 @@ struct OnboardingManual1: View {
                 Spacer().frame(height: 57)
                 
                 VStack(alignment: .leading, spacing: 30) {
-                    Text("기초 점형(초성·중성·종성),\n난이도별 생활 단어(5개 카테고리),\n숫자 점형,\n약자·약어까지")
+                    Text("입력한 한글을 \n")
                         .foregroundStyle(.white00)
-                        .accessibilityLabel("초성, 중성, 종성 점형, 난이도별 생활 단어, 숫자, 그리고 약자와 약어까지")
-                    
-                    Text("모두 ")
-                        .foregroundStyle(.white00)
-                    + Text("4지선다 퀴즈 형식")
+                    + Text("점자로 변환")
                         .foregroundStyle(.blue00)
-                    + Text("으로 학습할 수 있어요.")
+                    + Text("해주어,\n실생활에서 점자를 확인하는 데\n사용할 수 있어요.")
+                        .foregroundStyle(.white00)
+                    
+                    Text("홈 화면에서 세 손가락으로\n")
+                        .foregroundStyle(.white00)
+                    + Text("오른쪽")
+                        .foregroundStyle(.blue00)
+                    + Text("으로 쓸어넘기면\n")
+                        .foregroundStyle(.white00)
+                    + Text("점자 번역")
+                        .foregroundStyle(.blue00)
+                    + Text("으로 바로 이동해요.")
                         .foregroundStyle(.white00)
                 }
                 .font(.mainTextSemiBold18)
@@ -64,7 +71,7 @@ struct OnboardingManual1: View {
                             .foregroundStyle(.blue01)
                             .frame(width: 168, height: 64)
                             .overlay{
-                                Text("다음")
+                                Text("설명종료")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(.white)
                             }
@@ -87,7 +94,7 @@ struct OnboardingManual1: View {
 }
 
 #Preview {
-    OnboardingManual1 {
+    OnboardingManual4 {
         print("👉 다음 버튼 눌림")
     } onBack: {
         print("👈 이전 버튼 눌림")

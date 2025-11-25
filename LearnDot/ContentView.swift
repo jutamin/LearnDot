@@ -47,6 +47,8 @@ struct ContentView: View {
                         Manual2()
                     case .manual3:
                         Manual3()
+                    case .manual4:
+                        Manual4()
                     case .wordTutorial0:
                         WordQuizTutorialView()
                     case .wordTutorial1:

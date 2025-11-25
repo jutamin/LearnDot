@@ -12,6 +12,7 @@ enum OnboardingStep: Int, CaseIterable {
     case manual1 = 1
     case manual2 = 2
     case manual3 = 3
+    case manual4 = 4
 }
 
 struct OnboardingView: View {
@@ -33,8 +34,11 @@ struct OnboardingView: View {
                 OnboardingManual2(onNext: { nextStep() },
                                   onBack: { previousStep() })
             case .manual3:
-                OnboardingManual3(onNext: { finishOnboarding() },
+                OnboardingManual3(onNext: { nextStep() },
                                   onBack: { previousStep() })
+            case .manual4:
+                OnboardingManual4(onNext: { finishOnboarding() },
+                                    onBack: { previousStep() })
             }
         }
     }

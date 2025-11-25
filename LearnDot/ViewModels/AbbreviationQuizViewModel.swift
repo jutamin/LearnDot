@@ -32,12 +32,10 @@ class AbbreviationQuizViewModel {
         var optionSet: Set<String> = [correctWord.korean]
         let otherWords = sampleWords.filter { $0.korean != correctWord.korean }
 
-        // Add random wrong answers
         while optionSet.count < 4, let randomWord = otherWords.randomElement() {
             optionSet.insert(randomWord.korean)
         }
 
-        // Fill with dummy if still less than 4
         while optionSet.count < 4 {
             optionSet.insert("선택지\(optionSet.count)")
         }

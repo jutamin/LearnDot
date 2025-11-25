@@ -16,7 +16,7 @@ struct SelectCard: View {
         Button(action: action) {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundStyle(.gray06)
-                .frame(width: 361, height: 116)
+                .frame(width: 361, height: 100)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.gray04, lineWidth: 1)

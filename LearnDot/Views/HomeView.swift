@@ -16,9 +16,6 @@ struct HomeView: View {
             Color.black00
             
             VStack(spacing: 0) {
-                Spacer()
-                    .frame(height: 82)
-                
                 HStack {
                     Text("점형 학습 게임")
                         .font(.mainTextExtraBold36)
@@ -37,10 +34,12 @@ struct HomeView: View {
                     }
                     .accessibilityLabel("도움말")
                 }
+                .padding(.top, ((UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+                    .windows.first?.safeAreaInsets.top ?? 0) + 20)
                 .padding(.horizontal, 27)
                 
                 ScrollView(showsIndicators: false) {
-                    VStack(spacing: 16) {
+                    VStack(spacing: 12) {
                         SelectCard(
                             title: "기초단계 점형 학습",
                             description: "한글 자모 점형 맞추기"
@@ -78,7 +77,7 @@ struct HomeView: View {
                     }
                     .padding(.top, 30)
                 }
-                Spacer()
+                Spacer().frame(height: 20)
                 
                 HStack(spacing: 13) {
                     Button {
@@ -109,7 +108,7 @@ struct HomeView: View {
                             .accessibilityLabel("저장한 학습")
                     }
                 }
-                .padding(.bottom, 60)
+                .padding(.bottom, 30)
             }
         }
         .ignoresSafeArea()
@@ -126,4 +125,9 @@ struct HomeView: View {
             }
         }
     }
+}
+
+#Preview {
+    HomeView()
+        .environment(NavigationCoordinator())
 }

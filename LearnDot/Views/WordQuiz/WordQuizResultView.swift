@@ -305,7 +305,7 @@ struct WordQuizResultView: View {
                 
                 HStack {
                     Spacer()
-                    bookmarkButton
+                    BookmarkButton(isBookmarked: $isBookmarked, tapAction: toggleBookmark)
                         .padding(.bottom, 20)
                         .padding(.trailing, 20)
                 }
@@ -332,19 +332,6 @@ struct WordQuizResultView: View {
         .onAppear {
             isBookmarked = (fetchSavedItem() != nil)
         }
-    }
-    
-    private var bookmarkButton: some View {
-        Button {
-            toggleBookmark()
-        } label: {
-            Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
-                .font(.system(size: 24))
-                .foregroundStyle(isBookmarked ? .blue01 : .gray03)
-                .frame(width: 44, height: 44)
-                .contentShape(Rectangle())
-        }
-        .accessibilityLabel(isBookmarked ? "학습 저장 취소" : "학습 저장하기")
     }
 }
 

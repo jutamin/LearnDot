@@ -81,6 +81,8 @@ struct ContentView: View {
                         SavedLearningWordView()
                     case .savedLearningLevelView:
                         SavedLearningLevelView()
+                    case .savedLearningNumberView:
+                        SavedLearningNumberView()
                     case .savedLearningPunctuationView:
                         SavedLearningPunctuationView()
                     case .savedLearningWordDetailView(let itemID):
@@ -95,6 +97,15 @@ struct ContentView: View {
                         AbbreviationQuizView(unit: unit)
                     case .abbreviationResult(let isCorrect, let unit, let correctAnswer, let braillePattern, let myAnswerBraillePattern):
                         AbbreviationResultView(isCorrect: isCorrect, unit: unit, correctAnswer: correctAnswer, braillePattern: braillePattern, myAnswerBraillePattern: myAnswerBraillePattern)
+                    case .numberQuiz:
+                        NumberQuizView()
+                    case .numberResult(let isCorrect, let correctAnswer, let braillePattern, let myAnswerBraillePattern):
+                        NumberQuizResultView(
+                            isCorrect: isCorrect,
+                            correctAnswer: correctAnswer,
+                            braillePattern: braillePattern,
+                            myAnswerBraillePattern: myAnswerBraillePattern
+                        )
                     }
                 }
         }

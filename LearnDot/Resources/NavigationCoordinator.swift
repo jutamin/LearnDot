@@ -59,10 +59,13 @@ enum AppDestination: Hashable {
     case savedLearningWordView
     case savedLearningLevelView
     case savedLearningPunctuationView
+    case savedLearningNumberView
     case savedLearningWordDetailView(PersistentIdentifier)
     case savedLearningAbbreviationView
     case translateView
     case abbreviationUnit
     case abbreviationQuiz(AbbreviationUnit)
     case abbreviationResult(Bool, AbbreviationUnit, String, String, String)
+    case numberQuiz
+    case numberResult(Bool, String, String, String)
 }

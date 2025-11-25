@@ -30,15 +30,11 @@ struct OnboardingManual0: View {
                     .foregroundStyle(.white00)
                     .font(.mainTextBold32)
                 
-                + Text("\n간단한 게임을 통해\n점자 학습을 진행할 수 있어요.\n")
+                + Text("\n간단한 퀴즈 게임을 통해\n점자 학습을 진행할 수 있어요.\n")
                     .foregroundStyle(.white00)
                     .font(.mainTextBold24)
                 
-                + Text("\n다음 안내로 넘어가려면,\n한 손가락으로 왼쪽에서 오른쪽으로 빠르게 쓸어주세요.")
-                    .font(.mainTextSemiBold15)
-                    .foregroundStyle(.gray02)
-                
-                Text("버튼은 빠르게 두 번 탭하면 선택돼요.\n")
+                + Text("\n다음 안내로 넘어가려면,\n화면 오른쪽 아래에 있는 ‘다음’ 버튼을 눌러주세요.")
                     .font(.mainTextSemiBold15)
                     .foregroundStyle(.gray02)
                 
@@ -68,3 +64,8 @@ struct OnboardingManual0: View {
     }
 }
 
+#Preview {
+    OnboardingManual0 {
+        print("👉 다음 버튼 눌림")
+    }
+}

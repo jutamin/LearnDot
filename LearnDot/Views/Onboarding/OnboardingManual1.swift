@@ -18,48 +18,28 @@ struct OnboardingManual1: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .leading, spacing: 0) {
-                Spacer().frame(height: 100)
+                Spacer()
                 
-                Text("난이도별 점형 학습 안내")
+                Text("배우닷에서는\n점형을 자연스럽게\n익힐 수 있어요.")
                     .font(.mainTextBold32)
                     .foregroundColor(.white00)
-                    .frame(maxWidth: .infinity, alignment: .center)
                     .accessibilityFocused($isFocused)
                 
                 Spacer().frame(height: 57)
                 
                 VStack(alignment: .leading, spacing: 30) {
-                    Text("1. 난이도는 ")
+                    Text("기초 점형(초성·중성·종성),\n난이도별 생활 단어(5개 카테고리),\n숫자 점형,\n약자·약어까지")
                         .foregroundStyle(.white00)
-                    + Text("쉬움/보통/어려움 ")
-                        .foregroundStyle(.blue00)
-                        .accessibilityLabel("쉬움, 보통, 어려움")
-                    + Text("3단계로 나눠져 있어요.\n    원하는 난이도를 선택하세요.")
-                        .foregroundStyle(.white00)
+                        .accessibilityLabel("초성, 중성, 종성 점형, 난이도별 생활 단어, 숫자, 그리고 약자와 약어까지")
                     
-                    Text("2. 학습 주제는 5개,\n")
+                    Text("모두 ")
                         .foregroundStyle(.white00)
-                    + Text("    식품/화장실/철도/의약품/가전제품\n")
+                    + Text("4지선다 퀴즈 형식")
                         .foregroundStyle(.blue00)
-                        .accessibilityLabel("식품, 화장실, 철도, 의약품, 가전제품")
-                    + Text("    중에서 고를 수 있어요.")
-                        .foregroundStyle(.white00)
-                    
-                    Text("3. 한 단어의 점형이 제시되고,\n    ")
-                        .foregroundStyle(.white00)
-                    + Text("점형 번호를 음성으로 ")
-                        .foregroundStyle(.blue00)
-                    + Text("들을 수 있어요.")
-                        .foregroundStyle(.white00)
-                    
-                    Text("4. ")
-                        .foregroundStyle(.white00)
-                    + Text("4개의 보기 버튼 ")
-                        .foregroundStyle(.blue00)
-                    + Text("중,\n    점형과 일치하는 정답을 선택하세요.")
+                    + Text("으로 학습할 수 있어요.")
                         .foregroundStyle(.white00)
                 }
-                .font(.mainTextSemiBold16)
+                .font(.mainTextSemiBold18)
                 
                 Spacer()
                 

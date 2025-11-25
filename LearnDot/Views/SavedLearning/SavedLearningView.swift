@@ -45,11 +45,17 @@ struct SavedLearningView: View {
                     ) {
                         coordinator.push(AppDestination.savedLearningPunctuationView)
                     }
-                    
+                  
                     SelectLearning(
                         title: "숫자 점형 학습"
                     ) {
                         coordinator.push(AppDestination.savedLearningNumberView)
+                    }
+                    
+                    SelectLearning(
+                        title: "약자약어 점형 학습"
+                    ) {
+                        coordinator.push(AppDestination.savedLearningAbbreviationView)
                     }
                 }
                 .padding(.top, 30)

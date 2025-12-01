@@ -5,13 +5,6 @@
 //  Created by 신혜연 on 10/21/25.
 //
 
-//
-//  SavedLearningWordDetailView.swift
-//  LearnDot
-//
-//  Created by 신혜연 on 10/21/25.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -62,7 +55,7 @@ struct SavedLearningWordDetailView: View {
                     .foregroundStyle(.gray02)
             }
         }
-    
+        
         .alert("단어 삭제하기", isPresented: $isShowingDeleteAlert) {
             Button("확인", role: .destructive) {
                 deleteItem()
@@ -73,16 +66,14 @@ struct SavedLearningWordDetailView: View {
                 Text("'\(item.word)' 항목을 삭제할까요?")
             }
         }
-        
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     isShowingDeleteAlert = true
                 } label: {
-                    Image(systemName: "trash")
-                        .foregroundStyle(.white00)
-                        .font(.system(size: 20))
-                        .frame(width: 44, height: 44)
+                    Text("삭제")
+                        .foregroundColor(.red)
+                        .font(.mainTextSemiBold18)
                 }
             }
         }
@@ -100,14 +91,9 @@ struct SavedLearningWordDetailView: View {
             
             Text(item.braillePattern.trimmingCharacters(in: ["⠀"]))
                 .font(.mainTextExtraBold70)
+                .accessibilityLabel(item.braillePattern.toBrailleDotSpeech())
             
             Spacer()
-            
-            Text("(카드를 탭하면 소리가 나옵니다)")
-                .font(.mainTextSemiBold15)
-                .foregroundStyle(.gray02)
-                .accessibilityHidden(true)
-                .padding(.bottom, 20)
         }
         .foregroundStyle(.white00)
         .frame(width: 340, height: 380)
@@ -122,8 +108,10 @@ struct SavedLearningWordDetailView: View {
     @ViewBuilder
     private func listenAgainButton(item: SavedLearningItem) -> some View {
         Button {
-            let brailleText = item.braillePattern.trimmingCharacters(in: ["⠀"])
-            UIAccessibility.post(notification: .announcement, argument: brailleText)
+            let brailleSpeech = item.braillePattern.toBrailleDotSpeech()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                UIAccessibility.post(notification: .announcement, argument: brailleSpeech)
+            }
         } label: {
             Text("다시 듣기")
                 .font(.mainTextSemiBold20)
@@ -132,6 +120,8 @@ struct SavedLearningWordDetailView: View {
                 .background(Color.white00)
                 .cornerRadius(20)
         }
+        .accessibilityLabel("점자 다시 듣기")
+        .accessibilityHint("현재 단어의 점자 번호를 다시 읽어줍니다.")
     }
     
     // MARK: - Actions

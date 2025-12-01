@@ -49,12 +49,7 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                        .accessibilityLabel(
-                                            quiz.brailleText
-                                                .trimmingCharacters(in: ["⠀"])
-                                                .map { String($0) }
-                                                .joined(separator: "\n\n\n")
-                                        )
+                                        .accessibilityLabel(quiz.brailleText.toBrailleDotSpeech())
                                 }
                         case .jungseong:
                             RoundedRectangle(cornerRadius: 20)
@@ -67,12 +62,7 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                        .accessibilityLabel(
-                                            quiz.brailleText
-                                                .trimmingCharacters(in: ["⠀"])
-                                                .map { String($0) }
-                                                .joined(separator: "\n\n\n")
-                                        )
+                                        .accessibilityLabel(quiz.brailleText.toBrailleDotSpeech())
                                 }
                         case .jongseong:
                             RoundedRectangle(cornerRadius: 20)
@@ -85,12 +75,7 @@ struct BasicQuizView: View {
                                 .overlay {
                                     Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
-                                        .accessibilityLabel(
-                                            quiz.brailleText
-                                                .trimmingCharacters(in: ["⠀"])
-                                                .map { String($0) }
-                                                .joined(separator: "\n\n\n")
-                                        )
+                                        .accessibilityLabel(quiz.brailleText.toBrailleDotSpeech())
                                         .lineLimit(nil)
                                 }
                         }
@@ -141,5 +126,16 @@ struct BasicQuizView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    coordinator.popToRoot()
+                } label: {
+                    Text("나가기")
+                        .foregroundColor(.white00)
+                        .font(.mainTextSemiBold18)
+                }
+            }
+        }
     }
 }

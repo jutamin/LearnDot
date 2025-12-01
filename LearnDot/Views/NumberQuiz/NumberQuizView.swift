@@ -40,12 +40,7 @@ struct NumberQuizView: View {
                             .overlay {
                                 Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
                                     .font(.mainTextExtraBold50)
-                                    .accessibilityLabel(
-                                        quiz.brailleText
-                                            .trimmingCharacters(in: ["⠀"])
-                                            .map { String($0) }
-                                            .joined(separator: "\n\n\n")
-                                    )
+                                    .accessibilityLabel(quiz.brailleText.toBrailleDotSpeech())
                                     .lineLimit(nil)
                             }
                     }
@@ -87,6 +82,17 @@ struct NumberQuizView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    coordinator.popToRoot()
+                } label: {
+                    Text("나가기")
+                        .foregroundColor(.white00)
+                        .font(.mainTextSemiBold18)
+                }
+            }
+        }
         .onAppear {
             viewModel.generateQuize()
         }

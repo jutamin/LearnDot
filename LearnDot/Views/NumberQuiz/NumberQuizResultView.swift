@@ -119,12 +119,7 @@ struct NumberQuizResultView: View {
                             Text(braillePattern.trimmingCharacters(in: ["⠀"]))
                                 .font(.mainTextExtraBold50)
                                 .accessibilitySortPriority(0)
-                                .accessibilityLabel(
-                                    braillePattern
-                                        .trimmingCharacters(in: ["⠀"])
-                                        .map { String($0) }
-                                        .joined(separator: "\n\n\n")
-                                )
+                                .accessibilityLabel(braillePattern.toBrailleDotSpeech())
                                 .lineLimit(nil)
                         }
                     
@@ -153,12 +148,7 @@ struct NumberQuizResultView: View {
                                 Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
                                     .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
-                                    .accessibilityLabel(
-                                        myAnswerBraillePattern
-                                            .trimmingCharacters(in: ["⠀"])
-                                            .map { String($0) }
-                                            .joined(separator: "\n\n\n")
-                                    )
+                                    .accessibilityLabel(myAnswerBraillePattern.toBrailleDotSpeech())
                                     .lineLimit(nil)
                             }
                         

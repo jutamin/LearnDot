@@ -118,12 +118,7 @@ struct WordQuizResultView: View {
                             .overlay {
                                 Text(braillePattern.trimmingCharacters(in: ["⠀"]))
                                     .font(.mainTextExtraBold50)
-                                    .accessibilityLabel(
-                                        braillePattern
-                                            .trimmingCharacters(in: ["⠀"])
-                                            .map { String($0) }
-                                            .joined(separator: "\n\n\n")
-                                    )
+                                    .accessibilityLabel(braillePattern.toBrailleDotSpeech())
                                     .accessibilitySortPriority(0)
                             }
                         
@@ -151,12 +146,7 @@ struct WordQuizResultView: View {
                                     Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
                                         .accessibilitySortPriority(0)
-                                        .accessibilityLabel(
-                                            myAnswerBraillePattern
-                                                .trimmingCharacters(in: ["⠀"])
-                                                .map { String($0) }
-                                                .joined(separator: "\n\n\n")
-                                        )
+                                        .accessibilityLabel(myAnswerBraillePattern.toBrailleDotSpeech())
                                 }
                             
                             RoundedRectangle(cornerRadius: 20)
@@ -182,12 +172,7 @@ struct WordQuizResultView: View {
                                 Text(braillePattern.trimmingCharacters(in: ["⠀"]))
                                     .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
-                                    .accessibilityLabel(
-                                        braillePattern
-                                            .trimmingCharacters(in: ["⠀"])
-                                            .map { String($0) }
-                                            .joined(separator: "\n\n\n")
-                                    )
+                                    .accessibilityLabel(braillePattern.toBrailleDotSpeech())
                             }
                         
                         RoundedRectangle(cornerRadius: 20)
@@ -214,12 +199,7 @@ struct WordQuizResultView: View {
                                     Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
                                         .font(.mainTextExtraBold50)
                                         .accessibilitySortPriority(0)
-                                        .accessibilityLabel(
-                                            myAnswerBraillePattern
-                                                .trimmingCharacters(in: ["⠀"])
-                                                .map { String($0) }
-                                                .joined(separator: "\n\n\n")
-                                        )
+                                        .accessibilityLabel(myAnswerBraillePattern.toBrailleDotSpeech())
                                 }
                             
                             RoundedRectangle(cornerRadius: 20)
@@ -245,12 +225,7 @@ struct WordQuizResultView: View {
                                 Text(braillePattern.trimmingCharacters(in: ["⠀"]))
                                     .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
-                                    .accessibilityLabel(
-                                        braillePattern
-                                            .trimmingCharacters(in: ["⠀"])
-                                            .map { String($0) }
-                                            .joined(separator: "\n\n\n")
-                                    )
+                                    .accessibilityLabel(braillePattern.toBrailleDotSpeech())
                             }
                         
                         RoundedRectangle(cornerRadius: 20)
@@ -277,12 +252,7 @@ struct WordQuizResultView: View {
                                 Text(myAnswerBraillePattern.trimmingCharacters(in: ["⠀"]))
                                     .font(.mainTextExtraBold50)
                                     .accessibilitySortPriority(0)
-                                    .accessibilityLabel(
-                                        myAnswerBraillePattern
-                                            .trimmingCharacters(in: ["⠀"])
-                                            .map { String($0) }
-                                            .joined(separator: "\n\n\n")
-                                    )
+                                    .accessibilityLabel(myAnswerBraillePattern.toBrailleDotSpeech())
                             }
                         
                         RoundedRectangle(cornerRadius: 20)

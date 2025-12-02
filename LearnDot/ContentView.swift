@@ -111,11 +111,11 @@ struct ContentView: View {
                     }
                 }
         }
+        .tint(.white)
         .environment(coordinator)
         .fullScreenCover(isPresented: $isFirstLaunching) {
             OnboardingView()
         }
-        
     }
 }
 

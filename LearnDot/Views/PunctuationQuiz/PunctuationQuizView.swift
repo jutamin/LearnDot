@@ -177,7 +177,17 @@ struct PunctuationQuizView: View {
                 .padding(.top, 46)
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    coordinator.popToRoot()
+                } label: {
+                    Text("홈으로")
+                        .foregroundColor(.white00)
+                        .font(.mainTextSemiBold18)
+                }
+            }
+        }
         .onAppear {
             viewModel.prepareNewQuizIfNeeded()
             selectedDotsArray = [[]]

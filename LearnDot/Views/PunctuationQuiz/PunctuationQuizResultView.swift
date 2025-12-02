@@ -17,8 +17,8 @@ struct PunctuationQuizResultView: View {
     
     let isCorrect: Bool
     private var correctQuiz: BrailleWord {
-            quizToShow ?? viewModel.currentQuiz!
-        }
+        quizToShow ?? viewModel.currentQuiz!
+    }
     
     var currentLearningItemData: (word: String, unitType: String, title: String, braille: String) {
         (
@@ -64,13 +64,22 @@ struct PunctuationQuizResultView: View {
             isBookmarked = true
         }
     }
-    
-    var body: some View {
+
+    var dotNumbersText: String {
         let dotArrays = viewModel.convertBraillePatternToDotArrays(correctQuiz.braillePattern)
-        let dotNumbersText = dotArrays
+        return dotArrays
             .map { $0.sorted().map { String($0) }.joined(separator: "-") }
             .joined(separator: ", ")
-        
+    }
+    
+    var dotNumbersAccessibilityText: String {
+        let dotArrays = viewModel.convertBraillePatternToDotArrays(correctQuiz.braillePattern)
+        return dotArrays
+            .map { $0.sorted().map { String($0) }.joined(separator: " ") }
+            .joined(separator: ", ")
+    }
+    
+    var body: some View {
         ZStack {
             Color.black00
                 .ignoresSafeArea()
@@ -78,89 +87,17 @@ struct PunctuationQuizResultView: View {
             VStack(spacing: 0) {
                 Spacer().frame(height: 137)
                 
+                // 정답/오답 뷰 분리 호출
                 if isCorrect {
-                    VStack(spacing: 13){
-                        Text("정답입니다!🎉")
-                            .font(.mainTextBold32)
-                            .foregroundStyle(.white00)
-                            .accessibilityLabel("정답입니다")
-                        
-                        Text("다음 문제에도 도전해볼까요?")
-                            .font(.mainTextSemiBold15)
-                            .foregroundStyle(.gray02)
-                        
-                    }
-                    .accessibilityElement(children: .combine)
+                    correctView
                 } else {
-                    VStack(spacing: 0){
-                        VStack(spacing: 0) {
-                            Text("오답입니다 😭")
-                                .font(.mainTextBold32)
-                                .foregroundStyle(.white00)
-                                .accessibilityLabel("오답입니다")
-                            
-                            Group {
-                                Text("정답의 점형 번호는 ")
-                                    .foregroundStyle(.white00)
-                                + Text(dotNumbersText)
-                                    .foregroundStyle(.blue00)
-                                    .accessibilityLabel(dotArrays
-                                        .map { $0.sorted().map { String($0) }.joined(separator: " ") }
-                                        .joined(separator: ", "))
-                                + Text(" 입니다.")
-                                    .foregroundStyle(.white00)
-                            }
-                            .font(.mainTextSemiBold20)
-                            .padding(.top, 8)
-                            
-                            Text("다음 문제는 맞춰봐요!")
-                                .font(.mainTextSemiBold15)
-                                .foregroundStyle(.gray02)
-                                .padding(.top, 8)
-                                .accessibilityHidden(true)
-                        }
-                        .accessibilityElement(children: .combine)
-                        
-                        Button(action: {
-                            coordinator.pop()
-                        }) {
-                            Text("점자 다시 찍어보기")
-                                .font(.mainTextSemiBold16)
-                                .frame(width: 168, height: 64)
-                                .background(Color.gray06)
-                                .cornerRadius(20)
-                                .foregroundColor(.blue00)
-                                .accessibilityLabel("점자 다시 찍어보기 버튼. 다음으로 넘기면 다음 문제를 풀 수 있고, 두번 탭하면 방금 문제의 점자를 다시 찍어볼 수 있어요.")
-                        }
-                        .padding(.top, 20)
-                    }
+                    incorrectView
                 }
                 
                 Spacer().frame(height: isCorrect ? 87 : 23)
                 
-                VStack(spacing: 68) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(.gray06)
-                        .frame(width: 240, height: 72)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .overlay {
-                            Text(correctQuiz.korean)
-                                .font(.mainTextSemiBold24)
-                                .foregroundStyle(.white00)
-                        }
-                        .accessibilityHidden(true)
-                    
-                    let dotArrays = viewModel.convertBraillePatternToDotArrays(correctQuiz.braillePattern)
-                    HStack(spacing: 12) {
-                        ForEach(dotArrays.indices, id: \.self) { index in
-                            DotCellView(dotIndexes: dotArrays[index])
-                        }
-                    }
-                }
-                .padding(.top, 20)
+                // 점자 카드 뷰 분리 호출
+                brailleCardView
                 
                 Spacer()
                 
@@ -171,31 +108,156 @@ struct PunctuationQuizResultView: View {
                         .padding(.trailing, 20)
                 }
                 
-                HStack(spacing: 17) {
-                    Button {
-                        viewModel.shouldGenerateNewQuiz = true
-                        coordinator.popToRoot()
-                    } label: {
-                        QuitButtonCard()
-                    }
-                    
-                    Button{
-                        viewModel.shouldGenerateNewQuiz = true
-                        coordinator.push(AppDestination.PunctuationQuiz)
-                    } label: {
-                        NextButtonCard()
-                    }
-                }
+                // 하단 버튼 그룹
+                bottomButtons
                 
                 Spacer().frame(height: 80)
             }
         }
         .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    coordinator.pop()
+                } label: {
+                    HStack(spacing: 5) {
+                        Image(systemName: "chevron.backward")
+                        Text("뒤로")
+                    }
+                    .foregroundColor(.white00)
+                }
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.shouldGenerateNewQuiz = true
+                    coordinator.popToRoot()
+                } label: {
+                    Image(systemName: "house.fill")
+                        .foregroundColor(.white00)
+                }
+            }
+        }
         .onAppear {
             if quizToShow == nil {
                 quizToShow = viewModel.currentQuiz
             }
             isBookmarked = (fetchSavedItem() != nil)
+        }
+    }
+    
+    // MARK: - Subviews
+    
+    @ViewBuilder
+    private var correctView: some View {
+        VStack(spacing: 13){
+            Text("정답입니다!🎉")
+                .font(.mainTextBold32)
+                .foregroundStyle(.white00)
+                .accessibilityLabel("정답입니다")
+            
+            Text("다음 문제에도 도전해볼까요?")
+                .font(.mainTextSemiBold15)
+                .foregroundStyle(.gray02)
+        }
+        .accessibilityElement(children: .combine)
+    }
+    
+    @ViewBuilder
+    private var incorrectView: some View {
+        VStack(spacing: 0){
+            VStack(spacing: 0) {
+                Text("오답입니다 😭")
+                    .font(.mainTextBold32)
+                    .foregroundStyle(.white00)
+                    .accessibilityLabel("오답입니다")
+                
+                answerInfoText
+                    .padding(.top, 8)
+                
+                Text("다음 문제는 맞춰봐요!")
+                    .font(.mainTextSemiBold15)
+                    .foregroundStyle(.gray02)
+                    .padding(.top, 8)
+                    .accessibilityHidden(true)
+            }
+            .accessibilityElement(children: .combine)
+            
+            Button(action: {
+                coordinator.pop()
+            }) {
+                Text("점자 다시 찍어보기")
+                    .font(.mainTextSemiBold16)
+                    .frame(width: 168, height: 64)
+                    .background(Color.gray06)
+                    .cornerRadius(20)
+                    .foregroundColor(.blue00)
+                    .accessibilityLabel("점자 다시 찍어보기 버튼. 다음으로 넘기면 다음 문제를 풀 수 있고, 두번 탭하면 방금 문제의 점자를 다시 찍어볼 수 있어요.")
+            }
+            .padding(.top, 20)
+        }
+    }
+    
+    @ViewBuilder
+    private var answerInfoText: some View {
+        Group {
+            Text("정답의 점형 번호는 ")
+                .foregroundStyle(.white00)
+            + Text(dotNumbersText)
+                .foregroundStyle(.blue00)
+                .accessibilityLabel(dotNumbersAccessibilityText)
+            + Text(" 입니다.")
+                .foregroundStyle(.white00)
+        }
+        .font(.mainTextSemiBold20)
+        .accessibilityLabel("정답의 점형 번호는 " + correctQuiz.braillePattern.toBrailleDotSpeech() + " 입니다.")
+    }
+    
+    @ViewBuilder
+    private var brailleCardView: some View {
+        VStack(spacing: 68) {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundStyle(.gray06)
+                .frame(width: 240, height: 72)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                .overlay {
+                    Text(correctQuiz.korean)
+                        .font(.mainTextSemiBold24)
+                        .foregroundStyle(.white00)
+                }
+                .accessibilityHidden(true)
+            
+            let dotArrays = viewModel.convertBraillePatternToDotArrays(correctQuiz.braillePattern)
+            HStack(spacing: 12) {
+                ForEach(dotArrays.indices, id: \.self) { index in
+                    DotCellView(dotIndexes: dotArrays[index])
+                }
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(correctQuiz.braillePattern.toBrailleDotSpeech())
+        }
+        .padding(.top, 20)
+    }
+    
+    @ViewBuilder
+    private var bottomButtons: some View {
+        HStack(spacing: 17) {
+            Button {
+                viewModel.shouldGenerateNewQuiz = true
+                coordinator.popToRoot()
+            } label: {
+                QuitButtonCard()
+            }
+            
+            Button{
+                viewModel.shouldGenerateNewQuiz = true
+                coordinator.push(AppDestination.PunctuationQuiz)
+            } label: {
+                NextButtonCard()
+            }
         }
     }
 }

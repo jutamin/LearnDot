@@ -125,7 +125,6 @@ struct BasicQuizView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

@@ -118,7 +118,6 @@ struct WordQuizView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

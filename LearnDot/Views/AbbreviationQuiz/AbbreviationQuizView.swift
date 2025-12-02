@@ -103,7 +103,6 @@ struct AbbreviationQuizView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

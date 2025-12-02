@@ -81,7 +81,6 @@ struct NumberQuizView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

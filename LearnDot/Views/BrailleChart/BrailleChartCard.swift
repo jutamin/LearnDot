@@ -5,6 +5,7 @@
 //  Created by juyeun on 12/2/25.
 //
 import SwiftUI
+import KorToBraille
 
 struct BrailleChartCard: View {
     let item: BrailleChartItem
@@ -12,19 +13,25 @@ struct BrailleChartCard: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
             .foregroundStyle(.gray06)
-            .frame(width: 166, height: 132)
+            .frame(width: 166, height: 156)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.gray04, lineWidth: 1)
             )
             .overlay {
-                HStack(spacing: 26) {
-                    Text(item.title)
-                        .font(.mainTextBold48)
-                        .foregroundStyle(.blue00)
-                    BrailleDotsView(pattern: item.braille)
+                let cells = stride(from: 0, to: item.braille.count, by: 6).map {
+                    Array(item.braille[$0 ..< min($0 + 6, item.braille.count)])
                 }
-                .padding(.leading, 28)
+                VStack(spacing: 4) {
+                    Text(item.title)
+                        .font(.mainTextBold40)
+                        .foregroundStyle(.blue00)
+                    HStack(spacing: -50) {
+                        ForEach(cells.indices, id: \.self) { idx in
+                            BrailleDotsView(pattern: cells[idx])
+                        }
+                    }
+                }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
     }
@@ -79,7 +86,47 @@ enum JongseongData {
         .sorted { $0.title < $1.title }
 }
 
+enum NumberData {
+    static let numbers: [String: String] = [
+        "0": "⠼⠚",
+        "1": "⠼⠁",
+        "2": "⠼⠃",
+        "3": "⠼⠉",
+        "4": "⠼⠙",
+        "5": "⠼⠑",
+        "6": "⠼⠋",
+        "7": "⠼⠛",
+        "8": "⠼⠓",
+        "9": "⠼⠊"
+    ]
+
+    static let items: [BrailleChartItem] = numbers.map { key, value in
+        let cells = value.map { BraillePatternParser.parse(String($0)) }
+        let flatten = cells.flatMap { $0 }
+        return BrailleChartItem(title: key, braille: flatten)
+    }
+        .sorted { $0.title < $1.title }
+}
+
 enum AbbreviationData {
+    static let abbreviations: [String] = [
+        "가", "나", "다", "마", "바", "사", "자", "카", "타", "파", "하",
+        "억", "언", "얼", "연", "열", "영",
+        "옥", "온", "옹", "운", "울", "은", "을", "인",
+        "것"
+    ]
+    
+    static let items: [BrailleChartItem] = abbreviations.map { word in
+        let brailleString = KorToBraille.korTranslate(word)
+        let trimmed = String(brailleString.dropLast())
+        let cells = trimmed.map { BraillePatternParser.parse(String($0)) }
+        let flatten = cells.flatMap { $0 }
+        return BrailleChartItem(title: word, braille: flatten)
+    }
+        .sorted { $0.title < $1.title }
+}
+
+enum contractedData {
     static let items: [BrailleChartItem] = kor_abbreviations.map { (key, value) in
         
         let cells = value.map { BraillePatternParser.parse(String($0)) }
@@ -95,6 +142,6 @@ enum AbbreviationData {
 }
 
 #Preview {
-    BrailleChartView(category: .jungseong)
+    BrailleChartView(category: .abbreviation)
         .environment(NavigationCoordinator())
 }

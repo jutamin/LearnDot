@@ -53,18 +53,15 @@ struct BrailleChartView: View {
         case .jongseong:
             return JongseongData.items
         case .number:
-            //fix
-            return JongseongData.items
+            return NumberData.items
         case .abbreviation:
             return AbbreviationData.items
         case .contracted:
-            //fix
-            return JongseongData.items
+            return contractedData.items
         }
     }
 }
-
 #Preview {
-    BrailleChartView(category: .jungseong)
+    BrailleChartView(category: .abbreviation)
         .environment(NavigationCoordinator())
 }

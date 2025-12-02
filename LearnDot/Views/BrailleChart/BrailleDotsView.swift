@@ -11,8 +11,8 @@ struct BrailleDotsView: View {
     let pattern: [Int]
     
     private let columns = [
-        GridItem(.fixed(12), spacing: 10),
-        GridItem(.fixed(12), spacing: 10)
+        GridItem(.fixed(12), spacing: 8),
+        GridItem(.fixed(12), spacing: 8)
     ]
 
     var body: some View {

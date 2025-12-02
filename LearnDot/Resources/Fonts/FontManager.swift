@@ -62,6 +62,10 @@ extension Font {
     }
     
     // Bold
+    static var mainTextBold40: Font {
+        return .pretend(type: .bold, size: 40)
+    }
+    
     static var mainTextBold30: Font {
         return .pretend(type: .bold, size: 30)
     }

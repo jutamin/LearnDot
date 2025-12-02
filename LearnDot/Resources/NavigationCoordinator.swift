@@ -69,4 +69,6 @@ enum AppDestination: Hashable {
     case abbreviationResult(Bool, AbbreviationUnit, String, String, String)
     case numberQuiz
     case numberResult(Bool, String, String, String)
+    case brailleChart
+    case brailleChartCategory(BrailleChartCategory)
 }

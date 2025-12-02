@@ -81,9 +81,9 @@ struct HomeView: View {
                 
                 HStack(spacing: 13) {
                     Button {
-                        coordinator.push(AppDestination.translateView)
+                        coordinator.push(AppDestination.brailleChart)
                     } label: {
-                        Text("< 점자 번역")
+                        Text("< 점자 일람표")
                             .font(.mainTextBold24)
                             .foregroundStyle(.black00)
                             .frame(width: 167, height: 64)

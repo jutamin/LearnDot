@@ -30,46 +30,40 @@ struct ChartSelectView: View {
                 .padding(.horizontal, 27)
                 
                 VStack(spacing: 16) {
-                    SelectCard(
-                        title: "초성",
-                        description: "글자의 맨 앞 소리, 자음"
+                    SelectLearning(
+                        title: "초성 일람표"
                     ) {
-                        coordinator.push(AppDestination.basicQuiz(.choseong))
+                        coordinator.push(AppDestination.brailleChartCategory(.choseong))
                     }
                     
-                    SelectCard(
-                        title: "중성",
-                        description: "글자의 중심 소리, 모음"
+                    SelectLearning(
+                        title: "중성 일람표"
                     ) {
-                        coordinator.push(AppDestination.basicQuiz(.jungseong))
+                        coordinator.push(AppDestination.brailleChartCategory(.jungseong))
                     }
                     
-                    SelectCard(
-                        title: "종성",
-                        description: "글자의 끝소리, 받침"
+                    SelectLearning(
+                        title: "종성 일람표"
                     ) {
-                        coordinator.push(AppDestination.basicQuiz(.jongseong))
+                        coordinator.push(AppDestination.brailleChartCategory(.jongseong))
+                    }
+                  
+                    SelectLearning(
+                        title: "숫자 일람표"
+                    ) {
+                        coordinator.push(AppDestination.brailleChartCategory(.number))
                     }
                     
-                    SelectCard(
-                        title: "숫자",
-                        description: "숫자를 나타내는 점자"
+                    SelectLearning(
+                        title: "약자 일람표"
                     ) {
-                        coordinator.push(AppDestination.basicQuiz(.jongseong))
+                        coordinator.push(AppDestination.brailleChartCategory(.abbreviation))
                     }
                     
-                    SelectCard(
-                        title: "약자",
-                        description: "한 글자를 줄여 나타내는 점자"
+                    SelectLearning(
+                        title: "약어 일람표"
                     ) {
-                        coordinator.push(AppDestination.basicQuiz(.jongseong))
-                    }
-                    
-                    SelectCard(
-                        title: "약어",
-                        description: "여러 글자를 줄여 나타내는 점자"
-                    ) {
-                        coordinator.push(AppDestination.basicQuiz(.jongseong))
+                        coordinator.push(AppDestination.brailleChartCategory(.contracted))
                     }
                 }
                 .padding(.top, 30)

@@ -109,7 +109,7 @@ struct AbbreviationQuizView: View {
                 Button {
                     coordinator.popToRoot()
                 } label: {
-                    Text("나가기")
+                    Text("홈으로")
                         .foregroundColor(.white00)
                         .font(.mainTextSemiBold18)
                 }

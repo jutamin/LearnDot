@@ -108,6 +108,10 @@ struct ContentView: View {
                             braillePattern: braillePattern,
                             myAnswerBraillePattern: myAnswerBraillePattern
                         )
+                    case .brailleChart:
+                        ChartSelectView()
+                    case .brailleChartCategory(let category):
+                        BrailleChartView(category: category)
                     }
                 }
         }

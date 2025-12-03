@@ -91,7 +91,7 @@ struct HomeView: View {
                                 RoundedRectangle(cornerRadius: 20)
                                     .foregroundStyle(.gray01)
                             )
-                            .accessibilityLabel("점자 번역")
+                            .accessibilityLabel("점자 일람표")
                     }
                     
                     Button {

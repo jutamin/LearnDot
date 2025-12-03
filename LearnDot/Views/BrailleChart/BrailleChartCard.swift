@@ -34,6 +34,40 @@ struct BrailleChartCard: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .contentShape(Rectangle())
+        // MARK: - VoiceOver Accessibility 설정
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(item.title)
+            .accessibilityAddTraits(.isButton)
+            .accessibilityAction {
+                let message = brailleDotsSpeech
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    UIAccessibility.post(notification: .announcement, argument: message)
+                }
+            }
+    }
+    
+    private var brailleDotsSpeech: String {
+        var resultString = ""
+        
+        let chunks = stride(from: 0, to: item.braille.count, by: 6).map {
+            Array(item.braille[$0 ..< min($0 + 6, item.braille.count)])
+        }
+        
+        for chunk in chunks {
+            var value = 0x2800
+            
+            for (index, bit) in chunk.enumerated() {
+                if bit == 1 {
+                    value += (1 << index)
+                }
+            }
+            
+            if let scalar = UnicodeScalar(value) {
+                resultString.append(Character(scalar))
+            }
+        }
+        return resultString.toBrailleDotSpeech()
     }
 }
 
@@ -99,7 +133,7 @@ enum NumberData {
         "8": "⠼⠓",
         "9": "⠼⠊"
     ]
-
+    
     static let items: [BrailleChartItem] = numbers.map { key, value in
         let cells = value.map { BraillePatternParser.parse(String($0)) }
         let flatten = cells.flatMap { $0 }

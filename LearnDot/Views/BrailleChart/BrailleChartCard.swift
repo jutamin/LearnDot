@@ -161,7 +161,7 @@ enum AbbreviationData {
 }
 
 enum contractedData {
-    static let items: [BrailleChartItem] = kor_abbreviations.map { (key, value) in
+    static let items: [BrailleChartItem] = chart_abbreviations.map { (key, value) in
         
         let cells = value.map { BraillePatternParser.parse(String($0)) }
         

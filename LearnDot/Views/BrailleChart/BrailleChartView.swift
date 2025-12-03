@@ -12,25 +12,23 @@ struct BrailleChartView: View {
     @Environment(NavigationCoordinator.self) private var coordinator
     
     var body: some View {
-        ZStack {
-            Color.black00
-            ScrollView {
-                let columns = [
-                    GridItem(.flexible(), spacing: 0),
-                    GridItem(.flexible(), spacing: 0)
-                ]
-                LazyVGrid(columns: columns, spacing: 12) {
-                    ForEach(items(for: category)) { item in
-                        BrailleChartCard(item: item)
+        Color.black00
+            .ignoresSafeArea()
+            .overlay{
+                ScrollView {
+                    let columns = [
+                        GridItem(.flexible(), spacing: 0),
+                        GridItem(.flexible(), spacing: 0)
+                    ]
+                    LazyVGrid(columns: columns, spacing: 12) {
+                        ForEach(items(for: category)) { item in
+                            BrailleChartCard(item: item)
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
-            .padding(.top, ((UIApplication.shared.connectedScenes.first as? UIWindowScene)?
-                .windows.first?.safeAreaInsets.top ?? 0))
             .navigationTitle(title(for: category))
-        }
-        .ignoresSafeArea()
     }
     
     private func title(for category: BrailleChartCategory) -> String {

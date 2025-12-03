@@ -71,6 +71,17 @@ struct ChartSelectView: View {
             }
         }
         .ignoresSafeArea()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    coordinator.popToRoot()
+                } label: {
+                    Text("홈으로")
+                        .foregroundColor(.white00)
+                        .font(.mainTextSemiBold18)
+                }
+            }
+        }
     }
 }
 

@@ -29,6 +29,17 @@ struct BrailleChartView: View {
                 }
             }
             .navigationTitle(title(for: category))
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        coordinator.popToRoot()
+                    } label: {
+                        Text("홈으로")
+                            .foregroundColor(.white00)
+                            .font(.mainTextSemiBold18)
+                    }
+                }
+            }
     }
     
     private func title(for category: BrailleChartCategory) -> String {

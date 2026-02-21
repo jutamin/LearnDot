@@ -87,8 +87,8 @@ struct ContentView: View {
                         SavedLearningNumberView()
                     case .savedLearningPunctuationView:
                         SavedLearningPunctuationView()
-                    case .savedLearningWordDetailView(let itemID):
-                        SavedLearningWordDetailView(itemID: itemID)
+                    case .savedLearningWordDetailView(let item): 
+                        SavedLearningWordDetailView(item: item)
                     case .savedLearningAbbreviationView:
                         SavedLearningAbbreviationView()
                     case .translateView:

@@ -19,7 +19,7 @@ class PunctuationQuizViewModel: ObservableObject {
         BrailleWord(korean: "줄표 (—)", braillePattern: "⠤⠤", description: "문장 내 구분이나 강조를 위해 사용"),
         BrailleWord(korean: "물결표 (~)", braillePattern: "⠈⠔", description: "길이나 범위를 나타낼 때 사용"),
         BrailleWord(korean: "별표 (*)", braillePattern: "⠐⠔", description: "주석이나 강조 표시할 때 사용"),
-        BrailleWord(korean: "여는 큰따옴표 (“)", braillePattern: "⠠⠦", description: "말이나 글을 인용할 때 시작"),
+        BrailleWord(korean: "여는 큰따옴표 (“)", braillePattern: "⠦", description: "말이나 글을 인용할 때 시작"),
         BrailleWord(korean: "닫는 큰따옴표 (”)", braillePattern: "⠴", description: "말이나 글을 인용할 때 끝"),
         BrailleWord(korean: "여는 작은따옴표 (‘)", braillePattern: "⠠⠦", description: "작은 인용이나 강조를 시작할 때"),
         BrailleWord(korean: "닫는 작은따옴표 (’)", braillePattern: "⠴⠄", description: "작은 인용이나 강조를 끝낼 때"),

@@ -9,6 +9,12 @@ import Foundation
 
 class PunctuationQuizViewModel: ObservableObject {
     
+    private let writingToReadingMap = [
+        1: 4, 4: 1,
+        2: 5, 5: 2,
+        3: 6, 6: 3
+    ]
+    
     let punctuationData: [BrailleWord] = [
         BrailleWord(korean: "온점 (.)", braillePattern: "⠲", description: "문장 끝을 마무리할 때 사용"),
         BrailleWord(korean: "물음표 (?)", braillePattern: "⠦", description: "의문을 나타낼 때 사용"),
@@ -59,15 +65,14 @@ class PunctuationQuizViewModel: ObservableObject {
         
         let correctDotArrays = convertBraillePatternToDotArrays(correctPattern)
         
-        print("🔍 정답 패턴: \(correctPattern)")
-        print("✅ 정답 dot 배열: \(correctDotArrays)")
-        print("📝 입력 dot 배열: \(selectedDotsArray)")
+        let convertedInputArray = selectedDotsArray.map { dots in
+            dots.compactMap { writingToReadingMap[$0] }
+        }
         
-        if selectedDotsArray.count != correctDotArrays.count { return false }
+        if convertedInputArray.count != correctDotArrays.count { return false }
         
-        for (inputDots, correctDots) in zip(selectedDotsArray, correctDotArrays) {
+        for (inputDots, correctDots) in zip(convertedInputArray, correctDotArrays) {
             if Set(inputDots) != Set(correctDots) {
-                print("❌ 불일치: \(inputDots) vs \(correctDots)")
                 return false
             }
         }

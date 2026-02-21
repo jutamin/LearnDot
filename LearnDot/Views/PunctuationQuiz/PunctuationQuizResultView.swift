@@ -175,13 +175,13 @@ struct PunctuationQuizResultView: View {
                 answerInfoText
                     .padding(.top, 8)
                 
-                Text("다음 문제는 맞춰봐요!")
+                Text("점판에 읽을 때는 쓸 때와 좌우가 반전됩니다.")
                     .font(.mainTextSemiBold15)
                     .foregroundStyle(.gray02)
                     .padding(.top, 8)
-                    .accessibilityHidden(true)
             }
             .accessibilityElement(children: .combine)
+            .accessibilitySortPriority(10)
             
             Button(action: {
                 coordinator.pop()
@@ -192,25 +192,28 @@ struct PunctuationQuizResultView: View {
                     .background(Color.gray06)
                     .cornerRadius(20)
                     .foregroundColor(.blue00)
-                    .accessibilityLabel("점자 다시 찍어보기 버튼. 다음으로 넘기면 다음 문제를 풀 수 있고, 두번 탭하면 방금 문제의 점자를 다시 찍어볼 수 있어요.")
             }
             .padding(.top, 20)
+            .accessibilityLabel("점자 다시 찍어보기")
+            .accessibilityHint("방금 문제의 점자를 다시 찍어볼 수 있습니다.")
         }
     }
     
     @ViewBuilder
     private var answerInfoText: some View {
-        Group {
-            Text("정답의 점형 번호는 ")
-                .foregroundStyle(.white00)
-            + Text(dotNumbersText)
-                .foregroundStyle(.blue00)
-                .accessibilityLabel(dotNumbersAccessibilityText)
-            + Text(" 입니다.")
-                .foregroundStyle(.white00)
+        VStack {
+            Group {
+                Text("정답의 점형 번호는 ")
+                    .foregroundStyle(.white00)
+                + Text(dotNumbersText)
+                    .foregroundStyle(.blue00)
+                + Text(" 입니다.")
+                    .foregroundStyle(.white00)
+            }
+            .font(.mainTextSemiBold20)
         }
-        .font(.mainTextSemiBold20)
-        .accessibilityLabel("정답의 점형 번호는 " + correctQuiz.braillePattern.toBrailleDotSpeech() + " 입니다.")
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("정답의 점형 번호는 \(correctQuiz.braillePattern.toBrailleDotSpeech()) 입니다.")
     }
     
     @ViewBuilder
@@ -286,10 +289,11 @@ struct DotCellView: View {
 
     @ViewBuilder
     private func dotCircle(index: Int) -> some View {
-        let dotIndexMapping = [0, 3, 1, 4, 2, 5]
-        let checkIndex = dotIndexMapping[index] + 1
+        let writingLayout = [4, 1, 5, 2, 6, 3]
+        let checkNumber = writingLayout[index]
+        
         Circle()
-            .fill(dotIndexes.contains(checkIndex) ? Color.white00 : Color.gray05)
+            .fill(dotIndexes.contains(checkNumber) ? Color.white00 : Color.gray05)
             .frame(width: 20, height: 20)
     }
 }

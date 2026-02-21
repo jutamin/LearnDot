@@ -18,7 +18,7 @@ struct PunctuationQuizView: View {
 
     @AccessibilityFocusState private var focusedDot: Int?
     
-    let indexToDotNumber = [1, 4, 2, 5, 3, 6]
+    let indexToDotNumber = [4, 1, 5, 2, 6, 3]
     let totalDots = 6
     
     var body: some View {
@@ -30,10 +30,10 @@ struct PunctuationQuizView: View {
             
             VStack(spacing: 0) {
                 VStack(spacing: 0){
-                    Text("다음 문장부호의 점자를 찍어보세요.")
+                    Text("점판에 쓰는 방식으로 찍어보세요.")
                         .font(.mainTextBold24)
                         .foregroundStyle(.blue00)
-                        .accessibilityLabel("주어지는 문장부호를 듣고 점자를 찍어보세요.")
+                        .accessibilityLabel("점판에 쓰는 방식으로, 좌우가 반전된 점자를 찍어보세요. 오른쪽 위가 1번입니다.")
                     
                     if let quiz = viewModel.currentQuiz {
                         let label = quiz.korean + (quiz.description != nil ? ", \(quiz.description!)" : "")

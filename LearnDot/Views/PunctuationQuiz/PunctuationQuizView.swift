@@ -33,7 +33,7 @@ struct PunctuationQuizView: View {
                     Text("점판에 쓰는 방식으로 찍어보세요.")
                         .font(.mainTextBold24)
                         .foregroundStyle(.blue00)
-                        .accessibilityLabel("점판에 쓰는 방식으로, 좌우가 반전된 점자를 찍어보세요. 오른쪽 위가 1번입니다.")
+                        .accessibilityLabel("주어진 문장부호를 쓰기 점형으로 찍어보세요. 오른쪽 상단이 1번 점입니다.")
                     
                     if let quiz = viewModel.currentQuiz {
                         let label = quiz.korean + (quiz.description != nil ? ", \(quiz.description!)" : "")

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftData // Import SwiftData
+import SwiftData
 
 struct SavedLearningWordView: View {
     
@@ -38,7 +38,7 @@ struct SavedLearningWordView: View {
                                 SelectLearning(
                                     title: item.word
                                 ) {
-                                    coordinator.push(AppDestination.savedLearningWordDetailView(item.persistentModelID))
+                                    coordinator.push(AppDestination.savedLearningWordDetailView(item))
                                 }
                             }
                         }

@@ -18,17 +18,10 @@ struct SavedLearningWordDetailView: View {
     
     // MARK: - Data
     
-    @Query var itemQuery: [SavedLearningItem]
+    let item: SavedLearningItem
     
-    private var item: SavedLearningItem? {
-        itemQuery.first
-    }
-    
-    init(itemID: PersistentIdentifier) {
-        let id = itemID
-        self._itemQuery = Query(filter: #Predicate<SavedLearningItem> {
-            $0.persistentModelID == id
-        })
+    init(item: SavedLearningItem) {
+        self.item = item
     }
     
     // MARK: - Body
@@ -37,34 +30,24 @@ struct SavedLearningWordDetailView: View {
         ZStack {
             Color.black00.ignoresSafeArea()
             
-            if let item = item {
-                VStack(spacing: 0) {
-                    
-                    Spacer().frame(height: 30)
-                    
-                    mainCard(item: item)
-                    
-                    Spacer().frame(height: 30)
-                    listenAgainButton(item: item)
-                    
-                    Spacer()
-                }
-            } else {
-                Text("항목을 찾을 수 없습니다.")
-                    .font(.mainTextSemiBold15)
-                    .foregroundStyle(.gray02)
+            VStack(spacing: 0) {
+                Spacer().frame(height: 30)
+                
+                mainCard(item: item)
+                
+                Spacer().frame(height: 30)
+                listenAgainButton(item: item)
+                
+                Spacer()
             }
         }
-        
         .alert("단어 삭제하기", isPresented: $isShowingDeleteAlert) {
             Button("확인", role: .destructive) {
                 deleteItem()
             }
             Button("취소", role: .cancel) {}
         } message: {
-            if let item = item {
-                Text("'\(item.word)' 항목을 삭제할까요?")
-            }
+            Text("'\(item.word)' 항목을 삭제할까요?")
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -127,9 +110,8 @@ struct SavedLearningWordDetailView: View {
     // MARK: - Actions
     
     private func deleteItem() {
-        if let item = item {
-            modelContext.delete(item)
-            coordinator.pop()
-        }
+        modelContext.delete(item)
+        try? modelContext.save()
+        coordinator.pop()
     }
 }

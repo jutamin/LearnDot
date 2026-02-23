@@ -42,7 +42,7 @@ struct SavedLearningNumberView: View {
                                 SelectLearning(
                                     title: item.word
                                 ) {
-                                    coordinator.push(AppDestination.savedLearningWordDetailView(item.persistentModelID))
+                                    coordinator.push(AppDestination.savedLearningWordDetailView(item))
                                 }
                             }
                         }

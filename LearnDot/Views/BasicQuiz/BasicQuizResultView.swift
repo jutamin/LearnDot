@@ -178,11 +178,12 @@ struct BasicQuizResultView: View {
                 
                 HStack(spacing: 17) {
                     Button {
-                        coordinator.popToRoot()
+                        // Home → basicUnit → (quiz/result 반복) 중 basicUnit까지 돌아가기
+                        coordinator.popTo(1)
                     } label: {
                         QuitButtonCard()
                     }
-                    
+
                     Button{
                         coordinator.push(AppDestination.basicQuiz(unit))
                     } label: {

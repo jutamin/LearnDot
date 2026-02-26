@@ -283,11 +283,12 @@ struct WordQuizResultView: View {
                 // 학습종료 or 다음문제
                 HStack(spacing: 17) {
                     Button {
-                        coordinator.popToRoot()
+                        // Home → wordLevel → wordCategory → (quiz/result 반복) 중 wordCategory까지 돌아가기
+                        coordinator.popTo(2)
                     } label: {
                         QuitButtonCard()
                     }
-                    
+
                     Button{
                         coordinator.push(AppDestination.wordQuiz(level, category))
                     } label: {

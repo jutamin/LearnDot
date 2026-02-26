@@ -67,20 +67,6 @@ struct WordQuizView: View {
                                         .font(.mainTextExtraBold50)
                                         .accessibilityLabel(quiz.brailleText.toBrailleDotSpeech())
                                 }
-                        case .hard:
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(.gray06)
-                                .frame(width: 345, height: 150)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.gray, lineWidth: 1)
-                                )
-                                .overlay {
-                                    Text(quiz.brailleText.trimmingCharacters(in: ["⠀"]))
-                                        .font(.mainTextExtraBold50)
-                                        .accessibilityLabel(quiz.brailleText.toBrailleDotSpeech())
-                                        .lineLimit(nil)
-                                }
                         }
                     }
                     .accessibilityElement(children: .combine)

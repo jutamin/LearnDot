@@ -10,6 +10,7 @@ import SwiftUI
 struct OnboardingManual2: View {
     let onNext: () -> Void
     let onBack: () -> Void
+    let onSkip: () -> Void
     @AccessibilityFocusState private var isFocused: Bool
     
     var body: some View {
@@ -74,8 +75,19 @@ struct OnboardingManual2: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
-                
-                Spacer().frame(height: 80)
+
+                Button {
+                    onSkip()
+                } label: {
+                    Text("설명 건너뛰기")
+                        .font(.mainTextSemiBold15)
+                        .foregroundStyle(.gray02)
+                        .underline()
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 16)
+
+                Spacer().frame(height: 60)
             }
             .padding(.horizontal, 24)
         }
@@ -94,6 +106,7 @@ struct OnboardingManual2: View {
         print("👉 다음 버튼 눌림")
     } onBack: {
         print("👈 이전 버튼 눌림")
+    } onSkip: {
+        print("⏭ 건너뛰기 눌림")
     }
-    
 }

@@ -154,7 +154,7 @@ class WordQuizViewModel {
                     BrailleWord(korean: "여아용"),
                     BrailleWord(korean: "화장실"),
                     BrailleWord(korean: "화장대"),
-                    BrailleWord(korean: "화장품코너"),
+                    BrailleWord(korean: "화장품"),
                     BrailleWord(korean: "유아용"),
                     BrailleWord(korean: "장애인"),
                     BrailleWord(korean: "비상벨"),

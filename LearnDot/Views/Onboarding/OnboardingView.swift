@@ -26,16 +26,20 @@ struct OnboardingView: View {
             
             switch currentStep {
             case .manual0:
-                OnboardingManual0(onNext: { nextStep() })
+                OnboardingManual0(onNext: { nextStep() },
+                                  onSkip: { finishOnboarding() })
             case .manual1:
                 OnboardingManual1(onNext: { nextStep() },
-                                  onBack: { previousStep() })
+                                  onBack: { previousStep() },
+                                  onSkip: { finishOnboarding() })
             case .manual2:
                 OnboardingManual2(onNext: { nextStep() },
-                                  onBack: { previousStep() })
+                                  onBack: { previousStep() },
+                                  onSkip: { finishOnboarding() })
             case .manual3:
                 OnboardingManual3(onNext: { nextStep() },
-                                  onBack: { previousStep() })
+                                  onBack: { previousStep() },
+                                  onSkip: { finishOnboarding() })
             case .manual4:
                 OnboardingManual4(onNext: { finishOnboarding() },
                                     onBack: { previousStep() })
@@ -58,4 +62,8 @@ struct OnboardingView: View {
     private func finishOnboarding() {
         isFirstLaunching = false
     }
+}
+
+#Preview {
+    OnboardingView()
 }

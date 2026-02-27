@@ -23,6 +23,12 @@ class NavigationCoordinator {
     func popToRoot() {
         path.removeLast(path.count)
     }
+
+    func popTo(_ remainingCount: Int) {
+        let removeCount = path.count - remainingCount
+        guard removeCount > 0 else { return }
+        path.removeLast(removeCount)
+    }
 }
 
 // MARK: - Navigation Destinations

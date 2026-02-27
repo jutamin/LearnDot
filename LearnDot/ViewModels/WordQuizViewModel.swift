@@ -130,17 +130,6 @@ class WordQuizViewModel {
                     BrailleWord(korean: "음료수"),
                     BrailleWord(korean: "샐러드")
                 ]
-            case .hard:
-                return [
-                    BrailleWord(korean: "아메리카노"),
-                    BrailleWord(korean: "카페라떼"),
-                    BrailleWord(korean: "에스프레소"),
-                    BrailleWord(korean: "카푸치노"),
-                    BrailleWord(korean: "티라미수"),
-                    BrailleWord(korean: "마카롱"),
-                    BrailleWord(korean: "브라우니"),
-                    BrailleWord(korean: "젤라또")
-                ]
             }
         case .restroom:
             switch level {
@@ -154,7 +143,7 @@ class WordQuizViewModel {
                     BrailleWord(korean: "여아용"),
                     BrailleWord(korean: "화장실"),
                     BrailleWord(korean: "화장대"),
-                    BrailleWord(korean: "화장품코너"),
+                    BrailleWord(korean: "화장품"),
                     BrailleWord(korean: "유아용"),
                     BrailleWord(korean: "장애인"),
                     BrailleWord(korean: "비상벨"),
@@ -171,17 +160,6 @@ class WordQuizViewModel {
                     BrailleWord(korean: "휴대용"),
                     BrailleWord(korean: "자동문"),
                     BrailleWord(korean: "여성용")
-                ]
-            case .hard:
-                return [
-                    BrailleWord(korean: "장애인 호출 버튼"),
-                    BrailleWord(korean: "잠금 장치"),
-                    BrailleWord(korean: "비상벨"),
-                    BrailleWord(korean: "손잡이"),
-                    BrailleWord(korean: "경고등"),
-                    BrailleWord(korean: "센서 감지기"),
-                    BrailleWord(korean: "비상 출입문"),
-                    BrailleWord(korean: "긴급 상황")
                 ]
             }
         case .transport:
@@ -225,18 +203,6 @@ class WordQuizViewModel {
                     BrailleWord(korean: "의정부"),
                     BrailleWord(korean: "청량리")
                 ]
-            case .hard:
-                return [
-                    BrailleWord(korean: "출입문"),
-                    BrailleWord(korean: "종착역"),
-                    BrailleWord(korean: "정류장"),
-                    BrailleWord(korean: "운행시간"),
-                    BrailleWord(korean: "노선도"),
-                    BrailleWord(korean: "차량번호"),
-                    BrailleWord(korean: "정차위치"),
-                    BrailleWord(korean: "승차위치"),
-                    BrailleWord(korean: "승차권")
-                ]
             }
         case .medicine:
             switch level {
@@ -261,17 +227,6 @@ class WordQuizViewModel {
                     BrailleWord(korean: "비타민"),
                     BrailleWord(korean: "영양제"),
                     BrailleWord(korean: "소독약")
-                ]
-            case .hard:
-                return [
-                    BrailleWord(korean: "복약안내"),
-                    BrailleWord(korean: "주의사항"),
-                    BrailleWord(korean: "의사소견"),
-                    BrailleWord(korean: "처방전"),
-                    BrailleWord(korean: "복용시간"),
-                    BrailleWord(korean: "금기사항"),
-                    BrailleWord(korean: "약물반응"),
-                    BrailleWord(korean: "장기복용")
                 ]
             }
         case .electronics:
@@ -306,20 +261,6 @@ class WordQuizViewModel {
                     BrailleWord(korean: "키보드"),
                     BrailleWord(korean: "배터리"),
                     BrailleWord(korean: "아이콘")
-                ]
-            case .hard:
-                return [
-                    BrailleWord(korean: "무선연결"),
-                    BrailleWord(korean: "블루투스"),
-                    BrailleWord(korean: "소프트웨어"),
-                    BrailleWord(korean: "운영체제"),
-                    BrailleWord(korean: "업데이트"),
-                    BrailleWord(korean: "시스템복원"),
-                    BrailleWord(korean: "네트워크"),
-                    BrailleWord(korean: "와이파이"),
-                    BrailleWord(korean: "스마트폰"),
-                    BrailleWord(korean: "노트북"),
-                    BrailleWord(korean: "비밀번호")
                 ]
             }
         }

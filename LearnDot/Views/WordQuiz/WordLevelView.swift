@@ -23,7 +23,7 @@ struct WordLevelView: View {
                     Text("난이도")
                         .font(.mainTextExtraBold36)
                         .foregroundStyle(.white00)
-                        .accessibilityLabel("3단계의 난이도 중 하나를 골라주세요")
+                        .accessibilityLabel("2단계의 난이도 중 하나를 골라주세요")
                     
                     Spacer()
                 }
@@ -42,13 +42,6 @@ struct WordLevelView: View {
                         description: "6개 이상의 점자 셀 또는 합성어"
                     ) {
                         coordinator.push(AppDestination.wordCategory(.normal))
-                    }
-                    
-                    SelectCard(
-                        title: "어려움",
-                        description: "외래어, 긴 단어, 추상어"
-                    ) {
-                        coordinator.push(AppDestination.wordCategory(.hard))
                     }
                 }
                 .padding(.top, 30)

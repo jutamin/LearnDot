@@ -71,7 +71,7 @@ struct OnboardingManual4: View {
                             .foregroundStyle(.blue01)
                             .frame(width: 168, height: 64)
                             .overlay{
-                                Text("설명종료")
+                                Text("설명 종료")
                                     .font(.mainTextBold24)
                                     .foregroundStyle(.white)
                             }
@@ -99,5 +99,4 @@ struct OnboardingManual4: View {
     } onBack: {
         print("👈 이전 버튼 눌림")
     }
-    
 }

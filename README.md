@@ -24,7 +24,7 @@
 | :--: | :--: |
 | <img src="https://github.com/user-attachments/assets/f615e446-6653-434a-8625-e8d684b67515" width="200"/> | <img src="https://github.com/user-attachments/assets/3cef5f10-4537-4ba4-8c24-9a20c1be6398" width="150"/> |
 | **Happy** | **Daisy** |
-| `ADA 3기 러너` | `ADA 3기 러너` |
+| `서울여대 디지털미디어학과, ADA 3기 러너` | `서울여대 소프트웨어융합학과, ADA 3기 러너` |
 | 문장부호/숫자/카테고리별 점형학습 · 저장한 학습 | 온보딩 · 약자약어/기초단계 점형학습 · 점자 일람표 |
 
 <br>
